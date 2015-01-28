@@ -5,6 +5,7 @@ import blog.model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -20,6 +21,9 @@ public class UserDAOImpl implements UserDAO {
     @Autowired
     private SessionFactory sessionFactory;
 
+    @Autowired
+    private PasswordEncoder encoder;
+
     public SessionFactory getSessionFactory() {
         return sessionFactory;
     }
@@ -31,6 +35,8 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public void addUser(User user) {
+//        String cipherPassword = encoder.encode(user.getPassword());
+//        user.setPassword(cipherPassword);
         Session session = sessionFactory.getCurrentSession();
         session.persist(user);
     }

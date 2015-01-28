@@ -1,6 +1,13 @@
 <%--
   Created by IntelliJ IDEA.
   User: user
+  Date: 27.01.2015
+  Time: 12:10
+  To change this template use File | Settings | File Templates.
+--%>
+<%--
+  Created by IntelliJ IDEA.
+  User: user
   Date: 20.01.2015
   Time: 19:56
   To change this template use File | Settings | File Templates.
@@ -34,17 +41,17 @@
 
   <form:form action="/user/form" modelAttribute="user">
     <label for="nameInput">Name: </label>
-    <form:input path="name" id="nameInput" />
+    <form:input path="name" id="nameInput" /> <br/>
     <form:errors path="name" cssClass="error" />
     <br/>
 
     <label for="passwordInput">Password: </label>
-    <form:input path="password" id="passwordInput" />
+    <form:password path="password" id="passwordInput" /> <br/>
     <form:errors path="password" cssClass="error" />
     <br/>
 
     <label for="birthdayInput">Birthday: </label>
-    <form:input path="birthdayDate" id="birthdayInput" placeholder="MM/DD/YYYY" />
+    <form:input path="birthdayDate" id="birthdayInput" placeholder="MM/DD/YYYY" /> <br/>
     <form:errors path="birthdayDate" cssClass="error" />
     <br/>
 

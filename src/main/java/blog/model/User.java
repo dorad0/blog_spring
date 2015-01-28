@@ -1,6 +1,7 @@
 package blog.model;
 
 
+import blog.validator.Age;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -19,11 +20,14 @@ public class User implements Serializable {
     @Column(name = "id", nullable = false, unique = true)
     private long id;
 
-    @Size(min =2, max=30) @NotEmpty
+    @NotEmpty
+    @Size(min = 2, max = 30)
     @Column(name = "name", nullable = false, unique = true)
     private String name;
 
-    @Min(6) @Max(30) @NotEmpty
+   /* @Min(6) @Max(30)*/
+    @NotEmpty
+    @Size(min = 6, max = 30)
     @Column(name = "password", nullable = false)
     private String password;
 
@@ -32,9 +36,10 @@ public class User implements Serializable {
     private Date registrationDate;
 
     //    @Temporal(value = TemporalType.TIME)
-    @DateTimeFormat(pattern="MM/dd/yyyy")
+    @DateTimeFormat(pattern = "MM/dd/yyyy")
     @NotNull
     @Past
+    @Age(18)
     @Column(name = "bithdaydate", nullable = false)
     private Date birthdayDate;
 

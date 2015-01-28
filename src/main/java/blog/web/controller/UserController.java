@@ -1,9 +1,12 @@
 package blog.web.controller;
 
 import blog.model.User;
+import blog.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -15,19 +18,30 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/user")
 public class UserController {
-    @RequestMapping(value="/form", method= RequestMethod.GET)
+
+    @Autowired
+    private UserService service;
+
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String loadFormPage(Model m) {
         m.addAttribute("user", new User());
-        return "user/addUser";
+        return "user/registerForm";
     }
 
-    @RequestMapping(value="/form", method=RequestMethod.POST)
+    @RequestMapping(value = "/form", method = RequestMethod.POST)
     public String submitForm(@Valid User user, BindingResult result, Model m) {
-        if(result.hasErrors()) {
-            return "user/addUser";
+        if (result.hasErrors()) {
+            return "user/registerForm";
         }
 
-        m.addAttribute("message", "Successfully saved person: " + user.toString());
-        return "user/addUser";
+        service.save(user);
+        m.addAttribute("user", user);
+        return "redirect:/user/" + user.getName();
+    }
+
+    @RequestMapping(value = "/{username}", method = RequestMethod.GET)
+    public String showUserProfile(@PathVariable String username, Model model) {
+        model.addAttribute(service.getUser(username));
+        return "user/profile";
     }
 }
