@@ -1,7 +1,7 @@
 package blog.web.controller;
 
-import blog.model.User;
 import blog.service.UserService;
+import blog.service.form.UserForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,23 +24,26 @@ public class UserController {
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String loadFormPage(Model m) {
-        m.addAttribute("user", new User());
+
+        m.addAttribute("userForm", new UserForm());
         return "user/registerForm";
     }
 
     @RequestMapping(value = "/form", method = RequestMethod.POST)
-    public String submitForm(@Valid User user, BindingResult result, Model m) {
+    public String submitForm(@Valid UserForm userForm, BindingResult result, Model m) {
+
         if (result.hasErrors()) {
             return "user/registerForm";
         }
 
-        service.save(user);
-        m.addAttribute("user", user);
-        return "redirect:/user/" + user.getName();
+        service.save(userForm);
+        m.addAttribute("user", userForm);
+        return "redirect:/user/" + userForm.getName();
     }
 
     @RequestMapping(value = "/{username}", method = RequestMethod.GET)
     public String showUserProfile(@PathVariable String username, Model model) {
+
         model.addAttribute(service.getUser(username));
         return "user/profile";
     }

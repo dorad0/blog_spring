@@ -19,18 +19,7 @@
 <html>
 <head>
   <title>Sample Form</title>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <style>
-    body { background-color: #eee; font: helvetica; }
-    #container { width: 500px; background-color: #fff; margin: 30px auto; padding: 30px; border-radius: 5px; }
-    .green { font-weight: bold; color: green; }
-    .message { margin-bottom: 10px; }
-    label {width:70px; display:inline-block;}
-    input { display:inline-block; margin-right: 10px; }
-    form {line-height: 160%; }
-    .hide { display: none; }
-    .error { color: red; font-size: 0.9em; font-weight: bold; }
-  </style>
+  <link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/>
 </head>
 <body>
 
@@ -39,7 +28,7 @@
   <h2>Add user.</h2>
   <c:if test="${not empty message}"><div class="message green">${message}</div></c:if>
 
-  <form:form action="/user/form" modelAttribute="user">
+  <form:form action="/user/form" modelAttribute="userForm">
     <label for="nameInput">Name: </label>
     <form:input path="name" id="nameInput" /> <br/>
     <form:errors path="name" cssClass="error" />
@@ -50,9 +39,9 @@
     <form:errors path="password" cssClass="error" />
     <br/>
 
-    <label for="birthdayInput">Birthday: </label>
-    <form:input path="birthdayDate" id="birthdayInput" placeholder="MM/DD/YYYY" /> <br/>
-    <form:errors path="birthdayDate" cssClass="error" />
+    <label for="birthDateInput">Birthday: </label>
+    <form:input path="birthDate" id="birthDateInput" placeholder="MM/DD/YYYY" /> <br/>
+    <form:errors path="birthDate" cssClass="error" />
     <br/>
 
     <br/>

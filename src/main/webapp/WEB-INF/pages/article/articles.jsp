@@ -13,6 +13,7 @@
     <title>All articles</title>
 </head>
 <body>
+
   <c:forEach var="article" items="${articles}">
     <c:out value="${article.title}"/>
   </c:forEach>

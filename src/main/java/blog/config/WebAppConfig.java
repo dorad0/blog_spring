@@ -12,8 +12,8 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
@@ -56,6 +56,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
         prop.put("hibernate.show_sql", "true");
         prop.put("hibernate.dialect",
                 "org.hibernate.dialect.MySQL5Dialect");
+//        prop.put("hibernate.hbm2ddl.auto", "create");
         return prop;
     }
 
@@ -83,9 +84,23 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
         return messageSource;
     }
 
-    //Configure static content handling
+//    //Configure static content handling
+//    @Override
+//    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+//        configurer.enable();
+//    }
+
+
     @Override
-    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-        configurer.enable();
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//        registry.addResourceHandler("/blog/**")
+//                .addResourceLocations("classpath:/blog/");
+//        registry.addResourceHandler("/css/**")
+//                .addResourceLocations("/css/");
+//        registry.addResourceHandler("/img/**")
+//                .addResourceLocations("/img/");
+//        registry.addResourceHandler("/js/**")
+//                .addResourceLocations("/js/");
+        registry.addResourceHandler("/resources/**").addResourceLocations("/static/");
     }
 }

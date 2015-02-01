@@ -1,5 +1,7 @@
 package blog.model;
 
+import blog.model.auth.Role;
+
 import javax.persistence.*;
 
 /**
@@ -21,11 +23,16 @@ public class UserRole {
     @Column(name = "role", nullable = false)
     private String role;
 
+//    @Column(name = "role", nullable = false)
+//    private Role role;
+
+
     public UserRole() {
     }
 
     public UserRole(User user, String role) {
         this.user = user;
+//        this.role = role.toString();
         this.role = role;
     }
 
@@ -48,6 +55,7 @@ public class UserRole {
     public String getRole() {
         return role;
     }
+
 
     public void setRole(String role) {
         this.role = role;

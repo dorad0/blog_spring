@@ -29,14 +29,14 @@ public class UserDetails implements UserDetailsService {
     public org.springframework.security.core.userdetails.UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         User user = userDAO.findByUserName(s);
         List<GrantedAuthority> authorities =
-                buildUserAuthority(user.getUserRoles());
+                buildUserAuthority(user.getRoles());
         return buildUserForAuthentication(user, authorities);
     }
 
     private org.springframework.security.core.userdetails.User buildUserForAuthentication(User user,
                                                                                           List<GrantedAuthority> authorities) {
         return new org.springframework.security.core.userdetails.User(user.getName(), user.getPassword(),
-                true, true, true, true, authorities);
+                user.isEnabled(), true, true, true, authorities);
     }
 
     private List<GrantedAuthority> buildUserAuthority(Set<UserRole> userRoles) {
@@ -46,6 +46,7 @@ public class UserDetails implements UserDetailsService {
         // Build user's authorities
         for (UserRole userRole : userRoles) {
             setAuths.add(new SimpleGrantedAuthority(userRole.getRole()));
+//            setAuths.add(new SimpleGrantedAuthority(userRole.getRole().toString()));
         }
 
         List<GrantedAuthority> Result = new ArrayList<GrantedAuthority>(setAuths);

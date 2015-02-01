@@ -2,6 +2,7 @@ package blog.dao;
 
 
 import blog.model.User;
+import blog.model.UserRole;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +36,6 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public void addUser(User user) {
-//        String cipherPassword = encoder.encode(user.getPassword());
-//        user.setPassword(cipherPassword);
         Session session = sessionFactory.getCurrentSession();
         session.persist(user);
     }
@@ -47,11 +46,10 @@ public class UserDAOImpl implements UserDAO {
         session.delete(user);
     }
 
-    @Override
     @SuppressWarnings("unchecked")
+    @Override
     public User findByUserName(String username) {
         List<User> users = new ArrayList<User>();
-
         users = sessionFactory.getCurrentSession()
                 .createQuery("from User where name=?")
                 .setParameter(0, username)
@@ -63,4 +61,5 @@ public class UserDAOImpl implements UserDAO {
             return null;
         }
     }
+
 }

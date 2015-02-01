@@ -4,6 +4,9 @@
 <head>
 	<title>Login Page</title>
 	<style>
+        h1 {
+            align: center;
+        }
 		.error {
 			padding: 15px;
 			margin-bottom: 20px;

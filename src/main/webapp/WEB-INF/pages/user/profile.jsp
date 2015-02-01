@@ -14,7 +14,7 @@
 <body>
   <c:out value="${user.name}"/> <br>
   <c:out value="${user.password}"/> <br>
-  <c:out value="${user.registrationDate}"/> <br>
-  <c:out value="${user.birthdayDate}"/>
+  <%--<c:out value="${user.registrationDate}"/> <br>--%>
+  <c:out value="${user.birthDate}"/>
 </body>
 </html>

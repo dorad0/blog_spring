@@ -1,7 +1,10 @@
 package blog.service;
 
 import blog.dao.UserDAO;
+import blog.dao.UserRoleDAO;
 import blog.model.User;
+import blog.model.UserRole;
+import blog.service.form.UserForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,20 +19,40 @@ import java.util.Date;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserDAO dao;
+    private UserDAO userDAO;
 
+    @Autowired
+    private UserRoleDAO roleDAO;
 
+    @Autowired
+    private PasswordEncoder encoder;
 
     @Override
     @Transactional
     public User getUser(String username) {
-        return dao.findByUserName(username);
+        return userDAO.findByUserName(username);
     }
 
     @Override
     @Transactional
-    public void save(User user) {
+    public void save(UserForm form) {
+
+        User user = new User();
         user.setRegistrationDate(new Date());
-        dao.addUser(user);
+        user.setName(form.getName());
+        user.setPassword(encoder.encode(form.getPassword()));
+        user.setBirthDate(form.getBirthDate());
+        user.setEnabled(true);
+        userDAO.addUser(user);
+
+        UserRole role = new UserRole(user, "ROLE_USER");
+        roleDAO.addRoleToUser(role);
     }
+
+//    @Override
+//    @Transactional
+//    public void addRole(User user, Role role) {
+//        UserRole userRole = new UserRole(user, role);
+//        roleDAO.addRoleToUser(userRole);
+//    }
 }

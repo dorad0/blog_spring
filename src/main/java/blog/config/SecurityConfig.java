@@ -12,6 +12,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import javax.sql.DataSource;
+
 /**
  * Created by user on 17.01.2015.
  */
@@ -24,10 +26,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Qualifier("userDetailsService")
     UserDetailsService userDetailsService;
 
+
+    @Autowired
+    DataSource dataSource;
+
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-
+//        auth.jdbcAuthentication().dataSource(dataSource)
+//                .passwordEncoder(passwordEncoder())
+//                .usersByUsernameQuery("select username,password, enabled from users where username=?")
+//                .authoritiesByUsernameQuery("select username, role from user_roles where username=?");
     }
 
 //    @Autowired
@@ -40,7 +49,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.authorizeRequests().antMatchers("/admin/**")
+        http.authorizeRequests()
+                .antMatchers("/admin/**")
                 .access("hasRole('ROLE_ADMIN')").and().formLogin()
                 .loginPage("/login").failureUrl("/login?error")
                 .usernameParameter("username")

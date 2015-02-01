@@ -1,12 +1,9 @@
 package blog.model;
 
 
-import blog.validator.Age;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
@@ -20,14 +17,12 @@ public class User implements Serializable {
     @Column(name = "id", nullable = false, unique = true)
     private long id;
 
-    @NotEmpty
-    @Size(min = 2, max = 30)
+    @Column(name = "enabled", nullable = false)
+    private boolean enabled;
+
     @Column(name = "name", nullable = false, unique = true)
     private String name;
 
-   /* @Min(6) @Max(30)*/
-    @NotEmpty
-    @Size(min = 6, max = 30)
     @Column(name = "password", nullable = false)
     private String password;
 
@@ -36,12 +31,8 @@ public class User implements Serializable {
     private Date registrationDate;
 
     //    @Temporal(value = TemporalType.TIME)
-    @DateTimeFormat(pattern = "MM/dd/yyyy")
-    @NotNull
-    @Past
-    @Age(18)
-    @Column(name = "bithdaydate", nullable = false)
-    private Date birthdayDate;
+    @Column(name = "birthdate", nullable = false)
+    private Date birthDate;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "user")
     private Set<Comment> comments;
@@ -50,19 +41,25 @@ public class User implements Serializable {
     private Set<Article> articles;
 
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
-    private Set<UserRole> userRoles;
+    private Set<UserRole> roles;
 
     public User() {
     }
 
-    public User(String name, String password, Date registrationDate, Date birthdayDate, Set<Comment> comments, Set<Article> articles, Set<UserRole> userRoles) {
+    public User(boolean enabled, String name, String password, Date registrationDate, Date birthDate) {
+        this.enabled = enabled;
         this.name = name;
         this.password = password;
         this.registrationDate = registrationDate;
-        this.birthdayDate = birthdayDate;
-        this.comments = comments;
-        this.articles = articles;
-        this.userRoles = userRoles;
+        this.birthDate = birthDate;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public Set<Article> getArticles() {
@@ -113,20 +110,20 @@ public class User implements Serializable {
         this.registrationDate = registrationDate;
     }
 
-    public Date getBirthdayDate() {
-        return birthdayDate;
+    public Date getBirthDate() {
+        return birthDate;
     }
 
-    public void setBirthdayDate(Date birthdayDate) {
-        this.birthdayDate = birthdayDate;
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
     }
 
-    public Set<UserRole> getUserRoles() {
-        return userRoles;
+    public Set<UserRole> getRoles() {
+        return roles;
     }
 
-    public void setUserRoles(Set<UserRole> userRoles) {
-        this.userRoles = userRoles;
+    public void setRoles(Set<UserRole> roles) {
+        this.roles = roles;
     }
 
     @Override
@@ -136,10 +133,11 @@ public class User implements Serializable {
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
                 ", registrationDate=" + registrationDate +
-                ", birthdayDate=" + birthdayDate +
+                ", birthDate=" + birthDate +
                 ", comments=" + comments +
                 ", articles=" + articles +
-                ", roles=" + userRoles +
+                ", roles=" + roles +
+                ", enabled=" + enabled +
                 '}';
     }
 }

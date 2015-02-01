@@ -15,7 +15,7 @@ public class Article implements Serializable {
     @Column(name = "id", unique = true, nullable = false)
     private long id;
 
-    @Column(name = "title", nullable = false)
+    @Column(name = "title", nullable = false, unique = true)
     private String title;
 
     @Lob
@@ -34,7 +34,7 @@ public class Article implements Serializable {
     @Column(name = "publicationDate", nullable = false)
     private Date publicationDate;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
