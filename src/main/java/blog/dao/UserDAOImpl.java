@@ -2,21 +2,14 @@ package blog.dao;
 
 
 import blog.entity.User;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
  * Created by user on 31.12.2014.
  */
-@Repository
-public class UserDAOImpl extends AbstractHibernateDao<User> implements UserDAO {
+@Repository(value = "UserDAOImpl")
+public class UserDAOImpl extends GenericHibernateDAOImpl<User> implements UserDAO {
 
     @Override
     @SuppressWarnings("unchecked")

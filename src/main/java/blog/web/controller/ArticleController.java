@@ -1,6 +1,7 @@
 package blog.web.controller;
 
-import blog.service.ArticleService;
+import blog.service.ArticleManager;
+import blog.service.CommentManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ArticleController {
 
     @Autowired
-    private ArticleService service;
+    private ArticleManager service;
 
     @RequestMapping("/articles")
     public String getArticles(Model model) {
@@ -22,8 +23,8 @@ public class ArticleController {
 //        entity.addAttribute("articles", service.getArticlesByPage(0L, 10L));
 //        entity.addAttribute("page", service.getArticlePage(10));
 //        return "article/articles";
-        model.addAttribute("article", service.getArticleById(2));
-        return "article/test";
+        model.addAttribute("articles", service.findAll());
+        return "article/articles";
     }
 
 //    @RequestMapping(value = "/form", method = RequestMethod.GET)

@@ -2,10 +2,8 @@ package blog.dao;
 
 import blog.entity.Article;
 import blog.entity.Comment;
-import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -13,8 +11,8 @@ import java.util.Set;
  */
 
 /*Spring takes care about transactions*/
-@Repository
-public class ArticleDAOImpl extends AbstractHibernateDao<Article> implements ArticleDAO {
+@Repository(value = "ArticleDAOImpl")
+public class ArticleDAOImpl extends GenericHibernateDAOImpl<Article> implements ArticleDAO {
 
     @Override
     public Set<Comment> getComments(long id) {

@@ -65,7 +65,7 @@
     <div class="row">
         <div class="col-sm-8 blog-main">
 
-            <c:forEach var="article" items="${page.articles}">
+            <c:forEach var="article" items="${articles}">
                 <div class="blog-post">
                         <h2 class="blog-post-title">${article.title}</h2>
                     <p class="blog-post-meta">${article.date} by <a

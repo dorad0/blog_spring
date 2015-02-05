@@ -15,7 +15,7 @@ import java.util.List;
  * Created by Alex on 05.02.2015.
  */
 @Scope("prototype")
-public abstract class AbstractHibernateDao<T extends Serializable> implements GenericDAO<T> {
+public abstract class GenericHibernateDAOImpl<T extends Serializable> implements GenericDAO<T> {
 
     private final Class<T> genericType;
 
@@ -26,7 +26,7 @@ public abstract class AbstractHibernateDao<T extends Serializable> implements Ge
         return sessionFactory.getCurrentSession();
     }
 
-    public AbstractHibernateDao() {
+    public GenericHibernateDAOImpl() {
         this.genericType = (Class<T>) ((ParameterizedType) getClass()
                 .getGenericSuperclass()).getActualTypeArguments()[0];
     }

@@ -15,8 +15,8 @@ public class ArticlePaginator {
     public static final int PAGE_SIZE = 10;
 //    public static final int PAGES = 0;
 
-    @Autowired
-    private ArticleDAO dao;
+//    @Autowired
+//    private ArticleDAO dao;
 
     private int pages;
     private int page;

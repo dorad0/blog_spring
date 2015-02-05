@@ -6,37 +6,36 @@ import blog.entity.User;
 import blog.entity.UserRole;
 import blog.service.form.UserForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+import javax.transaction.Transactional;
 import java.util.GregorianCalendar;
 
 /**
- * Created by user on 27.01.2015.
+ * Created by Alex on 05.02.2015.
  */
 @Service
-public class UserServiceImpl implements UserService {
+@Transactional
+public class UserManagerImpl extends GenericManagerImpl<User, UserDAO> implements UserManager {
 
-    @Autowired
-    private UserDAO userDAO;
 
+    @Override
     @Autowired
-    private UserRoleDAO roleDAO;
+    @Qualifier("UserDAOImpl")
+    protected void setDao(UserDAO dao) {
+        super.setDao(dao);
+    }
 
     @Autowired
     private PasswordEncoder encoder;
 
-    @Override
-    @Transactional
-    public User getUser(String username) {
-        return userDAO.findByName(username);
-    }
+    @Autowired
+    private UserRoleDAO roleDAO;
 
     @Override
-    @Transactional
-    public void save(UserForm form) {
-
+    public void saveUserFromForm(UserForm form) {
         User user = new User();
         user.setRegistrationDate(GregorianCalendar.getInstance());
         user.setName(form.getName());
@@ -44,15 +43,13 @@ public class UserServiceImpl implements UserService {
         user.setBirthDate(form.getBirthDate());
 //        user.setEnabled(true);
 //        userDAO.addUser(user);
-
+        super.save(user);
         UserRole role = new UserRole(user, "ROLE_USER");
         roleDAO.addRoleToUser(role);
     }
 
-//    @Override
-//    @Transactional
-//    public void addRole(User user, Role role) {
-//        UserRole userRole = new UserRole(user, role);
-//        roleDAO.addRoleToUser(userRole);
-//    }
+    @Override
+    public User findByName(String name) {
+        return dao.findByName(name);
+    }
 }

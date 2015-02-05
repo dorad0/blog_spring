@@ -1,14 +1,14 @@
 package blog.web.controller;
 
-import blog.service.UserService;
+import blog.service.UserManager;
 import blog.service.form.UserForm;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
 
@@ -20,7 +20,7 @@ import javax.validation.Valid;
 public class UserController {
 
     @Autowired
-    private UserService service;
+    private UserManager service;
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String loadFormPage(Model m) {
@@ -36,7 +36,7 @@ public class UserController {
             return "user/registerForm";
         }
 
-        service.save(userForm);
+        service.saveUserFromForm(userForm);
         m.addAttribute("user", userForm);
         return "redirect:/user/" + userForm.getName();
     }
@@ -44,7 +44,7 @@ public class UserController {
     @RequestMapping(value = "/{username}", method = RequestMethod.GET)
     public String showUserProfile(@PathVariable String username, Model model) {
 
-        model.addAttribute(service.getUser(username));
+        model.addAttribute(service.findByName(username));
         return "user/profile";
     }
 }

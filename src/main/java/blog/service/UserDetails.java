@@ -4,6 +4,7 @@ import blog.dao.UserDAO;
 import blog.entity.User;
 import blog.entity.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -21,7 +22,9 @@ import java.util.Set;
  */
 @Service("userDetailsService")
 public class UserDetails implements UserDetailsService {
+
     @Autowired
+    @Qualifier(value = "UserDAOImpl")
     private UserDAO userDAO;
 
     @Transactional(readOnly = true)
