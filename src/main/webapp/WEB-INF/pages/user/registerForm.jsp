@@ -5,50 +5,71 @@
   Time: 12:10
   To change this template use File | Settings | File Templates.
 --%>
-<%--
-  Created by IntelliJ IDEA.
-  User: user
-  Date: 20.01.2015
-  Time: 19:56
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE HTML>
 <html>
 <head>
-  <title>Sample Form</title>
-  <link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/>
+    <title>Register user</title>
+    <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>"/>
 </head>
 <body>
 
-<div id="container">
+<div class="container center-block">
+    <%--<c:if test="${not empty message}">--%>
+        <%--<div class="message green">${message}</div>--%>
+    <%--</c:if>--%>
 
-  <h2>Add user.</h2>
-  <c:if test="${not empty message}"><div class="message green">${message}</div></c:if>
+    <form:form cssClass="form-horizontal" action="/user/form" modelAttribute="userForm" method="post">
+        <fieldset>
+            <div id="legend">
+                <legend class="">Register user</legend>
+            </div>
 
-  <form:form action="/user/form" modelAttribute="userForm">
-    <label for="nameInput">Name: </label>
-    <form:input path="name" id="nameInput" /> <br/>
-    <form:errors path="name" cssClass="error" />
-    <br/>
+            <div class="control-group">
+                <!--Username-->
+                <label class="control-label" for="nameInput">Name: </label>
 
-    <label for="passwordInput">Password: </label>
-    <form:password path="password" id="passwordInput" /> <br/>
-    <form:errors path="password" cssClass="error" />
-    <br/>
+                <div class="input-group">
+                    <form:input path="name" id="nameInput" cssClass="form-control" /> <br>
+                    <form:errors path="name" cssClass="has-error"/>
+                </div>
 
-    <label for="birthDateInput">Birthday: </label>
-    <form:input path="birthDate" id="birthDateInput" placeholder="MM/DD/YYYY" /> <br/>
-    <form:errors path="birthDate" cssClass="error" />
-    <br/>
+            </div>
 
-    <br/>
-    <input type="hidden" name="${_csrf.parameterName}"
-           value="${_csrf.token}" />
-    <input type="submit" value="Submit" />
-  </form:form>
+            <div class="control-group">
+                <!--Password-->
+                <label class="control-label" for="passwordInput">Password: </label>
+
+                <div class="controls">
+                    <input id="passwordInput" name="password" class="password-field" type="password" value=""> <br>
+                    <form:errors path="password" cssClass="has-error"/>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <!--BirthDate-->
+                <label class="control-label" for="birthDateInput">BirthDate: </label>
+
+                <div class="controls">
+                    <form:input path="birthDate" id="birthDateInput" cssClass="date-cell"/> <br>
+                    <form:errors path="birthDate" cssClass="has-error"/>
+                </div>
+            </div>
+
+            <br>
+            <div class="control-group">
+                <!-- Button -->
+                <div class="controls">
+                    <button class="btn btn-success" type="submit">Register</button>
+                </div>
+            </div>
+        </fieldset>
+        <input type="hidden" name="${_csrf.parameterName}"
+               value="${_csrf.token}"/>
+    </form:form>
 </div>
 
 </body>

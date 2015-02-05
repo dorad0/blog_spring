@@ -1,8 +1,8 @@
 package blog.service;
 
 import blog.dao.UserDAO;
-import blog.model.User;
-import blog.model.UserRole;
+import blog.entity.User;
+import blog.entity.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -27,7 +27,7 @@ public class UserDetails implements UserDetailsService {
     @Transactional(readOnly = true)
     @Override
     public org.springframework.security.core.userdetails.UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        User user = userDAO.findByUserName(s);
+        User user = userDAO.findByName(s);
         List<GrantedAuthority> authorities =
                 buildUserAuthority(user.getRoles());
         return buildUserForAuthentication(user, authorities);

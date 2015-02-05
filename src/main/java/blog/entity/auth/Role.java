@@ -1,4 +1,4 @@
-package blog.model.auth;
+package blog.entity.auth;
 
 /**
  * Created by user on 29.01.2015.

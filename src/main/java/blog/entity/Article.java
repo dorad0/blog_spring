@@ -1,9 +1,9 @@
-package blog.model;
+package blog.entity;
 
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.Set;
 
 @Entity
@@ -23,16 +23,9 @@ public class Article implements Serializable {
     @Column(name = "text", nullable = false)
     private String text;
 
-    public Article(String title, String text, Date publicationDate, User user) {
-        this.title = title;
-        this.text = text;
-        this.publicationDate = publicationDate;
-        this.user = user;
-    }
-
     //    @Temporal(value=TemporalType.TIME)
     @Column(name = "publicationDate", nullable = false)
-    private Date publicationDate;
+    private Calendar publicationDate;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "user_id", nullable = false)
@@ -44,6 +37,13 @@ public class Article implements Serializable {
 
     public Article() {
 
+    }
+
+    public Article(String title, String text, Calendar publicationDate, User user) {
+        this.title = title;
+        this.text = text;
+        this.publicationDate = publicationDate;
+        this.user = user;
     }
 
     public long getId() {
@@ -78,11 +78,11 @@ public class Article implements Serializable {
         this.text = text;
     }
 
-    public Date getPublicationDate() {
+    public Calendar getPublicationDate() {
         return publicationDate;
     }
 
-    public void setPublicationDate(Date publicationDate) {
+    public void setPublicationDate(Calendar publicationDate) {
         this.publicationDate = publicationDate;
     }
 

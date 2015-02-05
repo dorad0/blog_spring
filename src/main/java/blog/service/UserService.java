@@ -1,7 +1,6 @@
 package blog.service;
 
-import blog.model.User;
-import blog.model.auth.Role;
+import blog.entity.User;
 import blog.service.form.UserForm;
 
 /**

@@ -1,22 +1,15 @@
 package blog.dao;
 
-import blog.model.User;
-import blog.model.UserRole;
-import org.hibernate.Session;
+import blog.entity.UserRole;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 /**
  * Created by user on 29.01.2015.
  */
 @Repository
-public class UserRoleDAOImpl implements UserRoleDAO {
-
-    @Autowired
-    private SessionFactory sessionFactory;
+public class UserRoleDAOImpl extends AbstractHibernateDao<UserRole> implements UserRoleDAO {
 
     @Override
     public void addRoleToUser(UserRole userRole) {

@@ -1,9 +1,9 @@
-package blog.model;
+package blog.entity;
 
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Calendar;
 
 /**
  * Created by user on 13.12.2014.
@@ -22,7 +22,7 @@ public class Comment implements Serializable {
 
                 //    @Temporal(value = TemporalType.TIME)
     @Column(name = "publicationDate", nullable = false)
-    private Date publicationDate;
+    private Calendar publicationDate;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "user_id", nullable = false)
@@ -36,7 +36,7 @@ public class Comment implements Serializable {
 
     }
 
-    public Comment(String text, Date publicationDate, User user, Article article) {
+    public Comment(String text, Calendar publicationDate, User user, Article article) {
         this.text = text;
         this.publicationDate = publicationDate;
         this.user = user;
@@ -60,11 +60,11 @@ public class Comment implements Serializable {
         this.text = text;
     }
 
-    public Date getPublicationDate() {
+    public Calendar getPublicationDate() {
         return publicationDate;
     }
 
-    public void setPublicationDate(Date publicationDate) {
+    public void setPublicationDate(Calendar publicationDate) {
         this.publicationDate = publicationDate;
     }
 

@@ -1,11 +1,9 @@
-package blog.model;
+package blog.entity;
 
-
-import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.Set;
 
 @Entity
@@ -28,11 +26,11 @@ public class User implements Serializable {
 
     //    @Temporal(value = TemporalType.DATETIME)
     @Column(name = "registrationdate", nullable = false)
-    private Date registrationDate;
+    private Calendar registrationDate;
 
     //    @Temporal(value = TemporalType.TIME)
     @Column(name = "birthdate", nullable = false)
-    private Date birthDate;
+    private Calendar birthDate;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "user")
     private Set<Comment> comments;
@@ -46,7 +44,7 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(boolean enabled, String name, String password, Date registrationDate, Date birthDate) {
+    public User(boolean enabled, String name, String password, Calendar registrationDate, Calendar birthDate) {
         this.enabled = enabled;
         this.name = name;
         this.password = password;
@@ -102,19 +100,19 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public Date getRegistrationDate() {
+    public Calendar getRegistrationDate() {
         return registrationDate;
     }
 
-    public void setRegistrationDate(Date registrationDate) {
+    public void setRegistrationDate(Calendar registrationDate) {
         this.registrationDate = registrationDate;
     }
 
-    public Date getBirthDate() {
+    public Calendar getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(Calendar birthDate) {
         this.birthDate = birthDate;
     }
 

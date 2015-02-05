@@ -1,18 +1,21 @@
 package blog.service;
 
-import blog.model.Article;
-import blog.model.User;
-
-import java.util.List;
+import blog.entity.Article;
 
 /**
  * Created by user on 27.01.2015.
  */
 public interface ArticleService {
 
-    void saveArticle(Article article, String userName);
-
+//    void saveArticle(Article article, String userName);
+//
     Article getArticleById(long id);
-
-    public List<Article> getArticles();
+//
+//    public List<WebArticle> getArticles();
+//
+//    List<WebArticle> getArticlesByPage( long currentPage, long pageSize);
+//
+//    public long getArticleCount();
+//
+//    public ArticlePage getArticlePage(int page);
 }

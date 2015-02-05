@@ -1,13 +1,11 @@
 package blog.dao;
 
 
-import blog.model.Comment;
+import blog.entity.Comment;
 
 /**
  * Created by user on 19.12.2014.
  */
-public interface CommentDAO {
-    public void addComment(Comment comment);
+public interface CommentDAO extends GenericDAO<Comment> {
 
-    public void deleteComment(Comment comment);
 }

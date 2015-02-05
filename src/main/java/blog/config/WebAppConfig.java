@@ -11,13 +11,17 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
+
+import javax.servlet.MultipartConfigElement;
 
 /**
  * Created by user on 15.01.2015.
@@ -44,7 +48,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
     public SessionFactory sessionFactory() {
         LocalSessionFactoryBuilder builder =
                 new LocalSessionFactoryBuilder(dataSource());
-        builder.scanPackages("blog.model")
+        builder.scanPackages("blog.entity")
                 .addProperties(getHibernateProperties());
 
         return builder.buildSessionFactory();
@@ -103,4 +107,11 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 //                .addResourceLocations("/js/");
         registry.addResourceHandler("/resources/**").addResourceLocations("/static/");
     }
+
+//    //for image
+//    @Bean(name = "multipartResolver")
+//    public CommonsMultipartResolver getMultipartResolver() {
+//        return new CommonsMultipartResolver();
+//    }
+
 }

@@ -1,15 +1,14 @@
-package blog.model;
-
-import blog.model.auth.Role;
+package blog.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by user on 07.01.2015.
  */
 @Entity
 @Table(name="user_role")
-public class UserRole {
+public class UserRole implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

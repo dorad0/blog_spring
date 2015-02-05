@@ -1,8 +1,7 @@
 package blog.dao;
 
 
-import blog.model.User;
-import blog.model.UserRole;
+import blog.entity.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,49 +16,25 @@ import java.util.List;
  * Created by user on 31.12.2014.
  */
 @Repository
-public class UserDAOImpl implements UserDAO {
-
-    @Autowired
-    private SessionFactory sessionFactory;
-
-    @Autowired
-    private PasswordEncoder encoder;
-
-    public SessionFactory getSessionFactory() {
-        return sessionFactory;
-    }
-
-    public void setSessionFactory(SessionFactory sessionFactory) {
-
-        this.sessionFactory = sessionFactory;
-    }
+public class UserDAOImpl extends AbstractHibernateDao<User> implements UserDAO {
 
     @Override
-    public void addUser(User user) {
-        Session session = sessionFactory.getCurrentSession();
-        session.persist(user);
-    }
-
-    @Override
-    public void deleteUser(User user) {
-        Session session = sessionFactory.getCurrentSession();
-        session.delete(user);
-    }
-
     @SuppressWarnings("unchecked")
-    @Override
-    public User findByUserName(String username) {
-        List<User> users = new ArrayList<User>();
-        users = sessionFactory.getCurrentSession()
-                .createQuery("from User where name=?")
-                .setParameter(0, username)
-                .list();
-
-        if (users.size() > 0) {
-            return users.get(0);
-        } else {
-            return null;
-        }
+    public User findByName(String name) {
+        return (User) getCurrentSession()
+                .createQuery("FROM User WHERE name = :name")
+                .setString("name", name).uniqueResult();
+//        List<User> users = new ArrayList<User>();
+//        users = sessionFactory.getCurrentSession()
+//                .createQuery("from User where name=?")
+//                .setParameter(0, username)
+//                .list();
+//
+//        if (users.size() > 0) {
+//            return users.get(0);
+//        } else {
+//            return null;
+//        }
+//    }
     }
-
 }

@@ -1,14 +1,11 @@
 package blog.dao;
 
-import blog.model.User;
-import blog.model.UserRole;
-
-import java.util.List;
+import blog.entity.UserRole;
 
 /**
  * Created by user on 29.01.2015.
  */
-public interface UserRoleDAO {
+public interface UserRoleDAO extends GenericDAO<UserRole>  {
 
     void addRoleToUser(UserRole userRole);
 }
