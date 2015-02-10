@@ -1,10 +1,11 @@
-package blog.service;
+package blog.service.user;
 
 import blog.dao.UserDAO;
-import blog.dao.UserRoleDAO;
 import blog.entity.User;
 import blog.entity.UserRole;
-import blog.service.form.UserForm;
+import blog.service.GenericManagerImpl;
+import blog.service.roles.UserRoleManager;
+import blog.service.user.web.UserForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,7 +21,6 @@ import java.util.GregorianCalendar;
 @Transactional
 public class UserManagerImpl extends GenericManagerImpl<User, UserDAO> implements UserManager {
 
-
     @Override
     @Autowired
     @Qualifier("UserDAOImpl")
@@ -32,7 +32,7 @@ public class UserManagerImpl extends GenericManagerImpl<User, UserDAO> implement
     private PasswordEncoder encoder;
 
     @Autowired
-    private UserRoleDAO roleDAO;
+    private UserRoleManager roleManager;
 
     @Override
     public void saveUserFromForm(UserForm form) {
@@ -41,11 +41,10 @@ public class UserManagerImpl extends GenericManagerImpl<User, UserDAO> implement
         user.setName(form.getName());
         user.setPassword(encoder.encode(form.getPassword()));
         user.setBirthDate(form.getBirthDate());
-//        user.setEnabled(true);
-//        userDAO.addUser(user);
-        super.save(user);
+        user.setEnabled(true);
+        save(user);
         UserRole role = new UserRole(user, "ROLE_USER");
-        roleDAO.addRoleToUser(role);
+        roleManager.save(role);
     }
 
     @Override

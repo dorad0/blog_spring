@@ -1,9 +1,8 @@
-package blog.service.validator;
+package blog.service.user.validator;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * Created by user on 21.01.2015.

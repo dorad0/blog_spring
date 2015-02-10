@@ -1,7 +1,8 @@
-package blog.service;
+package blog.service.comment;
 
 import blog.dao.CommentDAO;
 import blog.entity.Comment;
+import blog.service.GenericManagerImpl;
 import org.springframework.stereotype.Service;
 
 /**

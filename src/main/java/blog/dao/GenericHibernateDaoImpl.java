@@ -60,7 +60,8 @@ public abstract class GenericHibernateDAOImpl<T extends Serializable> implements
     public int getEntityCount() {
         Criteria criteriaCount = getCurrentSession().createCriteria(genericType);
         criteriaCount.setProjection(Projections.rowCount());
-        return (Integer) criteriaCount.uniqueResult();
+        long r = (long) criteriaCount.uniqueResult();
+        return (int) r;
     }
 
     @Override

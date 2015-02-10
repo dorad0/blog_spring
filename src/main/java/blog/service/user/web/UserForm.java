@@ -1,15 +1,13 @@
-package blog.service.form;
+package blog.service.user.web;
 
-import blog.service.validator.Age;
+import blog.service.user.validator.Age;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
-import java.io.File;
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * Created by Alex on 01.02.2015.

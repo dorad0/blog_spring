@@ -1,7 +1,7 @@
 package blog.web.controller;
 
-import blog.service.UserManager;
-import blog.service.form.UserForm;
+import blog.service.user.UserManager;
+import blog.service.user.web.UserForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

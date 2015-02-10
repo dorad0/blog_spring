@@ -1,4 +1,4 @@
-package blog.service.data;
+package blog.service.article.web;
 
 import blog.entity.Article;
 import blog.entity.Comment;

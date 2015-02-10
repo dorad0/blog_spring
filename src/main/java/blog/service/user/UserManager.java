@@ -1,7 +1,7 @@
-package blog.service;
+package blog.service.user;
 
 import blog.dao.UserDAO;
-import blog.service.form.UserForm;
+import blog.service.user.web.UserForm;
 
 /**
  * Created by Alex on 05.02.2015.

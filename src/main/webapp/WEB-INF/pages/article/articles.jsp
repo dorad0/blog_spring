@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,26 +18,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="http://getbootstrap.com/favicon.ico">
+    <link rel="icon" href="../resources/fonts/favicon.ico">
 
     <title>Blog Template for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="http://getbootstrap.com/examples/blog/blog.css" rel="stylesheet">
-
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]>
-    <script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="./Blog Template for Bootstrap_files/ie-emulation-modes-warning.js"></script>
-    <style type="text/css"></style>
+    <link href="/resources/css/blog.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <script src="/resources/js/html5shiv.min.js"></script>
+    <script src="/resources/js/respond.min.js"></script>
     <![endif]-->
 </head>
 
@@ -64,24 +59,38 @@
 
     <div class="row">
         <div class="col-sm-8 blog-main">
+            <%--<img src="/resources/fonts/favicon.ico">--%>
 
-            <c:forEach var="article" items="${articles}">
+            <%--<c:forEach var="year" items="${years}">--%>
+            <%--<c:out value="${year.getFirstDayOfWeek()}"/>--%>
+            <%--</c:forEach>--%>
+
+            <c:forEach var="article" items="${page.entities}">
                 <div class="blog-post">
-                        <h2 class="blog-post-title">${article.title}</h2>
-                    <p class="blog-post-meta">${article.date} by <a
-                            href="<c:url value="/user/${article.author}"/>"><c:out value="${article.author}"/> </a>
-                            <%--href="http://getbootstrap.com/examples/blog/#">${article.user.name}</a>--%>
+                    <h2 class="blog-post-title">${article.title}</h2>
+
+                    <p class="blog-post-meta">
+                        <fmt:setLocale scope="session" value="en_US"/>
+                        <fmt:formatDate value="${article.publicationDate.time}"
+                                        pattern="MMMMM d, yyyy"/>
+                        by <a
+                            href="/user/<c:out value="${article.user.name}"/> "> <c:out
+                            value="${article.user.name}"/> </a>
+
                     </p>
                         ${article.text}
                 </div>
                 <!-- /.blog-post -->
             </c:forEach>
 
-
             <nav>
                 <ul class="pager">
-                    <li><a href="http://getbootstrap.com/examples/blog/#">Previous</a></li>
-                    <li><a href="http://getbootstrap.com/examples/blog/#">Next</a></li>
+                    <c:if test="${page.previous}">
+                        <li><a href="/article/articles/${page.pageNumber - 1}">Previous</a></li>
+                    </c:if>
+                    <c:if test="${page.next}">
+                        <li><a href="/article/articles/${page.pageNumber + 1}">Next</a></li>
+                    </c:if>
                 </ul>
             </nav>
 
@@ -98,18 +107,28 @@
             <div class="sidebar-module">
                 <h4>Archives</h4>
                 <ol class="list-unstyled">
-                    <li><a href="http://getbootstrap.com/examples/blog/#">March 2014</a></li>
-                    <li><a href="http://getbootstrap.com/examples/blog/#">February 2014</a></li>
-                    <li><a href="http://getbootstrap.com/examples/blog/#">January 2014</a></li>
-                    <li><a href="http://getbootstrap.com/examples/blog/#">December 2013</a></li>
-                    <li><a href="http://getbootstrap.com/examples/blog/#">November 2013</a></li>
-                    <li><a href="http://getbootstrap.com/examples/blog/#">October 2013</a></li>
-                    <li><a href="http://getbootstrap.com/examples/blog/#">September 2013</a></li>
-                    <li><a href="http://getbootstrap.com/examples/blog/#">August 2013</a></li>
-                    <li><a href="http://getbootstrap.com/examples/blog/#">July 2013</a></li>
-                    <li><a href="http://getbootstrap.com/examples/blog/#">June 2013</a></li>
-                    <li><a href="http://getbootstrap.com/examples/blog/#">May 2013</a></li>
-                    <li><a href="http://getbootstrap.com/examples/blog/#">April 2013</a></li>
+                    <c:forEach var="date" items="${dates}" >
+                        <li>
+                            <a href="http://getbootstrap.com/examples/blog/#">
+
+                                <fmt:formatDate value="${date.time}"
+                                                pattern="MMMMM yyyy"/>
+
+                            </a>
+                        </li>
+                    </c:forEach>
+
+                    <%--<li><a href="http://getbootstrap.com/examples/blog/#">February 2014</a></li>--%>
+                    <%--<li><a href="http://getbootstrap.com/examples/blog/#">January 2014</a></li>--%>
+                    <%--<li><a href="http://getbootstrap.com/examples/blog/#">December 2013</a></li>--%>
+                    <%--<li><a href="http://getbootstrap.com/examples/blog/#">November 2013</a></li>--%>
+                    <%--<li><a href="http://getbootstrap.com/examples/blog/#">October 2013</a></li>--%>
+                    <%--<li><a href="http://getbootstrap.com/examples/blog/#">September 2013</a></li>--%>
+                    <%--<li><a href="http://getbootstrap.com/examples/blog/#">August 2013</a></li>--%>
+                    <%--<li><a href="http://getbootstrap.com/examples/blog/#">July 2013</a></li>--%>
+                    <%--<li><a href="http://getbootstrap.com/examples/blog/#">June 2013</a></li>--%>
+                    <%--<li><a href="http://getbootstrap.com/examples/blog/#">May 2013</a></li>--%>
+                    <%--<li><a href="http://getbootstrap.com/examples/blog/#">April 2013</a></li>--%>
                 </ol>
             </div>
             <div class="sidebar-module">
@@ -122,7 +141,6 @@
             </div>
         </div>
         <!-- /.blog-sidebar -->
-
     </div>
     <!-- /.row -->
 
@@ -142,11 +160,11 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="./Blog Template for Bootstrap_files/jquery.min.js"></script>
-<script src="./Blog Template for Bootstrap_files/bootstrap.min.js"></script>
-<script src="./Blog Template for Bootstrap_files/docs.min.js"></script>
+<script src="/resources/js/jquery.min.js"></script>
+<script src="/resources/js/bootstrap.min.js"></script>
+<script src="/resources/js/docs.min.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="./Blog Template for Bootstrap_files/ie10-viewport-bug-workaround.js"></script>
+<script src="/resources/js/ie10-viewport-bug-workaround.js"></script>
 
 
 <div id="global-zeroclipboard-html-bridge" class="global-zeroclipboard-container"
