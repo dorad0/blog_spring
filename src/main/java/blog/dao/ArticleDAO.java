@@ -13,8 +13,10 @@ import java.util.Set;
  */
 public interface ArticleDAO extends GenericDAO<Article> {
 
-    public Set<Comment> getComments(long id);
+    Set<Comment> getComments(long id);
 
-    public List<Calendar> getDates();
+    List<Calendar> getDates();
+
+    void deleteById(long id);
 }
 

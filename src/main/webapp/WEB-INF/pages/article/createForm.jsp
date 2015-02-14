@@ -5,25 +5,70 @@
   Time: 7:21
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf" %>
+
+
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html>
+<%@page session="true" %>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org">
 <head>
-    <title>Create article</title>
-    <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
+    <title>Login Page</title>
+    <!-- Bootstrap core CSS -->
+    <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/resources/css/login.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="http://mymaplist.com/js/vendor/TweenLite.min.js"></script>
 </head>
-<body>
-<sf:form action="/article/form" method="post" commandName="article">
-    <sf:label path="title" cssErrorClass="error">Title</sf:label>
-    <sf:input path="title" cssErrorClass="error"/> <br>
-
-    <sf:label path="text" cssErrorClass="error">Article body</sf:label>
-    <sf:textarea path="text" cssErrorClass="error"/>
-
-    <input type="hidden" name="${_csrf.parameterName}"
-           value="${_csrf.token}" />
-    <input type="submit" value="Submit" />
-</sf:form>
+<body onload='document.articleForm.title.focus();'>
+<div class="container">
+    <div class="row vertical-offset-100">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Please enter your article</h3>
+                </div>
+                <div class="panel-body">
+                    <form accept-charset="UTF-8" name="articleForm" action="/article/form" method="post" commandName="article">
+                        <fieldset>
+                            <c:if test="${not empty error}">
+                                <div class="alert alert-warning">
+                                    <c:out value="${error}"/>
+                                </div>
+                            </c:if>
+                            <c:if test="${not empty logout}">
+                                <div class="alert alert-success">
+                                    <c:out value="${logout}"/>
+                                </div>
+                            </c:if>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Title" name="title" type="text">
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control" placeholder="Article text" name="text" type="text"
+                                       value=""></textarea>
+                            </div>
+                            <input type="hidden" name="${_csrf.parameterName}"
+                                   value="${_csrf.token}"/>
+                            <input class="btn btn-lg btn-success btn-block" type="submit" value="Submit">
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $(document).mousemove(function (e) {
+            TweenLite.to($('body'),
+                    .5,
+                    {
+                        css: {
+                            backgroundPosition: "" + parseInt(event.pageX / 8) + "px " + parseInt(event.pageY / '12') + "px, " + parseInt(event.pageX / '15') + "px " + +parseInt(event.pageY / '15') + "px, " + parseInt(event.pageX / '30') + "px " + parseInt(event.pageY / '30') + "px"
+                        }
+                    });
+        });
+    });
+</script>
 </body>
 </html>

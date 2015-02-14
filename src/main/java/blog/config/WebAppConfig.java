@@ -1,6 +1,5 @@
 package blog.config;
 
-import java.util.Properties;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.context.MessageSource;
@@ -11,17 +10,14 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
-import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
-import javax.servlet.MultipartConfigElement;
+import java.util.Properties;
 
 /**
  * Created by user on 15.01.2015.
@@ -31,18 +27,33 @@ import javax.servlet.MultipartConfigElement;
 @ComponentScan("blog") //Specifies which package to scan
 @EnableWebMvc //Enables to use Spring's annotations in the code
 @EnableTransactionManagement
-@Import({ SecurityConfig.class })
+@Import({SecurityConfig.class})
 public class WebAppConfig extends WebMvcConfigurerAdapter {
 
+//    @Bean
+//    public UrlBasedViewResolver setupViewResolver() {
+////        UrlBasedViewResolver resolver = new UrlBasedViewResolver();
+//        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+//        resolver.setPrefix("/WEB-INF/pages/");
+//        resolver.setSuffix(".jsp");
+//        resolver.setViewClass(JstlView.class);
+//        return resolver;
+//    }
+
     @Bean
-    public UrlBasedViewResolver setupViewResolver() {
-//        UrlBasedViewResolver resolver = new UrlBasedViewResolver();
-        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setPrefix("/WEB-INF/pages/");
-        resolver.setSuffix(".jsp");
-        resolver.setViewClass(JstlView.class);
-        return resolver;
+    public InternalResourceViewResolver viewResolver() {
+        InternalResourceViewResolver viewResolver
+                = new InternalResourceViewResolver();
+        viewResolver.setViewClass(JstlView.class);
+        viewResolver.setPrefix("/WEB-INF/pages/");
+        viewResolver.setSuffix(".jsp");
+        return viewResolver;
     }
+//    @Override
+//    public void addViewControllers(ViewControllerRegistry registry) {
+//        registry.addViewController("/login").setViewName("login");
+//        registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
+//    }
 
     @Bean
     public SessionFactory sessionFactory() {

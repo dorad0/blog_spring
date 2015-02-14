@@ -56,14 +56,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .antMatchers("/admin/**")
-                .access("hasRole('ROLE_ADMIN')").and().formLogin()
-                .loginPage("/login").failureUrl("/login?error")
-                .usernameParameter("username")
-                .passwordParameter("password")
-                .and().logout().logoutSuccessUrl("/login?logout")
-                .and().csrf()
-                .and().exceptionHandling().accessDeniedPage("/403");
+                .antMatchers("/resources/**").permitAll()
+                .and()
+                    .formLogin()
+                    .loginPage("/login").failureUrl("/login?error")
+                    .permitAll()
+                    .usernameParameter("username")
+                    .passwordParameter("password")
+                .and()
+                .logout()
+                .logoutSuccessUrl("/login?logout")
+                .permitAll()
+                .and()
+                    .csrf();
+//                .antMatchers("/admin/**")
+//                .access("hasRole('ROLE_ADMIN')").and().formLogin()
+//                .loginPage("/login").failureUrl("/login?error")
+//                .usernameParameter("username")
+//                .passwordParameter("password")
+//                .and().logout().logoutSuccessUrl("/login?logout")
+//                .and().csrf()
+//                .and().exceptionHandling().accessDeniedPage("/403");
     }
 
     @Override

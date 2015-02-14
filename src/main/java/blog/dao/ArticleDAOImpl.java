@@ -2,6 +2,8 @@ package blog.dao;
 
 import blog.entity.Article;
 import blog.entity.Comment;
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Order;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
@@ -28,5 +30,25 @@ public class ArticleDAOImpl extends GenericHibernateDAOImpl<Article> implements 
             calendars.add(new GregorianCalendar((Integer) mas[0], (Integer) mas[1], 1));
         }
         return calendars;
+    }
+
+    @Override
+    public List<Article> findAll() {
+        return getCurrentSession().createCriteria(Article.class).addOrder(Order.desc("publicationdate")).list();
+    }
+
+    @Override
+    public List<Article> getEntityGroup(int fIndex, int groupSize) {
+        Criteria criteria = getCurrentSession().createCriteria(Article.class);
+        criteria.addOrder(Order.desc("publicationDate"));
+        criteria.setFirstResult(fIndex);
+        criteria.setMaxResults(groupSize);
+        return criteria.list();
+    }
+
+    @Override
+    public void deleteById(long id) {
+        Article article = (Article) getCurrentSession().load(Article.class, id);
+        getCurrentSession().delete(article);
     }
 }

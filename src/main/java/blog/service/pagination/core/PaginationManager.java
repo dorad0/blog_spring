@@ -1,23 +1,21 @@
 package blog.service.pagination.core;
 
 import blog.dao.GenericDAO;
-import blog.dao.GenericHibernateDAOImpl;
-import blog.service.GenericManagerImpl;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+
 import javax.transaction.Transactional;
-import java.io.Serializable;
 
 /**
  * Created by Alex on 06.02.2015.
  */
 @Transactional
-public class PaginationManager<T, D extends GenericDAO<T>> implements Pagination<T> {
+public abstract class PaginationManager<T, D extends GenericDAO<T>> implements Pagination<T> {
 
-    public static final int FIRST_PAGE = 0;
-    public static final int PAGE_SIZE = 10;
+    public static final int DEFAULT_PAGE_SIZE = 5;
+    public static final int DEFAULT_FIRST_ELEMENT = 0;
 
     private D dao;
+    private int pageSize = DEFAULT_PAGE_SIZE;
+
 
     private int countPages(int items, int pageSize) {
         int pages;
@@ -36,9 +34,22 @@ public class PaginationManager<T, D extends GenericDAO<T>> implements Pagination
     }
 
     @Override
-    public Page<T> getPage(int fromPage, int pageSize) {
+    public Page<T> getPage(int pageNumber, int pageSize) {
         int items = dao.getEntityCount();
+        int fromElement = DEFAULT_FIRST_ELEMENT;
         int pages = countPages(items, pageSize);
-        return new Page<>(fromPage, pages, dao.getEntityGroup(fromPage, pageSize));
+//        if(pageNumber <= 0 || pageNumber > pages)
+//            throw new Exception();
+                if(pageNumber <= 0 || pageNumber > pages)
+                    pageNumber = DEFAULT_FIRST_ELEMENT;
+        if (pageNumber > 1) {
+            fromElement = (pageNumber - 1) * pageSize;
+            return new Page<>(pageNumber, pages, dao.getEntityGroup(fromElement, pageSize));
+        }
+        return new Page<>(pageNumber, pages, dao.getEntityGroup(fromElement, pageSize));
+    }
+
+    public Page<T> getPage(int pageNumber) {
+        return getPage(pageNumber, pageSize);
     }
 }

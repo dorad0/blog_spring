@@ -3,6 +3,7 @@ package blog.web.controller;
 import blog.service.user.UserManager;
 import blog.service.user.web.UserForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -41,6 +42,7 @@ public class UserController {
         return "redirect:/user/" + userForm.getName();
     }
 
+    
     @RequestMapping(value = "/{username}", method = RequestMethod.GET)
     public String showUserProfile(@PathVariable String username, Model model) {
 

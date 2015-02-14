@@ -4,6 +4,7 @@ package blog.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Set;
 
 @Entity
@@ -27,7 +28,7 @@ public class Article implements Serializable {
     @Column(name = "publicationDate", nullable = false)
     private Calendar publicationDate;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
@@ -36,7 +37,7 @@ public class Article implements Serializable {
 
 
     public Article() {
-
+        this.publicationDate = new GregorianCalendar();
     }
 
     public Article(String title, String text, Calendar publicationDate, User user) {

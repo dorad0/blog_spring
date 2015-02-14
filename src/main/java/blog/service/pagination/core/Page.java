@@ -11,6 +11,20 @@ public class Page<T> {
     private List<T> entities;
     private boolean next;
     private boolean previous;
+    private int nextPage;
+    private int previousPage;
+
+    public int getNextPage() {
+        if (next) //or exception NoSuchPageException
+            return nextPage;
+        return pageNumber;
+    }
+
+    public int getPreviousPage() {
+        if (previous)
+            return previousPage;
+        return pageNumber;
+    }
 
     public boolean isPrevious() {
         return previous;
@@ -18,10 +32,12 @@ public class Page<T> {
 
     public Page(int pageNumber, int pages, List<T> entities) {
         this.pageNumber = pageNumber;
-        this.pages = pages ;
+        this.pages = pages;
         this.entities = entities;
-        this.next = (pageNumber + 1) <= pages;
-        this.previous = (pageNumber - 1) >= 0;
+        this.nextPage = pageNumber + 1;
+        this.previousPage = pageNumber - 1;
+        this.next = nextPage <= pages;
+        this.previous = previousPage >= 1;
     }
 
     public int getPageNumber() {

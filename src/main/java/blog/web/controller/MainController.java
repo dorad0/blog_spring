@@ -24,28 +24,23 @@ public class MainController {
 
     @RequestMapping(value = { "/", "/welcome**" }, method = RequestMethod.GET)
     public ModelAndView defaultPage() {
-
         ModelAndView model = new ModelAndView();
         model.addObject("title", "Spring Security + Hibernate Example");
         model.addObject("message", "This is default page!");
-        model.setViewName("hello");
+        model.setViewName("redirect:/article/articles");
         return model;
-
     }
 
     @RequestMapping(value = "/admin**", method = RequestMethod.GET)
     public ModelAndView adminPage() {
-
         ModelAndView model = new ModelAndView();
         model.addObject("title", "Spring Security + Hibernate Example");
         model.addObject("message", "This page is for ROLE_ADMIN only!");
         model.setViewName("admin");
-
         return model;
-
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/login", method = {RequestMethod.POST, RequestMethod.GET})
     public ModelAndView login(@RequestParam(value = "error", required = false) String error,
                               @RequestParam(value = "logout", required = false) String logout, HttpServletRequest request) {
 
@@ -55,7 +50,8 @@ public class MainController {
         }
 
         if (logout != null) {
-            model.addObject("msg", "You've been logged out successfully.");
+            model.addObject("logout", "You've been logged out successfully.");
+
         }
         model.setViewName("login");
 
