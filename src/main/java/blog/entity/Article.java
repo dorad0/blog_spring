@@ -1,6 +1,8 @@
 package blog.entity;
 
 
+import org.hibernate.annotations.Formula;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Calendar;
@@ -32,9 +34,20 @@ public class Article implements Serializable {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, mappedBy = "article")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "article")
     private Set<Comment> comments;
 
+    public void setCommentsCount(int commentsCount) {
+        this.commentsCount = commentsCount;
+    }
+
+    public int getCommentsCount() {
+
+        return commentsCount;
+    }
+
+    @Formula("(SELECT COUNT(*) FROM comment WHERE comment.article_id = id)")
+    private int commentsCount;
 
     public Article() {
         this.publicationDate = new GregorianCalendar();

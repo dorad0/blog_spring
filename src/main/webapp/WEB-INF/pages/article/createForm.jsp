@@ -6,13 +6,12 @@
   To change this template use File | Settings | File Templates.
 --%>
 
-
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@page session="true" %>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org">
 <head>
-    <title>Login Page</title>
+    <title>Add article page</title>
     <!-- Bootstrap core CSS -->
     <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="/resources/css/login.css" rel="stylesheet">
@@ -22,7 +21,7 @@
 <body onload='document.articleForm.title.focus();'>
 <div class="container">
     <div class="row vertical-offset-100">
-        <div class="col-md-4 col-md-offset-4">
+        <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Please enter your article</h3>
@@ -42,14 +41,16 @@
                             </c:if>
                             <div class="form-group">
                                 <input class="form-control" placeholder="Title" name="title" type="text">
+                                <%--<form:errors path="title" cssClass="has-error"/>--%>
                             </div>
                             <div class="form-group">
-                                <textarea class="form-control" placeholder="Article text" name="text" type="text"
+                                <textarea class="form-control" rows="15" placeholder="Article text" name="text" type="text"
                                        value=""></textarea>
+                                <%--<form:errors path="text" cssClass="has-error"/>--%>
                             </div>
                             <input type="hidden" name="${_csrf.parameterName}"
                                    value="${_csrf.token}"/>
-                            <input class="btn btn-lg btn-success btn-block" type="submit" value="Submit">
+                            <input class="btn btn-lg btn-success btn-block" type="submit" value="Preview">
                         </fieldset>
                     </form>
                 </div>

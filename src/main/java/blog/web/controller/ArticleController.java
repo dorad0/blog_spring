@@ -2,6 +2,7 @@ package blog.web.controller;
 
 import blog.entity.Article;
 import blog.service.article.ArticleManager;
+import blog.service.article.web.ArticleForm;
 import blog.service.pagination.article.ArticlePagination;
 import blog.service.util.ArticleArchives;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,48 +35,48 @@ public class ArticleController {
     @Autowired
     private ArticlePagination pagination;
 
-    @RequestMapping("/articles")
+    @RequestMapping(method = RequestMethod.GET)
     public String getArticles(Model model) {
-        model.addAttribute("page", pagination.getPage(1));
+        model.addAttribute("page", pagination.getFirstPage());
         model.addAttribute("dates", archives.getDates());
         return "article/articles";
     }
 
-    @RequestMapping(value = "articles/{pagenumber}", method = RequestMethod.GET)
-    public String showUserProfile(@PathVariable int pagenumber, Model model) {
+    @RequestMapping(value = "/page", method = RequestMethod.GET)
+    public String showDefaultPage(Model model) {
+        return getArticles(model);
+    }
+
+    @RequestMapping(value = "/page/{pagenumber}", method = RequestMethod.GET)
+    public String showArticlesPage(@PathVariable int pagenumber, Model model) {
         model.addAttribute("dates", archives.getDates());
         model.addAttribute("page", pagination.getPage(pagenumber));
         return "article/articles";
     }
 
     @RequestMapping(value = "/form", method = RequestMethod.GET)
-    @Secured("ROLE_USER")
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     public String createArticle(Model entity) {
-
         entity.addAttribute(new Article());
         return "article/createForm";
     }
 
-
     @RequestMapping(value = "/form", method = RequestMethod.POST)
-    @Secured("ROLE_USER")
-    public String submitForm(@Valid Article article, BindingResult result, Model entity) {
-
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
+    public String submitForm(@Valid ArticleForm article, BindingResult result, Model entity) {
         if (result.hasErrors()) {
-            return "article/creatForm";
+            return "article/createForm";
         }
 
-//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        service.save(article, (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-        entity.addAttribute(article);
-        return "redirect:/article/" + article.getId();
+        Article article1 = service.save(article, (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        entity.addAttribute(article1);
+//        return "redirect:/article/" + article1.getId();
+        return "article/articles";
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     public String showArticleContent(@PathVariable long id, Model entity) {
-
         entity.addAttribute(service.findById(id));
         return "article/preview";
     }
@@ -89,9 +90,7 @@ public class ArticleController {
             service.delete(article);
             m.addAttribute("article", article);
             return "article/sucsessDelete";
-        }
-        else
-        {
+        } else {
             return "-----";
         }
     }

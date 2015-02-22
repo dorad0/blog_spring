@@ -5,6 +5,7 @@ import blog.dao.UserDAO;
 import blog.entity.Article;
 import blog.entity.Comment;
 import blog.service.GenericManagerImpl;
+import blog.service.article.web.ArticleForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.userdetails.User;
@@ -33,6 +34,10 @@ public class ArticleManagerImpl extends GenericManagerImpl<Article, ArticleDAO> 
         super.setDao(dao);
     }
 
+    private blog.entity.User findUserByName(String userName) {
+        return userDAO.findByName(userName);
+    }
+
     @Override
     public Set<Comment> getComments(long id) {
         return dao.getComments(id);
@@ -45,14 +50,14 @@ public class ArticleManagerImpl extends GenericManagerImpl<Article, ArticleDAO> 
 
     @Override
     public void save(Article article, String userName) {
-        article.setUser(userDAO.findByName(userName));
+        article.setUser(findUserByName(userName));
         article.setPublicationDate(new GregorianCalendar());
         save(article);
     }
 
     @Override
     public void save(Article article, User user) {
-        article.setUser(userDAO.findByName(user.getUsername()));
+        article.setUser(findUserByName(user.getUsername()));
         article.setPublicationDate(new GregorianCalendar());
         save(article);
     }
@@ -60,5 +65,22 @@ public class ArticleManagerImpl extends GenericManagerImpl<Article, ArticleDAO> 
     @Override
     public void deleteById(long id) {
         dao.deleteById(id);
+    }
+
+    @Override
+    public Article saveAndGet(Article article) {
+        return null;
+    }
+
+    @Override
+    public Article save(ArticleForm form, User user) {
+        Article article = new Article(form.getTitle(), form.getText(), new GregorianCalendar(), findUserByName(user.getUsername()));
+        save(article);
+        return article;
+    }
+
+    @Override
+    public Article getInitializedArticleById(long id) {
+        return dao.getInitializedArticleById(id);
     }
 }

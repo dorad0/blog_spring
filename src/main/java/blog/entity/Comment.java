@@ -24,7 +24,7 @@ public class Comment implements Serializable {
     @Column(name = "publicationDate", nullable = false)
     private Calendar publicationDate;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 

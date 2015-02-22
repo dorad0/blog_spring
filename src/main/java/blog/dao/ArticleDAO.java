@@ -18,5 +18,9 @@ public interface ArticleDAO extends GenericDAO<Article> {
     List<Calendar> getDates();
 
     void deleteById(long id);
+
+    Article saveAndGet(Article article);
+
+    Article getInitializedArticleById(long id);
 }
 

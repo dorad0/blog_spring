@@ -6,4 +6,5 @@ package blog.service.pagination.core;
 public interface Pagination<T> {
     Page<T> getPage(int pageNumber, int pageSize);
     Page<T> getPage(int pageNumber);
+    Page<T> getFirstPage();
 }

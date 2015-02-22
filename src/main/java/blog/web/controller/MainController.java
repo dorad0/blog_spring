@@ -25,9 +25,9 @@ public class MainController {
     @RequestMapping(value = { "/", "/welcome**" }, method = RequestMethod.GET)
     public ModelAndView defaultPage() {
         ModelAndView model = new ModelAndView();
-        model.addObject("title", "Spring Security + Hibernate Example");
-        model.addObject("message", "This is default page!");
-        model.setViewName("redirect:/article/articles");
+//        model.addObject("title", "Spring Security + Hibernate Example");
+//        model.addObject("message", "This is default page!");
+        model.setViewName("redirect:/article/");
         return model;
     }
 

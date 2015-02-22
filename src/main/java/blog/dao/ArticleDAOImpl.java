@@ -3,6 +3,7 @@ package blog.dao;
 import blog.entity.Article;
 import blog.entity.Comment;
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.criterion.Order;
 import org.springframework.stereotype.Repository;
 
@@ -19,6 +20,7 @@ public class ArticleDAOImpl extends GenericHibernateDAOImpl<Article> implements 
     @Override
     public Set<Comment> getComments(long id) {
         Article article = (Article) getCurrentSession().load(Article.class, id);
+        Hibernate.initialize(article.getComments());
         return article.getComments();
     }
 
@@ -50,5 +52,18 @@ public class ArticleDAOImpl extends GenericHibernateDAOImpl<Article> implements 
     public void deleteById(long id) {
         Article article = (Article) getCurrentSession().load(Article.class, id);
         getCurrentSession().delete(article);
+    }
+
+    @Override
+    public Article saveAndGet(Article article) {
+        getCurrentSession().save(article);
+        return article;
+    }
+
+    @Override
+    public Article getInitializedArticleById(long id) {
+        Article article = (Article) getCurrentSession().load(Article.class, id);
+        Hibernate.initialize(article.getComments());
+        return article;
     }
 }
