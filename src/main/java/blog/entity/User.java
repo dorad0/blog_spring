@@ -35,7 +35,7 @@ public class User implements Serializable {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "user")
     private Set<Comment> comments;
 
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "user")
     private Set<Article> articles;
 
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")

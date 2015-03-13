@@ -10,4 +10,6 @@ import java.util.List;
  */
 public interface CommentDAO extends GenericDAO<Comment> {
     List<Comment> getArticleComments(long articleId);
+
+    void deleteCommentById(long id);
 }

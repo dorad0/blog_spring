@@ -3,6 +3,7 @@ package blog.service.comment;
 import blog.dao.ArticleDAO;
 import blog.dao.CommentDAO;
 import blog.dao.UserDAO;
+import blog.entity.Article;
 import blog.entity.Comment;
 import blog.service.GenericManagerImpl;
 import blog.service.article.ArticleManager;
@@ -46,7 +47,15 @@ public class CommentManagerImpl extends GenericManagerImpl<Comment, CommentDAO> 
         comment.setText(form.getText());
         comment.setPublicationDate(new GregorianCalendar());
         comment.setUser(userManager.findByName(userName));
-        comment.setArticle(articleManager.findById(articleId));
+
+        Article article = new Article();
+        article.setId(articleId);
+        comment.setArticle(article);
         dao.save(comment);
+    }
+
+    @Override
+    public void deleteComment(long id) {
+        dao.deleteCommentById(id);
     }
 }

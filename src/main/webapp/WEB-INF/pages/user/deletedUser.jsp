@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
-  User: user
-  Date: 27.01.2015
-  Time: 13:25
+  User: Alex
+  Date: 26.02.2015
+  Time: 14:52
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -18,18 +18,11 @@
     <div class="row">
         <div class="col-sm-8 blog-main">
             <p>
-                User name: <c:out value="${user.name}"/>
+                User <c:out value="${user.name}"/> (articles and comments) was deleted successfully.
             </p>
-            <p>
+       <%--     <p>
                 Register: <fmt:formatDate value="${user.registrationDate.time}" pattern="yyyy-MM-dd HH:mm:ss"/>
-            </p>
-            <sec:authorize ifAnyGranted="ROLE_ADMIN">
-                <form name="deleteUserForm" action="/user/delete/${user.id}" method="post">
-                    <input type="hidden" name="${_csrf.parameterName}"
-                           value="${_csrf.token}"/>
-                    <input type="submit" class="btn btn-lg btn-success" value="Delete"/>
-                </form>
-            </sec:authorize>
+            </p>--%>
             <p>
                 <a href="/article/">Go back</a>
             </p>

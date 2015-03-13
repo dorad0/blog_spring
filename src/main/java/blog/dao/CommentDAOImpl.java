@@ -14,6 +14,12 @@ public class CommentDAOImpl extends GenericHibernateDAOImpl<Comment> implements 
 
     @Override
     public List<Comment> getArticleComments(long articleId) {
-        return getCurrentSession().createQuery("FROM Comment WHERE article_id = " + articleId + " ORDER BY publicationDate DESC").list();
+        return getCurrentSession().createQuery("FROM Comment WHERE article_id = " + articleId + " ORDER BY publicationDate ASC").list();
+    }
+
+    @Override
+    public void deleteCommentById(long id) {
+        getCurrentSession().createSQLQuery("DELETE FROM Comment  WHERE id = :id ").setParameter("id", id).executeUpdate();
+
     }
 }

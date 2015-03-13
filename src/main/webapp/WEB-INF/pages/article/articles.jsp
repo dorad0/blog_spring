@@ -67,60 +67,13 @@
             </nav>
         </div>
         <!-- /.blog-main -->
-        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
-            <div class="sidebar-module sidebar-module-inset">
-                <h4>About</h4>
-
-                <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet
-                    fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
-            </div>
-            <div class="sidebar-module">
-                <h4>Archives</h4>
-                <ol class="list-unstyled">
-                    <c:forEach var="date" items="${dates}">
-                        <li>
-                            <a href="http://getbootstrap.com/examples/blog/#">
-                                <fmt:formatDate value="${date.time}"
-                                                pattern="MMMMM yyyy"/>
-                            </a>
-                        </li>
-                    </c:forEach>
-                </ol>
-            </div>
-            <div class="sidebar-module">
-                <h4>Elsewhere</h4>
-                <ol class="list-unstyled">
-                    <li><a href="http://getbootstrap.com/examples/blog/#">GitHub</a></li>
-                    <li><a href="http://getbootstrap.com/examples/blog/#">Twitter</a></li>
-                    <li><a href="http://getbootstrap.com/examples/blog/#">Facebook</a></li>
-                </ol>
-            </div>
-        </div>
-        <!-- /.blog-sidebar -->
+        <jsp:include page="../sidebar.jsp"/>
     </div>
     <!-- /.row -->
 </div>
 <!-- /.container -->
+<!--footer -->
 <jsp:include page="../footer.jsp"/>
-<%--<footer class="blog-footer">--%>
-<%--<p>Blog template built for <a href="http://getbootstrap.com/">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.--%>
-<%--</p>--%>
-
-<%--<p>--%>
-<%--<a href="http://getbootstrap.com/examples/blog/#">Back to top</a>--%>
-<%--</p>--%>
-<%--</footer>--%>
-
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="/resources/js/jquery.min.js"></script>
-<script src="/resources/js/bootstrap.min.js"></script>
-<script src="/resources/js/docs.min.js"></script>
-<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="/resources/js/ie10-viewport-bug-workaround.js"></script>
-
-
 <%--<div id="global-zeroclipboard-html-bridge" class="global-zeroclipboard-container"--%>
 <%--style="position: absolute; left: 0px; top: -9999px; width: 15px; height: 15px; z-index: 999999999;" title=""--%>
 <%--data-original-title="Copy to clipboard">--%>

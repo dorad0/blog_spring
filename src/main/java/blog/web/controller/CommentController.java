@@ -1,5 +1,6 @@
 package blog.web.controller;
 
+import blog.entity.Article;
 import blog.service.article.ArticleManager;
 import blog.service.comment.CommentManager;
 import blog.service.comment.web.CommentForm;
@@ -13,7 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import org.springframework.web.bind.annotation.RequestParam;
 import javax.validation.Valid;
 
 /**
@@ -31,9 +32,16 @@ public class CommentController {
 
     @RequestMapping("/{id}")
     public String getArticleWithComments(@PathVariable long id, Model model) {
-        model.addAttribute("article", articleService.findById(id));
-        model.addAttribute("comments", commentService.getArticleComments(id));
-        return "comment/article";
+        Article article = articleService.findById(id);
+        if(article != null) {
+            model.addAttribute("article", article);
+            model.addAttribute("comments", commentService.getArticleComments(id));
+            model.addAttribute("commentForm", new CommentForm());
+            return "comment/article";
+        }
+        else {
+            return "comment/empty";
+        }
     }
 
     @RequestMapping(value = "/add/{articleId}", method = RequestMethod.POST)
@@ -43,6 +51,13 @@ public class CommentController {
             return "comment/article";
         }
         commentService.addComment(articleId, form, ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername());
+        return "redirect:/comments/" + articleId + "#end";
+    }
+
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @Secured("ROLE_ADMIN")
+    public String deleteComment(@RequestParam(required = true) long commentId, @RequestParam(required = true) long articleId) {
+        commentService.deleteComment(commentId);
         return "redirect:/comments/" + articleId;
     }
 }

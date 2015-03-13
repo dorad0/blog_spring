@@ -48,6 +48,12 @@ public class UserManagerImpl extends GenericManagerImpl<User, UserDAO> implement
     }
 
     @Override
+    public void deleteUserById(long id) {
+        User user = findById(id);
+        delete(user);
+    }
+
+    @Override
     public User findByName(String name) {
         return dao.findByName(name);
     }

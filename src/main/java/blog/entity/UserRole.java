@@ -15,7 +15,7 @@ public class UserRole implements Serializable {
     @Column(name = "id", unique = true, nullable = false)
     private  long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 

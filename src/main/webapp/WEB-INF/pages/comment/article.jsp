@@ -9,11 +9,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<html>
 <jsp:include page="../head.jsp"/>
 <body>
 <jsp:include page="../header.jsp"/>
 <div class="container">
     <div class="row">
+        <br>
+
         <div class="col-sm-8 blog-main">
             <div class="blog-post">
                 <h2 class="blog-post-title">
@@ -31,11 +35,11 @@
 
                 <p>${article.text}</p>
                 <sec:authorize ifAnyGranted="ROLE_ADMIN">
-                    <form method="post" action="/article/delete?id=${article.id}">
+                    <form:form name="deleteArticleForm" action="/article/delete?id=${article.id}">
                         <input type="hidden" name="${_csrf.parameterName}"
                                value="${_csrf.token}"/>
                         <input type="submit" class="btn btn-lg btn-success" value="Delete"/>
-                    </form>
+                    </form:form>
                 </sec:authorize>
                 <div class="col-lg-12">
                     <c:forEach var="comment" items="${comments}">
@@ -60,28 +64,44 @@
                                 </p>
                             </div>
 
+                            <sec:authorize ifAnyGranted="ROLE_ADMIN">
+                                <div class="panel-footer">
+                                    <form name="deleteCommentForm" action="/comments/delete?commentId=${comment.id}&articleId=${article.id}"
+                                          method="post">
+                                        <input type="hidden" name="${_csrf.parameterName}"
+                                               value="${_csrf.token}"/>
+                                        <input type="submit" class="btn btn-lg btn-success" value="Delete"/>
+                                    </form>
+                                </div>
+                            </sec:authorize>
+
+
                             <!-- /panel-body -->
                         </div>
                         <!-- /panel panel-default -->
                     </c:forEach>
+                    <div id="end"></div>
                     <sec:authorize access="isAuthenticated()">
-                        <form method="post" action="/comments/add/${article.id}" class="form-inline" role="form">
-                        <div class="form-group">
-                            <input class="form-control" name="text" type="text" placeholder="Your comments" />
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-default">Add</button>
-                        </div>
+                        <form:form name="addCommentForm" action="/comments/add/${article.id}" cssClass="form-inline" modelAttribute="commentForm">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="text" placeholder="Your comment"/>
+                                <form:errors path="text" cssClass="has-error"/>
+                                <button type="submit" class="btn btn-default">Add</button>
+                            </div>
                             <input type="hidden" name="${_csrf.parameterName}"
                                    value="${_csrf.token}"/>
-                        </form>
+                        </form:form>
                     </sec:authorize>
                 </div>
                 <!-- /col-sm-5 -->
             </div>
+
             <!-- /.blog-post -->
         </div>
+
+        <jsp:include page="../sidebar.jsp"/>
     </div>
 </div>
+<jsp:include page="../footer.jsp"/>
 </body>
 </html>

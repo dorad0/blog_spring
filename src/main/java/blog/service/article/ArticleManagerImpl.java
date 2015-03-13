@@ -49,6 +49,11 @@ public class ArticleManagerImpl extends GenericManagerImpl<Article, ArticleDAO> 
     }
 
     @Override
+    public List<Article> findByMonthAndYear(Calendar date) {
+        return dao.findByMonthAndYear(date);
+    }
+
+    @Override
     public void save(Article article, String userName) {
         article.setUser(findUserByName(userName));
         article.setPublicationDate(new GregorianCalendar());
@@ -83,4 +88,6 @@ public class ArticleManagerImpl extends GenericManagerImpl<Article, ArticleDAO> 
     public Article getInitializedArticleById(long id) {
         return dao.getInitializedArticleById(id);
     }
+
+
 }

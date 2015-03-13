@@ -12,4 +12,6 @@ public interface CommentManager {
     List<Comment> getArticleComments(long articleId);
 
     void addComment(long articleId, CommentForm form, String username);
+
+    void deleteComment(long id);
 }

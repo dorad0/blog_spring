@@ -14,11 +14,11 @@ public abstract class PaginationManager<T, D extends GenericDAO<T>> implements P
     public static final int DEFAULT_FIRST_ELEMENT = 0;
     public static final int DEFAULT_FIRST_PAGE_NUMBER = 1;
 
-    private D dao;
+    protected D dao;
     private int pageSize = DEFAULT_PAGE_SIZE;
 
 
-    private int countPages(int items, int pageSize) {
+    protected int countPages(int items, int pageSize) {
         int pages;
 //        if(pages == 0) throw new Exception();
         if (items <= pageSize) {

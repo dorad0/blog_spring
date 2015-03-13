@@ -7,5 +7,6 @@ import blog.service.user.web.UserForm;
  * Created by Alex on 05.02.2015.
  */
 public interface UserManager extends UserDAO {
-    public void saveUserFromForm(UserForm form);
+    void saveUserFromForm(UserForm form);
+    void deleteUserById(long id);
 }

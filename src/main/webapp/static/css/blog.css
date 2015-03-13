@@ -30,6 +30,11 @@ h6, .h6 {
   }
 }
 
+.sticky {
+    position: static; /* указываем перед sticky */
+    position: sticky;
+    top: 0px; /* обязательно указываем позицию элемента */
+}
 
 /*
  * Masthead for nav

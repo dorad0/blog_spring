@@ -27,7 +27,7 @@
                     <h3 class="panel-title">Please enter your article</h3>
                 </div>
                 <div class="panel-body">
-                    <form accept-charset="UTF-8" name="articleForm" action="/article/form" method="post" commandName="article">
+                    <form accept-charset="UTF-8" name="articleForm" action="/article/form" method="post" commandName="articleFrom">
                         <fieldset>
                             <c:if test="${not empty error}">
                                 <div class="alert alert-warning">

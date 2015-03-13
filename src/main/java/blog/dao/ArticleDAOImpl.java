@@ -35,6 +35,11 @@ public class ArticleDAOImpl extends GenericHibernateDAOImpl<Article> implements 
     }
 
     @Override
+        public List<Article> findByMonthAndYear(Calendar date) {
+        return getCurrentSession().createQuery("FROM article WHERE YEAR(publicationDate) = :year AND MONTH(publicationDate) = :month").setInteger("year", date.get(Calendar.YEAR)).setInteger("month", date.get(Calendar.MONTH)).list();
+    }
+
+    @Override
     public List<Article> findAll() {
         return getCurrentSession().createCriteria(Article.class).addOrder(Order.desc("publicationdate")).list();
     }
@@ -50,8 +55,9 @@ public class ArticleDAOImpl extends GenericHibernateDAOImpl<Article> implements 
 
     @Override
     public void deleteById(long id) {
-        Article article = (Article) getCurrentSession().load(Article.class, id);
-        getCurrentSession().delete(article);
+//        Article article = (Article) getCurrentSession().load(Article.class, id);
+//        getCurrentSession().delete(article);
+        getCurrentSession().createQuery("DELETE FROM article WHERE id = :id").setParameter("id", id).executeUpdate();
     }
 
     @Override

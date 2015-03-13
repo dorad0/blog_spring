@@ -24,16 +24,15 @@ public class Comment implements Serializable {
     @Column(name = "publicationDate", nullable = false)
     private Calendar publicationDate;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "article_id", nullable = false)
     private Article article;
 
     public Comment() {
-
     }
 
     public Comment(String text, Calendar publicationDate, User user, Article article) {

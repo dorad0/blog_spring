@@ -8,12 +8,15 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.core.Ordered;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
@@ -49,6 +52,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
         viewResolver.setSuffix(".jsp");
         return viewResolver;
     }
+
 //    @Override
 //    public void addViewControllers(ViewControllerRegistry registry) {
 //        registry.addViewController("/login").setViewName("login");
@@ -123,6 +127,22 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 //    @Bean(name = "multipartResolver")
 //    public CommonsMultipartResolver getMultipartResolver() {
 //        return new CommonsMultipartResolver();
+//    }
+
+//    @Bean(name="simpleMappingExceptionResolver")
+//    public SimpleMappingExceptionResolver createSimpleMappingExceptionResolver() {
+//        SimpleMappingExceptionResolver r =
+//                new SimpleMappingExceptionResolver();
+//
+//        Properties mappings = new Properties();
+//        mappings.setProperty("DatabaseException", "databaseError");
+//        mappings.setProperty("InvalidCreditCardException", "creditCardError");
+//
+//        r.setExceptionMappings(mappings);  // None by default
+//        r.setDefaultErrorView("error");    // No default
+//        r.setExceptionAttribute("ex");     // Default is "exception"
+//        r.setWarnLogCategory("example.MvcLogger");     // No default
+//        return r;
 //    }
 
 }
