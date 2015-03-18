@@ -6,6 +6,7 @@ import blog.entity.Article;
 import blog.entity.Comment;
 import blog.service.GenericManagerImpl;
 import blog.service.article.web.ArticleForm;
+import blog.service.pagination.article.ArticleArchivePagination;
 import blog.service.pagination.article.ArticlePagination;
 import blog.service.pagination.core.Page;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,9 @@ public class ArticleManagerImpl extends GenericManagerImpl<Article, ArticleDAO> 
     @Qualifier("articlePaginationImpl")
     @Autowired
     private ArticlePagination pagination;
+
+    @Autowired
+    private ArticleArchivePagination archivePagination;
 
     @Override
     @Autowired
@@ -108,5 +112,10 @@ public class ArticleManagerImpl extends GenericManagerImpl<Article, ArticleDAO> 
     @Override
     public ArticlePagination getPagination() {
         return (ArticlePagination) pagination;
+    }
+
+    @Override
+    public ArticleArchivePagination getArchivePagination() {
+        return archivePagination;
     }
 }

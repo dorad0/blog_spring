@@ -61,7 +61,7 @@ public class ArticleController {
 
     @RequestMapping(value="archive/{year}/{month}/page/{pagenumber}", method = RequestMethod.GET)
     public String getArchiveArticlesPage(Model model, @PathVariable(value = "year") int year, @PathVariable(value = "month") int month, @PathVariable int pagenumber) {
-        model.addAttribute("page", service.getPagination().getPage(pagenumber, year, month));
+        model.addAttribute("page", service.getArchivePagination().getPage(pagenumber, year, month));
         model.addAttribute("date", new GregorianCalendar(year, month, 1));
         return "article/archive/archiveArticles";
     }

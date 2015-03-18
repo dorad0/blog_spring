@@ -4,6 +4,7 @@ import blog.dao.ArticleDAO;
 import blog.entity.Article;
 import blog.service.article.web.ArticleForm;
 import blog.service.pagination.Pageable;
+import blog.service.pagination.article.ArticleArchivePagination;
 import blog.service.pagination.article.ArticlePagination;
 import org.springframework.security.core.userdetails.User;
 
@@ -22,4 +23,6 @@ public interface ArticleManager  extends ArticleDAO {
     Article getInitializedArticleById(long id);
 
     ArticlePagination getPagination();
+
+    ArticleArchivePagination getArchivePagination();
 }
