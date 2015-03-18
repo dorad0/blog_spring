@@ -15,8 +15,11 @@ public abstract class PaginationManager<T, D extends GenericDAO<T>> implements P
     public static final int DEFAULT_FIRST_PAGE_NUMBER = 1;
 
     protected D dao;
-    private int pageSize = DEFAULT_PAGE_SIZE;
+    protected int pageSize = DEFAULT_PAGE_SIZE;
 
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
 
     protected int countPages(int items, int pageSize) {
         int pages;
@@ -36,11 +39,13 @@ public abstract class PaginationManager<T, D extends GenericDAO<T>> implements P
 
     @Override
     public Page<T> getPage(int pageNumber, int pageSize) {
+
         int items = dao.getEntityCount();
         int fromElement = DEFAULT_FIRST_ELEMENT;
         int pages = countPages(items, pageSize);
 //        if(pageNumber <= 0 || pageNumber > pages)
 //            throw new Exception();
+        this.pageSize = pageSize;
                 if(pageNumber <= 0 || pageNumber > pages)
                     pageNumber = DEFAULT_FIRST_ELEMENT;
         if (pageNumber > 1) {

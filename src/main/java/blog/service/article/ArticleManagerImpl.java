@@ -6,6 +6,8 @@ import blog.entity.Article;
 import blog.entity.Comment;
 import blog.service.GenericManagerImpl;
 import blog.service.article.web.ArticleForm;
+import blog.service.pagination.article.ArticlePagination;
+import blog.service.pagination.core.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.userdetails.User;
@@ -27,6 +29,10 @@ public class ArticleManagerImpl extends GenericManagerImpl<Article, ArticleDAO> 
     @Qualifier("UserDAOImpl")
     @Autowired
     private UserDAO userDAO;
+
+    @Qualifier("articlePaginationImpl")
+    @Autowired
+    private ArticlePagination pagination;
 
     @Override
     @Autowired
@@ -89,5 +95,18 @@ public class ArticleManagerImpl extends GenericManagerImpl<Article, ArticleDAO> 
         return dao.getInitializedArticleById(id);
     }
 
+    @Override
+    public int getEntityCount(Calendar date) {
+        return dao.getEntityCount(date);
+    }
 
+    @Override
+    public List<Article> getEntityGroup(int fIndex, int groupSize, Calendar date) {
+        return dao.getEntityGroup(fIndex, groupSize, date);
+    }
+
+    @Override
+    public ArticlePagination getPagination() {
+        return (ArticlePagination) pagination;
+    }
 }

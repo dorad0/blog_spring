@@ -1,13 +1,12 @@
+/**
+ * Created by user on 22.01.2015.
+ */
 package blog.web.controller;
-
 
 import blog.entity.Article;
 import blog.service.article.ArticleManager;
 import blog.service.article.web.ArticleForm;
-import blog.service.pagination.article.ArticlePagination;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -18,16 +17,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import javax.validation.Valid;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 
-
-/**
- * Created by user on 22.01.2015.
- */
 @Controller
 @RequestMapping("/article")
 public class ArticleController {
@@ -37,38 +30,40 @@ public class ArticleController {
     @Autowired
     private ArticleManager service;
 
-    @Autowired
-    private ArticlePagination pagination;
-
     @RequestMapping("/articles")
     public String getArticles(Model model) {
-//        model.addAttribute("page", pagination.getFirstPage());
-//        model.addAttribute("dates", service.getDates());
-        showArticlesPage(FIRST_PAGE, model);
+        getArticlesPage(FIRST_PAGE, model);
         return "article/articles";
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public String showDefaultArticlePage(Model model) {
+    public String getDefaultArticlePage(Model model) {
         return getArticles(model);
     }
 
     @RequestMapping(value = "/page", method = RequestMethod.GET)
-    public String showDefaultPage(Model model) {
+    public String getDefaultPage(Model model) {
         return getArticles(model);
     }
 
     @RequestMapping(value = "/page/{pagenumber}", method = RequestMethod.GET)
-    public String showArticlesPage(@PathVariable int pagenumber, Model model) {
+    public String getArticlesPage(@PathVariable int pagenumber, Model model) {
         model.addAttribute("dates", service.getDates());
-        model.addAttribute("page", pagination.getPage(pagenumber));
+        model.addAttribute("page", service.getPagination().getPage(pagenumber));
         return "article/articles";
     }
 
-    @RequestMapping(value="archive/")
-    public String getArchiveArticles(Model model, @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Calendar date) {
-        model.addAttribute("dates", service.getDates());
-        return "article/test";
+    @RequestMapping(value="archive/{year}/{month}", method = RequestMethod.GET)
+    public String getArchiveArticles(Model model, @PathVariable(value = "year") int year, @PathVariable(value = "month") int month) {
+        getArchiveArticlesPage(model,year,month,FIRST_PAGE);
+        return "article/archive/archiveArticles";
+    }
+
+    @RequestMapping(value="archive/{year}/{month}/page/{pagenumber}", method = RequestMethod.GET)
+    public String getArchiveArticlesPage(Model model, @PathVariable(value = "year") int year, @PathVariable(value = "month") int month, @PathVariable int pagenumber) {
+        model.addAttribute("page", service.getPagination().getPage(pagenumber, year, month));
+        model.addAttribute("date", new GregorianCalendar(year, month, 1));
+        return "article/archive/archiveArticles";
     }
 
     @RequestMapping(value = "/form", method = RequestMethod.GET)

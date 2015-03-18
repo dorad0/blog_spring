@@ -19,8 +19,8 @@
         <ol class="list-unstyled">
             <c:forEach var="date" items="${dates}">
                 <li>
-                    <a href="/article/archive/${date.time.year}/${date.time.month}" >
-                        <fmt:formatDate value="${date.time}"
+                    <a href="/article/archive/${date.get(1)}/${date.get(2) + 1}/" >
+                        <fmt:formatDate value="${date.time}" type="date"
                                         pattern="MMMMM yyyy"/>
                     </a>
                 </li>

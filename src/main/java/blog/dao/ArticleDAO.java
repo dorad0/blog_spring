@@ -24,5 +24,9 @@ public interface ArticleDAO extends GenericDAO<Article> {
     Article saveAndGet(Article article);
 
     Article getInitializedArticleById(long id);
+
+    public int getEntityCount(Calendar date);
+
+    public List<Article> getEntityGroup(int fIndex, int groupSize, Calendar date);
 }
 
