@@ -50,10 +50,4 @@ public class UserController {
         service.deleteUserById(id);
         return "user/deletedUser";
     }
-
-    @RequestMapping(value = "/register1", method = RequestMethod.GET)
-    public String loadFormPage1(Model m) {
-        m.addAttribute("userForm", new UserForm());
-        return "user/register1";
-    }
 }
