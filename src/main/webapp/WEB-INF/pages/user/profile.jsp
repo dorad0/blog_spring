@@ -27,7 +27,7 @@
                 <form name="deleteUserForm" action="/user/delete/${user.id}" method="post">
                     <input type="hidden" name="${_csrf.parameterName}"
                            value="${_csrf.token}"/>
-                    <input type="submit" class="btn btn-lg btn-success" value="Delete"/>
+                    <input type="submit" class="btn btn-lg btn-success" value="Delete user"/>
                 </form>
             </sec:authorize>
             <p>

@@ -13,14 +13,6 @@ public class ArticleForm {
     @Size(min = 1, max = 1000)
     private String text;
 
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     @NotEmpty
     private String title;
 
@@ -36,7 +28,15 @@ public class ArticleForm {
         return text;
     }
 
+    public void setText(String text) {
+        this.text = text;
+    }
+
     public String getTitle() {
         return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

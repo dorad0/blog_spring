@@ -84,7 +84,7 @@ public class ArticleController {
         Article article1 = service.save(article, (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         entity.addAttribute(article1);
 //        return "redirect:/article/" + article1.getId();
-        return "article/articles";
+        return "redirect: /article";
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)

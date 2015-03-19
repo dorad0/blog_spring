@@ -38,7 +38,7 @@
                     <form:form name="deleteArticleForm" action="/article/delete?id=${article.id}">
                         <input type="hidden" name="${_csrf.parameterName}"
                                value="${_csrf.token}"/>
-                        <input type="submit" class="btn btn-lg btn-success" value="Delete"/>
+                        <input type="submit" class="btn btn-lg btn-success" value="Delete article"/>
                     </form:form>
                 </sec:authorize>
                 <div class="col-lg-12">
@@ -70,7 +70,7 @@
                                           method="post">
                                         <input type="hidden" name="${_csrf.parameterName}"
                                                value="${_csrf.token}"/>
-                                        <input type="submit" class="btn btn-lg btn-success" value="Delete"/>
+                                        <input type="submit" class="btn btn-lg btn-success" value="Delete comment"/>
                                     </form>
                                 </div>
                             </sec:authorize>

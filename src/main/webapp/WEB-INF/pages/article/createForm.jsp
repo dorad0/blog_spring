@@ -27,32 +27,33 @@
                     <h3 class="panel-title">Please enter your article</h3>
                 </div>
                 <div class="panel-body">
-                    <form accept-charset="UTF-8" name="articleForm" action="/article/form" method="post" commandName="articleFrom">
+                    <form:form accept-charset="UTF-8" name="articleForm" action="/article/form" method="post" modelAttribute="articleForm">
                         <fieldset>
-                            <c:if test="${not empty error}">
-                                <div class="alert alert-warning">
-                                    <c:out value="${error}"/>
-                                </div>
-                            </c:if>
-                            <c:if test="${not empty logout}">
-                                <div class="alert alert-success">
-                                    <c:out value="${logout}"/>
-                                </div>
-                            </c:if>
+                            <%--<c:if test="${not empty error}">--%>
+                                <%--<div class="alert alert-warning">--%>
+                                    <%--<c:out value="${error}"/>--%>
+                                <%--</div>--%>
+                            <%--</c:if>--%>
+                            <%--<c:if test="${not empty logout}">--%>
+                                <%--<div class="alert alert-success">--%>
+                                    <%--<c:out value="${logout}"/>--%>
+                                <%--</div>--%>
+                            <%--</c:if>--%>
                             <div class="form-group">
-                                <input class="form-control" placeholder="Title" name="title" type="text">
-                                <%--<form:errors path="title" cssClass="has-error"/>--%>
+                                <form:input path="title" id="title" cssClass="form-control" placeholder="Title"/>
+                                <%--<input class="form-control" placeholder="Title" name="title" type="text">--%>
+                                <form:errors path="title" cssClass="has-error"/>
                             </div>
                             <div class="form-group">
                                 <textarea class="form-control" rows="15" placeholder="Article text" name="text" type="text"
                                        value=""></textarea>
-                                <%--<form:errors path="text" cssClass="has-error"/>--%>
+                                <form:errors path="text" cssClass="has-error"/>
                             </div>
                             <input type="hidden" name="${_csrf.parameterName}"
                                    value="${_csrf.token}"/>
-                            <input class="btn btn-lg btn-success btn-block" type="submit" value="Preview">
+                            <input class="btn btn-lg btn-success btn-block" type="submit" value="Add article">
                         </fieldset>
-                    </form>
+                    </form:form>
                 </div>
             </div>
         </div>

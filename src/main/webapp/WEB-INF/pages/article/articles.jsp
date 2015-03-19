@@ -46,7 +46,7 @@
                         <form method="post" action="/article/delete?id=${article.id}">
                             <input type="hidden" name="${_csrf.parameterName}"
                                    value="${_csrf.token}"/>
-                            <input type="submit" class="btn btn-lg btn-success" value="Delete"/>
+                            <input type="submit" class="btn btn-lg btn-success" value="Delete article"/>
                         </form>
                     </sec:authorize>
                 </div>
