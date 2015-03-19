@@ -28,17 +28,19 @@
                     <h2 class="blog-post-title">
                         <a href="/comments/${article.id}/">${article.title}</a>
                     </h2>
+
                     <p class="blog-post-meta">
                         <fmt:setLocale scope="session" value="en_US"/>
                         <fmt:formatDate value="${article.publicationDate.time}"
                                         pattern="MMMMM d, yyyy"/>
                         by <a
-                            href="/user/<c:out value="${article.user.name}"/> "> <c:out
-                            value="${article.user.name}"/> </a>
+                            href="/user/${article.user.name}/">${article.user.name}</a>
                     </p>
+
                     <p>
                             ${article.text}
                     </p>
+
                     <p>
                         <a href="/comments/${article.id}/">Read comments(${article.commentsCount})</a>
                     </p>

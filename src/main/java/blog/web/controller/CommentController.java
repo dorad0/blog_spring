@@ -37,6 +37,7 @@ public class CommentController {
             model.addAttribute("article", article);
             model.addAttribute("comments", commentService.getArticleComments(id));
             model.addAttribute("commentForm", new CommentForm());
+            model.addAttribute("dates", articleService.getDates());
             return "comment/article";
         }
         else {

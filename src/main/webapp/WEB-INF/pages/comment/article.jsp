@@ -29,7 +29,7 @@
                     <fmt:formatDate value="${article.publicationDate.time}"
                                     pattern="MMMMM d, yyyy"/>
                     by <a
-                        href="/user/<c:out value="${article.user.name}"/> "> <c:out
+                        href="/user/${article.user.name}/"> <c:out
                         value="${article.user.name}"/> </a>
                 </p>
 

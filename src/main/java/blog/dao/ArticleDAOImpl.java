@@ -60,9 +60,7 @@ public class ArticleDAOImpl extends GenericHibernateDAOImpl<Article> implements 
 
     @Override
     public void deleteById(long id) {
-//        Article article = (Article) getCurrentSession().load(Article.class, id);
-//        getCurrentSession().delete(article);
-        getCurrentSession().createQuery("DELETE FROM article WHERE id = :id").setParameter("id", id).executeUpdate();
+        getCurrentSession().createQuery("DELETE FROM Article WHERE id = :id").setLong("id", id).executeUpdate();
     }
 
     @Override
