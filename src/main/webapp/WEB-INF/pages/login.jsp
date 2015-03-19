@@ -6,6 +6,8 @@
     <!-- Bootstrap core CSS -->
     <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="/resources/css/login.css" rel="stylesheet">
+    <%--<script src="/resources/js/jquery.min.js"></script>--%>
+    <%--<script src="/resources/js/TweenLite.min.js"></script>--%>
     <script src="/resources/js/jquery.min.js"></script>
     <script src="/resources/js/TweenLite.min.js"></script>
 </head>
@@ -45,6 +47,7 @@
                             <input type="hidden" name="${_csrf.parameterName}"
                                    value="${_csrf.token}"/>
                             <input class="btn btn-lg btn-success btn-block" type="submit" value="Login">
+                                <a href="/user/register/">Go register</a>
                         </fieldset>
                     </form>
                 </div>

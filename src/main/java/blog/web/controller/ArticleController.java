@@ -63,6 +63,7 @@ public class ArticleController {
     public String getArchiveArticlesPage(Model model, @PathVariable(value = "year") int year, @PathVariable(value = "month") int month, @PathVariable int pagenumber) {
         model.addAttribute("page", service.getArchivePagination().getPage(pagenumber, year, month));
         model.addAttribute("date", new GregorianCalendar(year, month, 1));
+        model.addAttribute("dates", service.getDates());
         return "article/archive/archiveArticles";
     }
 

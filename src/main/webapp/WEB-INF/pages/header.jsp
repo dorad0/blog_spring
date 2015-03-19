@@ -9,6 +9,7 @@
 
             <c:if test="${pageContext.request.userPrincipal.name == null}">
                 <a class="blog-nav-item" href="<c:url value="/login" />"> Login</a>
+                <a class="blog-nav-item" href="/user/register/">Register</a>
             </c:if>
             <c:if test="${pageContext.request.userPrincipal.name != null}">
                 <a class="blog-nav-item" href="/article/form">Add article</a>

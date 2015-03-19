@@ -1,80 +1,79 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: user
-  Date: 27.01.2015
-  Time: 12:10
-  To change this template use File | Settings | File Templates.
---%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<!DOCTYPE HTML>
+<%@page session="true" %>
 <html>
 <head>
-    <title>Register user</title>
+    <title>Login Page</title>
+    <!-- Bootstrap core CSS -->
     <link rel="icon" href="../resources/fonts/favicon.ico">
-    <link rel="stylesheet" href="/resources/css/bootstrap.min.css"/>
+    <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/resources/css/blog.css"/>
-    <link rel="stylesheet" href="/resources/css/datepicker.css"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <link href="/resources/css/login.css" rel="stylesheet">
+    <link rel="stylesheet" href="/resources/css/datepicker.css" rel="stylesheet">
+
+    <script src="/resources/js/jquery.min.js"></script>
+    <script src="/resources/js/TweenLite.min.js"></script>
     <script src="/resources/js/bootstrap-datepicker.js"></script>
 </head>
-<body>
-    <div class="container">
-        <div class="row">
-            <form:form cssClass="form-horizontal" action="/user/form" modelAttribute="userForm" method="post">
-                <fieldset>
-                    <div id="legend">
-                        <legend class="">Register user</legend>
-                    </div>
-                    <div class="form-group">
-                        <!--Username-->
-                        <label class="control-label" for="nameInput">Name: </label>
-
-                        <div class="input-group">
-                            <form:input path="name" id="nameInput" cssClass="form-control"/> <br>
-                            <form:errors path="name" cssClass="has-error"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <!--Password-->
-                        <label class="control-label" for="passwordInput">Password: </label>
-
-                        <div class="input-group">
-                            <form:password path="password" id="passwordInput" cssClass="form-control"/> <br>
-                            <form:errors path="password" cssClass="has-error"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <!--BirthDate-->
-                        <label class="control-label" for="birthDateInput">Birthday: </label>
-
-                        <div class="input-group">
-                            <div class='input-group date' id='datetimepicker1'>
-                                <form:input path="birthDate" id="birthDateInput" cssClass="form-control"/>
-                                <form:errors path="birthDate" cssClass="has-error"/>
+<body onload='document.loginForm.username.focus();'>
+<div class="container">
+    <div class="row vertical-offset-100">
+        <div class="col-lg-5 col-md-offset-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Register user</h3>
+                </div>
+                <div class="panel-body">
+                    <form:form action="/user/form" modelAttribute="userForm" method="post">
+                        <fieldset>
+                            <div class="form-group">
+                                <!--Username-->
+                                <input class="form-control" placeholder="Name" name="name" type="text"/>
+                                <form:errors path="name" cssClass="has-error"/>
                             </div>
-                        </div>
-                    </div>
-                    <br>
-                    <script>
-                        $(document).ready(function () {
-                            $('#birthDateInput').datepicker({
-                                format: "dd/mm/yyyy"
-                            });
-                        });
-                    </script>
-                    <div class="control-group">
-                        <!-- Button -->
-                        <div class="controls">
-                            <button class="btn btn-success" type="submit">Register</button>
-                        </div>
-                    </div>
-                </fieldset>
-                <input type="hidden" name="${_csrf.parameterName}"
-                       value="${_csrf.token}"/>
-            </form:form>
+                            <div class="form-group">
+                                <!--Password-->
+                                <input class="form-control" placeholder="Password" name="password" type="password"/>
+                                <form:errors path="password" cssClass="has-error"/>
+                            </div>
+                            <div class="form-group">
+                                <!--BirthDate-->
+                                <div class="date" id="datetimepicker1">
+                                    <form:input path="birthDate" id="birthDateInput" placeholder="Your birthday"
+                                                cssClass="form-control"/>
+                                    <form:errors path="birthDate" cssClass="has-error"/>
+                                </div>
+                            </div>
+                            <br>
+                            <script>
+                                $(document).ready(function () {
+                                    $('#birthDateInput').datepicker({
+                                        format: "dd/mm/yyyy"
+                                    });
+                                });
+                            </script>
+                            <input type="hidden" name="${_csrf.parameterName}"
+                                   value="${_csrf.token}"/>
+                            <input class="btn btn-lg btn-success btn-block" type="submit" value="Register">
+                        </fieldset>
+                    </form:form>
+                </div>
+            </div>
         </div>
     </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $(document).mousemove(function (e) {
+            TweenLite.to($('body'),
+                    .5,
+                    {
+                        css: {
+                            backgroundPosition: "" + parseInt(event.pageX / 8) + "px " + parseInt(event.pageY / '12') + "px, " + parseInt(event.pageX / '15') + "px " + +parseInt(event.pageY / '15') + "px, " + parseInt(event.pageX / '30') + "px " + parseInt(event.pageY / '30') + "px"
+                        }
+                    });
+        });
+    });
+</script>
 </body>
 </html>
