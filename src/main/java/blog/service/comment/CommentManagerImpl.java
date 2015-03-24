@@ -1,8 +1,6 @@
 package blog.service.comment;
 
-import blog.dao.ArticleDAO;
 import blog.dao.CommentDAO;
-import blog.dao.UserDAO;
 import blog.entity.Article;
 import blog.entity.Comment;
 import blog.service.GenericManagerImpl;
@@ -10,7 +8,6 @@ import blog.service.article.ArticleManager;
 import blog.service.comment.web.CommentForm;
 import blog.service.user.UserManager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -32,7 +29,7 @@ public class CommentManagerImpl extends GenericManagerImpl<Comment, CommentDAO> 
 
     @Override
     @Autowired
-    protected void setDao( CommentDAO dao) {
+    protected void setDao(CommentDAO dao) {
         super.setDao(dao);
     }
 

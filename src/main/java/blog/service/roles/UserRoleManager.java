@@ -1,6 +1,5 @@
 package blog.service.roles;
 
-import blog.dao.UserRoleDAO;
 import blog.entity.User;
 import blog.entity.UserRole;
 import blog.service.GenericManager;

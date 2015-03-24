@@ -10,8 +10,12 @@ import java.util.Calendar;
  */
 public interface ArticleArchivePagination {
     Page<Article> getPage(int pageNumber, int pageSize, Calendar date);
+
     Page<Article> getPage(int pageNumber, Calendar date);
+
     Page<Article> getFirstPage(Calendar date);
+
     Page<Article> getPage(int pageNumber, int pageSize, int year, int month);
+
     Page<Article> getPage(int pageNumber, int year, int month);
 }

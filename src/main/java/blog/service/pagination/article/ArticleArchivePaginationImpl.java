@@ -36,7 +36,7 @@ public class ArticleArchivePaginationImpl extends PaginationManager<Article, Art
 //        if(pageNumber <= 0 || pageNumber > pages)
 //            throw new Exception();
         this.pageSize = pageSize;
-        if(pageNumber <= 0 || pageNumber > pages)
+        if (pageNumber <= 0 || pageNumber > pages)
             pageNumber = DEFAULT_FIRST_ELEMENT;
         if (pageNumber > 1) {
             fromElement = (pageNumber - 1) * pageSize;
@@ -63,6 +63,6 @@ public class ArticleArchivePaginationImpl extends PaginationManager<Article, Art
 
     @Override
     public Page<Article> getPage(int pageNumber, int year, int month) {
-        return getPage(pageNumber,pageSize,year, month);
+        return getPage(pageNumber, pageSize, year, month);
     }
 }

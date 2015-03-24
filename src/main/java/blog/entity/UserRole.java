@@ -7,13 +7,13 @@ import java.io.Serializable;
  * Created by user on 07.01.2015.
  */
 @Entity
-@Table(name="user_role")
+@Table(name = "user_role")
 public class UserRole implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
-    private  long id;
+    private long id;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)

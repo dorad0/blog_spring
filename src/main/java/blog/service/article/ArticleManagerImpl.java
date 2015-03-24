@@ -8,7 +8,6 @@ import blog.service.GenericManagerImpl;
 import blog.service.article.web.ArticleForm;
 import blog.service.pagination.article.ArticleArchivePagination;
 import blog.service.pagination.article.ArticlePagination;
-import blog.service.pagination.core.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.userdetails.User;

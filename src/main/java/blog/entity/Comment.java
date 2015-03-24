@@ -20,7 +20,7 @@ public class Comment implements Serializable {
     @Column(name = "text", nullable = false)
     private String text;
 
-                //    @Temporal(value = TemporalType.TIME)
+    //    @Temporal(value = TemporalType.TIME)
     @Column(name = "publicationDate", nullable = false)
     private Calendar publicationDate;
 

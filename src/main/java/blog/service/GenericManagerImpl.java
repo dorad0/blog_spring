@@ -1,6 +1,7 @@
 package blog.service;
 
 import blog.dao.GenericDAO;
+
 import javax.transaction.Transactional;
 import java.util.List;
 

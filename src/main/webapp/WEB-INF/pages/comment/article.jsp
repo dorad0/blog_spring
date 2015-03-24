@@ -43,11 +43,10 @@
                 </sec:authorize>
                 <div class="col-lg-12">
                     <c:forEach var="comment" items="${comments}">
-
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <c:set var="username" scope="request" value="${comment.user.name}"/>
-                                <strong><a href="/user/${username}">${username}</a></strong>
+                                <strong><a href="/user/${username}/">${username}</a></strong>
                                 <span class="text-muted">at
                                     <fmt:setLocale scope="session" value="en_US"/>
                                <%-- <fmt:formatDate type="both"

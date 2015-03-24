@@ -87,7 +87,6 @@ public class ArticleController {
         return "redirect:/comments/" + article.getId();
     }
 
-    //исправить
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     @Secured("ROLE_ADMIN")
     public String deleteArticle(@RequestParam(required = true) long id, Model m) {

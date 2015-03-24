@@ -4,9 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler;
-import org.springframework.security.access.expression.method.MethodSecurityExpressionHandler;
-import org.springframework.security.acls.AclPermissionEvaluator;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -47,25 +44,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/resources/**").permitAll()
                 .and()
-                    .formLogin()
-                        .loginPage("/login").failureUrl("/login?error")
-                        .usernameParameter("username")
-                        .passwordParameter("password")
-                    .permitAll()
+                .formLogin()
+                .loginPage("/login").failureUrl("/login?error")
+                .usernameParameter("username")
+                .passwordParameter("password")
+                .permitAll()
                 .and()
-                    .logout()
+                .logout()
                         /*.logoutUrl("/logout")*/
-                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                        .deleteCookies("remove")
-                        .invalidateHttpSession(true)
-                        .logoutSuccessUrl("/login?logout=success")
-                    .permitAll()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .deleteCookies("remove")
+                .invalidateHttpSession(true)
+                .logoutSuccessUrl("/login?logout=success")
+                .permitAll()
                 .and()
-                    .exceptionHandling().accessDeniedPage("/403")
+                .exceptionHandling().accessDeniedPage("/403")
                 .and()
-                    .httpBasic();
+                .httpBasic();
                 /*.and()
-                    .csrf()*/;
+                    .csrf()*/
+        ;
     }
 
     @Override

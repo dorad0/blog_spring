@@ -1,6 +1,5 @@
 package blog.web.controller;
 
-import blog.entity.User;
 import blog.service.user.UserManager;
 import blog.service.user.web.UserForm;
 import org.springframework.beans.factory.annotation.Autowired;

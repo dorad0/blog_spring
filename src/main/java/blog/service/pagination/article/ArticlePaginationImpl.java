@@ -2,16 +2,12 @@ package blog.service.pagination.article;
 
 import blog.dao.ArticleDAO;
 import blog.entity.Article;
-import blog.service.pagination.core.Page;
-import blog.service.pagination.core.Pagination;
 import blog.service.pagination.core.PaginationManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 /**
  * Created by Alex on 06.02.2015.

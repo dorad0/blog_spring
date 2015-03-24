@@ -1,7 +1,6 @@
 package blog.web.controller;
-import org.hibernate.HibernateException;
-import org.slf4j.Logger;
 
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.dao.DataAccessException;
@@ -14,8 +13,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.Date;
 
 /**
@@ -30,8 +27,8 @@ public class GlobalExceptionHandlingControllerAdvice {
     }
 
 	/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-	/* . . . . . . . . . . . . . EXCEPTION HANDLERS . . . . . . . . . . . . . . */
-	/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+    /* . . . . . . . . . . . . . EXCEPTION HANDLERS . . . . . . . . . . . . . . */
+    /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
     /**
      * Convert a predefined exception to an HTTP Status code
@@ -63,12 +60,10 @@ public class GlobalExceptionHandlingControllerAdvice {
      * information and return the "support" view name. This method explicitly
      * creates and returns
      *
-     * @param req
-     *            Current HTTP request.
-     * @param exception
-     *            The exception thrown - always {@link SupportInfoException}.
+     * @param req       Current HTTP request.
+     * @param exception The exception thrown - always {@link SupportInfoException}.
      * @return The model and view used by the DispatcherServlet to generate
-     *         output.
+     * output.
      * @throws Exception
      */
 //    @ExceptionHandler(Exception.class)
@@ -91,7 +86,6 @@ public class GlobalExceptionHandlingControllerAdvice {
 //        mav.setViewName("support");
 //        return mav;
 //    }
-
     @ExceptionHandler({CannotCreateTransactionException.class, DataAccessException.class})
     public ModelAndView databaseError(HttpServletRequest req, Exception exception)
             throws Exception {
@@ -113,7 +107,6 @@ public class GlobalExceptionHandlingControllerAdvice {
         return mav;
     }
 
-
     // Total control - setup a model and return the view name yourself. Or consider
     // subclassing ExceptionHandlerExceptionResolver (see below).
     @ExceptionHandler(Exception.class)
@@ -126,7 +119,4 @@ public class GlobalExceptionHandlingControllerAdvice {
         mav.setViewName("error");
         return mav;
     }
-
-
-
 }

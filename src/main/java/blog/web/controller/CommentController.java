@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import javax.validation.Valid;
 
 /**
@@ -33,14 +34,13 @@ public class CommentController {
     @RequestMapping("/{id}")
     public String getArticleWithComments(@PathVariable long id, Model model) {
         Article article = articleService.findById(id);
-        if(article != null) {
+        if (article != null) {
             model.addAttribute("article", article);
             model.addAttribute("comments", commentService.getArticleComments(id));
             model.addAttribute("commentForm", new CommentForm());
             model.addAttribute("dates", articleService.getDates());
             return "comment/article";
-        }
-        else {
+        } else {
             return "comment/empty";
         }
     }
