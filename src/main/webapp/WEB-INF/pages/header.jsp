@@ -13,8 +13,13 @@
             </c:if>
             <c:if test="${pageContext.request.userPrincipal.name != null}">
                 <a class="blog-nav-item" href="/article/form">Add article</a>
-                <c:url value="/login?logout" var="logoutUrl" />
-                <a href="${logoutUrl}">Log Out</a>
+                <c:url value="/logout" var="logoutUrl" />
+                <a class="blog-nav-item" href="${logoutUrl}">Log Out</a>
+               <%-- <form action="/logout">
+                    <input type="hidden" name="${_csrf.parameterName}"
+                           value="${_csrf.token}"/>
+                    <input type="submit" value="Log out"/>
+                </form>--%>
             </c:if>
             <%--<form action="/login?logout">
                 &lt;%&ndash;<input type="hidden" name="${_csrf.parameterName}"&ndash;%&gt;

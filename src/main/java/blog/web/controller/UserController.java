@@ -4,6 +4,7 @@ import blog.entity.User;
 import blog.service.user.UserManager;
 import blog.service.user.web.UserForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,6 +24,7 @@ public class UserController {
     @Autowired
     private UserManager service;
 
+    @Secured(value = "ROLE_ANONYMOUS")
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String loadFormPage(Model m) {
         m.addAttribute("userForm", new UserForm());
@@ -45,6 +47,7 @@ public class UserController {
         return "user/profile";
     }
 
+    @Secured(value = "ROLE_ADMIN")
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
     public String deleteUser(@PathVariable long id) {
         service.deleteUserById(id);

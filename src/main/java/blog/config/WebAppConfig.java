@@ -33,6 +33,11 @@ import java.util.Properties;
 @Import({SecurityConfig.class})
 public class WebAppConfig extends WebMvcConfigurerAdapter {
 
+    private static final String PROPERTY_NAME_DATABASE_DRIVER = "com.mysql.jdbc.Driver";
+    private static final String PROPERTY_NAME_DATABASE_URL = "jdbc:mysql://localhost:3306/blog_mvc";
+    private static final String PROPERTY_NAME_DATABASE_USERNAME = "root";
+    private static final String PROPERTY_NAME_DATABASE_PASSWORD = "1234";
+
 //    @Bean
 //    public UrlBasedViewResolver setupViewResolver() {
 ////        UrlBasedViewResolver resolver = new UrlBasedViewResolver();
@@ -81,12 +86,11 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 
     @Bean(name = "dataSource")
     public BasicDataSource dataSource() {
-
         BasicDataSource ds = new BasicDataSource();
-        ds.setDriverClassName("com.mysql.jdbc.Driver");
-        ds.setUrl("jdbc:mysql://localhost:3306/blog_mvc");
-        ds.setUsername("root");
-        ds.setPassword("1234");
+        ds.setDriverClassName(PROPERTY_NAME_DATABASE_DRIVER);
+        ds.setUrl(PROPERTY_NAME_DATABASE_URL);
+        ds.setUsername(PROPERTY_NAME_DATABASE_USERNAME);
+        ds.setPassword(PROPERTY_NAME_DATABASE_PASSWORD);
         return ds;
     }
 
