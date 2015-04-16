@@ -22,47 +22,12 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class MainController {
 
-
     @RequestMapping(value = {"/", "/welcome**"}, method = RequestMethod.GET)
     public ModelAndView defaultPage() {
         ModelAndView model = new ModelAndView();
-//        model.addObject("title", "Spring Security + Hibernate Example");
-//        model.addObject("message", "This is default page!");
         model.setViewName("redirect:/article/");
         return model;
     }
-
-//    @RequestMapping(value = "/admin**", method = RequestMethod.GET)
-//    public ModelAndView adminPage() {
-//        ModelAndView model = new ModelAndView();
-//        model.addObject("title", "Spring Security + Hibernate Example");
-//        model.addObject("message", "This page is for ROLE_ADMIN only!");
-//        model.setViewName("admin");
-//        return model;
-//    }
-
-//    @RequestMapping(value = "/login", method = {RequestMethod.POST, RequestMethod.GET})
-//    public ModelAndView login(@RequestParam(value = "error", required = false) String error,
-//                              @RequestParam(value = "logout", required = false) String logout, HttpServletRequest request) {
-//
-//        ModelAndView model = new ModelAndView();
-//        if (error != null) {
-//            model.addObject("error", getErrorMessage(request, "SPRING_SECURITY_LAST_EXCEPTION"));
-//        }
-//        System.out.println("LOGIN!!!!!!!!!!");
-//        if (logout != null) {
-//            model.addObject("logout", "You've been logged out successfully.");
-//            HttpSession session = request.getSession(false);
-//            if(session != null) {
-//                session.invalidate();
-//                System.out.println("exit");
-//            }
-//        }
-//        model.setViewName("login");
-//
-//        return model;
-//
-//    }
 
     @Secured(value = "ROLE_ANONYMOUS")
     @RequestMapping(value = {"/login", "/login/", "login"}, method = {RequestMethod.POST, RequestMethod.GET})
@@ -131,6 +96,5 @@ public class MainController {
 
         model.setViewName("403");
         return model;
-
     }
 }

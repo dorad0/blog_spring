@@ -1,12 +1,10 @@
 package blog.config;
 
+import blog.config.logging.SystemArchitecture;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.context.MessageSource;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.*;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
@@ -27,6 +25,7 @@ import java.util.Properties;
 @ComponentScan("blog") //Specifies which package to scan
 @EnableWebMvc //Enables to use Spring's annotations in the code
 @EnableTransactionManagement
+@EnableAspectJAutoProxy
 @Import({SecurityConfig.class})
 public class WebAppConfig extends WebMvcConfigurerAdapter {
 
@@ -34,6 +33,11 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
     private static final String PROPERTY_NAME_DATABASE_URL = "jdbc:mysql://localhost:3306/blog_mvc";
     private static final String PROPERTY_NAME_DATABASE_USERNAME = "root";
     private static final String PROPERTY_NAME_DATABASE_PASSWORD = "1234";
+
+//    @Bean
+//    public SystemArchitecture myAspect() {
+//        return new SystemArchitecture();
+//    }
 
 //    @Bean
 //    public UrlBasedViewResolver setupViewResolver() {

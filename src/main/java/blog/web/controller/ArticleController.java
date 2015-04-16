@@ -27,6 +27,7 @@ import java.util.List;
 public class ArticleController {
 
     public static final int FIRST_PAGE = 1;
+    public static final int FIRST_DAY = 1;
 
     @Autowired
     private ArticleManager service;
@@ -63,7 +64,7 @@ public class ArticleController {
     @RequestMapping(value = "archive/{year}/{month}/page/{pagenumber}", method = RequestMethod.GET)
     public String getArchiveArticlesPage(Model model, @PathVariable(value = "year") int year, @PathVariable(value = "month") int month, @PathVariable int pagenumber) {
         model.addAttribute("page", service.getArchivePagination().getPage(pagenumber, year, month));
-        model.addAttribute("date", new GregorianCalendar(year, month, 1));
+        model.addAttribute("date", new GregorianCalendar(year, month, FIRST_DAY));
         model.addAttribute("dates", service.getDates());
         return "article/archive/archiveArticles";
     }

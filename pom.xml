@@ -8,7 +8,6 @@
   <name>blog_spring Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <dependencies>
-
       <dependency>
           <groupId>org.springframework</groupId>
           <artifactId>spring-core</artifactId>
@@ -108,14 +107,53 @@
           <version>1.2</version>
       </dependency>
 
+      <!--<dependency>-->
+          <!--<groupId>org.slf4j</groupId>-->
+          <!--<artifactId>slf4j-api</artifactId>-->
+          <!--<version>1.7.10</version>-->
+      <!--</dependency>-->
+
+      <!--<dependency>-->
+          <!--<groupId>org.slf4j</groupId>-->
+          <!--<artifactId>slf4j-simple</artifactId>-->
+          <!--<version>1.7.10</version>-->
+      <!--</dependency>-->
+
       <dependency>
-          <groupId>org.slf4j</groupId>
-          <artifactId>slf4j-api</artifactId>
-          <version>1.7.10</version>
+          <groupId>log4j</groupId>
+          <artifactId>log4j</artifactId>
+          <version>1.2.17</version>
       </dependency>
 
+      <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-aop</artifactId>
+          <version>4.1.2.RELEASE</version>
+      </dependency>
+
+      <dependency>
+          <groupId>org.aspectj</groupId>
+          <artifactId>aspectjrt</artifactId>
+          <version>1.8.5</version>
+      </dependency>
+
+      <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-aspects</artifactId>
+          <version>4.1.5.RELEASE</version>
+      </dependency>
   </dependencies>
+
   <build>
+      <plugins>
+          <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-war-plugin</artifactId>
+              <configuration>
+                  <failOnMissingWebXml>false</failOnMissingWebXml>
+              </configuration>
+          </plugin>
+      </plugins>
     <finalName>blog_spring</finalName>
   </build>
 </project>
