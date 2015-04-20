@@ -24,9 +24,6 @@ public class CommentManagerImpl extends GenericManagerImpl<Comment, CommentDAO> 
     @Autowired
     private UserManager userManager;
 
-    @Autowired
-    private ArticleManager articleManager;
-
     @Override
     @Autowired
     protected void setDao(CommentDAO dao) {

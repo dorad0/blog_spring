@@ -1,6 +1,5 @@
 package blog.entity;
 
-
 import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
@@ -26,7 +25,6 @@ public class Article implements Serializable {
     @Column(name = "text", nullable = false)
     private String text;
 
-    //    @Temporal(value=TemporalType.TIME)
     @Column(name = "publicationDate", nullable = false)
     private Calendar publicationDate;
 
@@ -106,5 +104,32 @@ public class Article implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Article article = (Article) o;
+
+        if (id != article.id) return false;
+        if (publicationDate != null ? !publicationDate.equals(article.publicationDate) : article.publicationDate != null)
+            return false;
+        if (text != null ? !text.equals(article.text) : article.text != null) return false;
+        if (title != null ? !title.equals(article.title) : article.title != null) return false;
+        if (user != null ? !user.equals(article.user) : article.user != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + (title != null ? title.hashCode() : 0);
+        result = 31 * result + (text != null ? text.hashCode() : 0);
+        result = 31 * result + (publicationDate != null ? publicationDate.hashCode() : 0);
+        result = 31 * result + (user != null ? user.hashCode() : 0);
+        return result;
     }
 }

@@ -34,21 +34,6 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
     private static final String PROPERTY_NAME_DATABASE_USERNAME = "root";
     private static final String PROPERTY_NAME_DATABASE_PASSWORD = "1234";
 
-//    @Bean
-//    public SystemArchitecture myAspect() {
-//        return new SystemArchitecture();
-//    }
-
-//    @Bean
-//    public UrlBasedViewResolver setupViewResolver() {
-////        UrlBasedViewResolver resolver = new UrlBasedViewResolver();
-//        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-//        resolver.setPrefix("/WEB-INF/pages/");
-//        resolver.setSuffix(".jsp");
-//        resolver.setViewClass(JstlView.class);
-//        return resolver;
-//    }
-
     @Bean
     public InternalResourceViewResolver viewResolver() {
         InternalResourceViewResolver viewResolver
@@ -58,12 +43,6 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
         viewResolver.setSuffix(".jsp");
         return viewResolver;
     }
-
-//    @Override
-//    public void addViewControllers(ViewControllerRegistry registry) {
-//        registry.addViewController("/login").setViewName("login");
-//        registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
-//    }
 
     @Bean
     public SessionFactory sessionFactory() {
@@ -108,46 +87,8 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
         return messageSource;
     }
 
-//    //Configure static content handling
-//    @Override
-//    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-//        configurer.enable();
-//    }
-
-
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-//        registry.addResourceHandler("/blog/**")
-//                .addResourceLocations("classpath:/blog/");
-//        registry.addResourceHandler("/css/**")
-//                .addResourceLocations("/css/");
-//        registry.addResourceHandler("/img/**")
-//                .addResourceLocations("/img/");
-//        registry.addResourceHandler("/js/**")
-//                .addResourceLocations("/js/");
         registry.addResourceHandler("/resources/**").addResourceLocations("/static/");
     }
-
-//    //for image
-//    @Bean(name = "multipartResolver")
-//    public CommonsMultipartResolver getMultipartResolver() {
-//        return new CommonsMultipartResolver();
-//    }
-
-//    @Bean(name="simpleMappingExceptionResolver")
-//    public SimpleMappingExceptionResolver createSimpleMappingExceptionResolver() {
-//        SimpleMappingExceptionResolver r =
-//                new SimpleMappingExceptionResolver();
-//
-//        Properties mappings = new Properties();
-//        mappings.setProperty("DatabaseException", "databaseError");
-//        mappings.setProperty("InvalidCreditCardException", "creditCardError");
-//
-//        r.setExceptionMappings(mappings);  // None by default
-//        r.setDefaultErrorView("error");    // No default
-//        r.setExceptionAttribute("ex");     // Default is "exception"
-//        r.setWarnLogCategory("example.MvcLogger");     // No default
-//        return r;
-//    }
-
 }

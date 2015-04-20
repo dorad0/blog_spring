@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.util.GregorianCalendar;
-import java.util.List;
 
 @Controller
 @RequestMapping("/article")
@@ -91,7 +90,7 @@ public class ArticleController {
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     @Secured("ROLE_ADMIN")
     public String deleteArticle(@RequestParam(required = true) long id, Model m) {
-        m.addAttribute("article",  service.findById(id));
+        m.addAttribute("article", service.findById(id));
         service.deleteById(id);
         m.addAttribute("dates", service.getDates());
         return "article/sucsessDelete";

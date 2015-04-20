@@ -1,6 +1,7 @@
-package blog.dao;
+package blog.dao.impl;
 
 
+import blog.dao.CommentDAO;
 import blog.entity.Comment;
 import org.springframework.stereotype.Repository;
 
@@ -20,6 +21,5 @@ public class CommentDAOImpl extends GenericHibernateDAOImpl<Comment> implements 
     @Override
     public void deleteCommentById(long id) {
         getCurrentSession().createSQLQuery("DELETE FROM Comment  WHERE id = :id ").setParameter("id", id).executeUpdate();
-
     }
 }

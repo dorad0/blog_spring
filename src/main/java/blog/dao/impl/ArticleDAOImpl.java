@@ -1,5 +1,6 @@
-package blog.dao;
+package blog.dao.impl;
 
+import blog.dao.ArticleDAO;
 import blog.entity.Article;
 import blog.entity.Comment;
 import org.hibernate.Criteria;

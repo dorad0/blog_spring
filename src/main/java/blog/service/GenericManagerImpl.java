@@ -12,11 +12,11 @@ import java.util.List;
 @Transactional
 public abstract class GenericManagerImpl<T, D extends GenericDAO<T>> implements GenericManager<T> {
 
+    protected D dao;
+
     protected void setDao(D dao) {
         this.dao = dao;
     }
-
-    protected D dao;
 
     @Override
     public void save(T entity) {

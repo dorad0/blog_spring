@@ -22,16 +22,11 @@ public class UserRole implements Serializable {
     @Column(name = "role", nullable = false)
     private String role;
 
-//    @Column(name = "role", nullable = false)
-//    private Role role;
-
-
     public UserRole() {
     }
 
     public UserRole(User user, String role) {
         this.user = user;
-//        this.role = role.toString();
         this.role = role;
     }
 
@@ -67,5 +62,27 @@ public class UserRole implements Serializable {
                 ", user=" + user +
                 ", role='" + role + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        UserRole userRole = (UserRole) o;
+
+        if (id != userRole.id) return false;
+        if (role != null ? !role.equals(userRole.role) : userRole.role != null) return false;
+        if (user != null ? !user.equals(userRole.user) : userRole.user != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + (user != null ? user.hashCode() : 0);
+        result = 31 * result + (role != null ? role.hashCode() : 0);
+        return result;
     }
 }

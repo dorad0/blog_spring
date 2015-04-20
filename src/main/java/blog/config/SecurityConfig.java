@@ -45,22 +45,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/resources/**").permitAll()
                 .and()
                 .formLogin()
-                .loginPage("/login").failureUrl("/login?error")
-                .usernameParameter("username")
-                .passwordParameter("password")
+                    .loginPage("/login").failureUrl("/login?error")
+                    .usernameParameter("username")
+                    .passwordParameter("password")
                 .permitAll()
                 .and()
                 .logout()
-                        /*.logoutUrl("/logout")*/
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .deleteCookies("remove")
-                .invalidateHttpSession(true)
-                .logoutSuccessUrl("/login?logout=success")
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                    .deleteCookies("remove")
+                    .invalidateHttpSession(true)
+                    .logoutSuccessUrl("/login?logout=success")
                 .permitAll()
                 .and()
-                .exceptionHandling().accessDeniedPage("/403")
+                    .exceptionHandling().accessDeniedPage("/403")
                 .and()
-                .httpBasic();
+                    .httpBasic();
                 /*.and()
                     .csrf()*/
         ;

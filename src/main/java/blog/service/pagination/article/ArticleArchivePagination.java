@@ -9,6 +9,7 @@ import java.util.Calendar;
  * Created by alex on 3/18/2015.
  */
 public interface ArticleArchivePagination {
+
     Page<Article> getPage(int pageNumber, int pageSize, Calendar date);
 
     Page<Article> getPage(int pageNumber, Calendar date);

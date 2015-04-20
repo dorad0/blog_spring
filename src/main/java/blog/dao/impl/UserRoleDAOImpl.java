@@ -1,5 +1,6 @@
-package blog.dao;
+package blog.dao.impl;
 
+import blog.dao.UserRoleDAO;
 import blog.entity.UserRole;
 import org.springframework.stereotype.Repository;
 

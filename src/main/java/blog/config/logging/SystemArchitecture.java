@@ -28,9 +28,4 @@ public class SystemArchitecture {
         System.out.println("There has been an exception: " + ex.getStackTrace());
         log.error("error exception", ex);
     }
-
-//    @Before("execution(* blog.web.controller.MainController.login(..))")
-//    public void doBefore(JoinPoint joinPoint) {
-//        System.out.println("***AspectJ*** DoBefore() is running!! intercepted***************************** : " + joinPoint.getSignature().getName());
-//    }
 }
