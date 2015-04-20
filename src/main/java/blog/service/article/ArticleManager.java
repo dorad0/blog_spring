@@ -16,11 +16,11 @@ public interface ArticleManager extends ArticleDAO {
 
     void save(Article article, User user);
 
-    void deleteById(long id);
+    void deleteById(Long id);
 
     Article save(ArticleForm form, User user);
 
-    Article getInitializedArticleById(long id);
+    Article getInitializedArticleById(Long id);
 
     ArticlePagination getPagination();
 

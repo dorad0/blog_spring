@@ -10,8 +10,4 @@ import org.springframework.stereotype.Repository;
 @Repository(value = "UserRoleDAOImpl")
 public class UserRoleDAOImpl extends GenericHibernateDAOImpl<UserRole> implements UserRoleDAO {
 
-    @Override
-    public void addRoleToUser(UserRole userRole) {
-        sessionFactory.getCurrentSession().persist(userRole);
-    }
 }

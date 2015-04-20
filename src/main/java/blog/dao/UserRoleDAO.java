@@ -7,5 +7,4 @@ import blog.entity.UserRole;
  */
 public interface UserRoleDAO extends GenericDAO<UserRole>  {
 
-    void addRoleToUser(UserRole userRole);
 }

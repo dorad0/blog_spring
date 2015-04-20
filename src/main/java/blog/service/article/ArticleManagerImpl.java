@@ -48,7 +48,7 @@ public class ArticleManagerImpl extends GenericManagerImpl<Article, ArticleDAO> 
     }
 
     @Override
-    public Set<Comment> getComments(long id) {
+    public Set<Comment> getComments(Long id) {
         return dao.getComments(id);
     }
 
@@ -77,7 +77,7 @@ public class ArticleManagerImpl extends GenericManagerImpl<Article, ArticleDAO> 
     }
 
     @Override
-    public void deleteById(long id) {
+    public void deleteById(Long id) {
         dao.deleteById(id);
     }
 
@@ -94,7 +94,7 @@ public class ArticleManagerImpl extends GenericManagerImpl<Article, ArticleDAO> 
     }
 
     @Override
-    public Article getInitializedArticleById(long id) {
+    public Article getInitializedArticleById(Long id) {
         return dao.getInitializedArticleById(id);
     }
 
@@ -104,8 +104,8 @@ public class ArticleManagerImpl extends GenericManagerImpl<Article, ArticleDAO> 
     }
 
     @Override
-    public List<Article> getEntityGroup(int fIndex, int groupSize, Calendar date) {
-        return dao.getEntityGroup(fIndex, groupSize, date);
+    public List<Article> getEntityGroup(int firstResult, int maxResults, Calendar date) {
+        return dao.getEntityGroup(firstResult, maxResults, date);
     }
 
     @Override

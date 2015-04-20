@@ -6,17 +6,17 @@ import java.util.List;
  * Created by Alex on 05.02.2015.
  */
 public interface GenericDAO<T> {
-    void save(T entity);
+    Long save(T entity);
 
     void delete(T entity);
 
     void update(T entity);
 
-    T findById(long id);
+    T findById(Long id);
 
     List<T> findAll();
 
-    int getEntityCount();
+    List<T> findAll(int firstResult, int maxResults);
 
-    List<T> getEntityGroup(int fIndex, int groupSize);
+    Long getCount();
 }

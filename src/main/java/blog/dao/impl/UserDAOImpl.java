@@ -1,10 +1,8 @@
 package blog.dao.impl;
 
-
 import blog.dao.UserDAO;
 import blog.entity.User;
 import org.springframework.stereotype.Repository;
-
 
 /**
  * Created by user on 31.12.2014.
@@ -18,4 +16,5 @@ public class UserDAOImpl extends GenericHibernateDAOImpl<User> implements UserDA
                 .createQuery("FROM User WHERE name = :name")
                 .setString("name", name).uniqueResult();
     }
+
 }

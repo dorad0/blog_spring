@@ -15,7 +15,6 @@ import java.util.*;
 /**
  * Created by user on 15.12.2014.
  */
-
 /*Spring takes care about transactions*/
 @Repository(value = "ArticleDAOImpl")
 public class ArticleDAOImpl extends GenericHibernateDAOImpl<Article> implements ArticleDAO {
@@ -23,7 +22,7 @@ public class ArticleDAOImpl extends GenericHibernateDAOImpl<Article> implements 
     public static final int FIRST_DAY_OF_MONTH = 1;
 
     @Override
-    public Set<Comment> getComments(long id) {
+    public Set<Comment> getComments(Long id) {
         Article article = (Article) getCurrentSession().load(Article.class, id);
         Hibernate.initialize(article.getComments());
         return article.getComments();
@@ -50,16 +49,16 @@ public class ArticleDAOImpl extends GenericHibernateDAOImpl<Article> implements 
     }
 
     @Override
-    public List<Article> getEntityGroup(int fIndex, int groupSize) {
+    public List<Article> findAll(int firstResult, int maxResults) {
         Criteria criteria = getCurrentSession().createCriteria(Article.class);
         criteria.addOrder(Order.desc("publicationDate"));
-        criteria.setFirstResult(fIndex);
-        criteria.setMaxResults(groupSize);
+        criteria.setFirstResult(firstResult);
+        criteria.setMaxResults(maxResults);
         return criteria.list();
     }
 
     @Override
-    public void deleteById(long id) {
+    public void deleteById(Long id) {
         getCurrentSession().createQuery("DELETE FROM Article WHERE id = :id").setLong("id", id).executeUpdate();
     }
 
@@ -70,7 +69,7 @@ public class ArticleDAOImpl extends GenericHibernateDAOImpl<Article> implements 
     }
 
     @Override
-    public Article getInitializedArticleById(long id) {
+    public Article getInitializedArticleById(Long id) {
         Article article = (Article) getCurrentSession().load(Article.class, id);
         Hibernate.initialize(article.getComments());
         return article;
@@ -83,14 +82,15 @@ public class ArticleDAOImpl extends GenericHibernateDAOImpl<Article> implements 
     }
 
     @Override
-    public List<Article> getEntityGroup(int fIndex, int groupSize, Calendar date) {
+    public List<Article> getEntityGroup(int firstResult, int maxResults, Calendar date) {
         Query query = getCurrentSession()
                 .createQuery("FROM Article WHERE YEAR(publicationDate) = :year AND MONTH(publicationDate) = :month ORDER BY publicationDate DESC")
                 .setInteger("year", date.get(Calendar.YEAR)).setInteger("month", date.get(Calendar.MONTH));
-        query.setFirstResult(fIndex);
-        query.setMaxResults(groupSize);
+        query.setFirstResult(firstResult);
+        query.setMaxResults(maxResults);
 
         List<Article> list = query.list();
         return list;
     }
+
 }

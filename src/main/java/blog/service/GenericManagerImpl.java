@@ -44,12 +44,12 @@ public abstract class GenericManagerImpl<T, D extends GenericDAO<T>> implements 
     }
 
     @Override
-    public int getEntityCount() {
-        return dao.getEntityCount();
+    public Long getCount() {
+        return dao.getCount();
     }
 
     @Override
-    public List<T> getEntityGroup(int fIndex, int groupSize) {
-        return dao.getEntityGroup(fIndex, groupSize);
+    public List<T> findAll(int firstResult, int maxResults) {
+        return dao.findAll(firstResult, maxResults);
     }
 }

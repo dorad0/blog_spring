@@ -33,8 +33,8 @@ public abstract class GenericHibernateDAOImpl<T extends Serializable> implements
     }
 
     @Override
-    public void save(T entity) {
-        getCurrentSession().save(entity);
+    public Long save(T entity) {
+        return (Long) getCurrentSession().save(entity);
     }
 
     @Override
@@ -48,7 +48,7 @@ public abstract class GenericHibernateDAOImpl<T extends Serializable> implements
     }
 
     @Override
-    public T findById(long id) {
+    public T findById(Long id) {
         return (T) getCurrentSession().get(genericType, id);
     }
 
@@ -58,21 +58,21 @@ public abstract class GenericHibernateDAOImpl<T extends Serializable> implements
     }
 
     @Override
-    public int getEntityCount() {
+    public Long getCount() {
         Criteria criteriaCount = getCurrentSession().createCriteria(genericType);
         criteriaCount.setProjection(Projections.rowCount());
+        Long result = (Long) criteriaCount.uniqueResult();
 
-        long r = (long) criteriaCount.uniqueResult();
-
-        return (int) r;
+        return  result;
     }
 
     @Override
-    public List<T> getEntityGroup(int fIndex, int groupSize) {
+    public List<T> findAll(int firstResult, int maxResults) {
         Criteria criteria = getCurrentSession().createCriteria(genericType);
-        criteria.setFirstResult(fIndex);
-        criteria.setMaxResults(groupSize);
+        criteria.setFirstResult(firstResult);
+        criteria.setMaxResults(maxResults);
 
         return criteria.list();
     }
+
 }
