@@ -15,7 +15,6 @@ import java.util.*;
 /**
  * Created by user on 15.12.2014.
  */
-/*Spring takes care about transactions*/
 @Repository(value = "ArticleDAOImpl")
 public class ArticleDAOImpl extends GenericHibernateDAOImpl<Article> implements ArticleDAO {
 
@@ -58,17 +57,6 @@ public class ArticleDAOImpl extends GenericHibernateDAOImpl<Article> implements 
     }
 
     @Override
-    public void deleteById(Long id) {
-        getCurrentSession().createQuery("DELETE FROM Article WHERE id = :id").setLong("id", id).executeUpdate();
-    }
-
-    @Override
-    public Article saveAndGet(Article article) {
-        getCurrentSession().save(article);
-        return article;
-    }
-
-    @Override
     public Article getInitializedArticleById(Long id) {
         Article article = (Article) getCurrentSession().load(Article.class, id);
         Hibernate.initialize(article.getComments());
@@ -76,13 +64,13 @@ public class ArticleDAOImpl extends GenericHibernateDAOImpl<Article> implements 
     }
 
     @Override
-    public int getEntityCount(Calendar date) {
+    public Long getCount(Calendar date) {
         return ((BigInteger) getCurrentSession().createSQLQuery("SELECT COUNT(*) FROM article WHERE YEAR(publicationDate) = :year AND MONTH(publicationDate) = :month")
-                .setInteger("year", date.get(Calendar.YEAR)).setInteger("month", date.get(Calendar.MONTH)).uniqueResult()).intValue();
+                .setInteger("year", date.get(Calendar.YEAR)).setInteger("month", date.get(Calendar.MONTH)).uniqueResult()).longValue();
     }
 
     @Override
-    public List<Article> getEntityGroup(int firstResult, int maxResults, Calendar date) {
+    public List<Article> findAll(int firstResult, int maxResults, Calendar date) {
         Query query = getCurrentSession()
                 .createQuery("FROM Article WHERE YEAR(publicationDate) = :year AND MONTH(publicationDate) = :month ORDER BY publicationDate DESC")
                 .setInteger("year", date.get(Calendar.YEAR)).setInteger("month", date.get(Calendar.MONTH));

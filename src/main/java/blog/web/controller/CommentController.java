@@ -58,7 +58,7 @@ public class CommentController {
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     @Secured("ROLE_ADMIN")
     public String deleteComment(@RequestParam(required = true) long commentId, @RequestParam(required = true) long articleId) {
-        commentService.deleteComment(commentId);
+        commentService.delete(commentId);
         return "redirect:/comments/" + articleId;
     }
 }

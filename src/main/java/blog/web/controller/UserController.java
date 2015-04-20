@@ -49,7 +49,7 @@ public class UserController {
     @Secured(value = "ROLE_ADMIN")
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
     public String deleteUser(@PathVariable long id) {
-        service.deleteUserById(id);
+        service.delete(id);
         return "user/deletedUser";
     }
 }

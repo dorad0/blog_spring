@@ -91,7 +91,7 @@ public class ArticleController {
     @Secured("ROLE_ADMIN")
     public String deleteArticle(@RequestParam(required = true) long id, Model m) {
         m.addAttribute("article", service.findById(id));
-        service.deleteById(id);
+        service.delete(id);
         m.addAttribute("dates", service.getDates());
         return "article/sucsessDelete";
     }

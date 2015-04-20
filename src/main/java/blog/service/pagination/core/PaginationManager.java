@@ -40,7 +40,7 @@ public abstract class PaginationManager<T, D extends GenericDAO<T>> implements P
     @Override
     public Page<T> getPage(int pageNumber, int pageSize) {
 
-        int items = dao.getCount();
+        int items = dao.getCount().intValue();
         int fromElement = DEFAULT_FIRST_ELEMENT;
         int pages = countPages(items, pageSize);
 //        if(pageNumber <= 0 || pageNumber > pages)

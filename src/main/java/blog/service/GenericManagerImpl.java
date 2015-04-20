@@ -19,8 +19,8 @@ public abstract class GenericManagerImpl<T, D extends GenericDAO<T>> implements 
     }
 
     @Override
-    public void save(T entity) {
-        dao.save(entity);
+    public Long save(T entity) {
+        return dao.save(entity);
     }
 
     @Override
@@ -29,12 +29,17 @@ public abstract class GenericManagerImpl<T, D extends GenericDAO<T>> implements 
     }
 
     @Override
+    public void delete(Long id) {
+        dao.delete(id);
+    }
+
+    @Override
     public void update(T entity) {
         dao.update(entity);
     }
 
     @Override
-    public T findById(long id) {
+    public T findById(Long id) {
         return dao.findById(id);
     }
 
@@ -44,12 +49,12 @@ public abstract class GenericManagerImpl<T, D extends GenericDAO<T>> implements 
     }
 
     @Override
-    public Long getCount() {
-        return dao.getCount();
+    public List<T> findAll(int firstResult, int maxResults) {
+        return dao.findAll(firstResult, maxResults);
     }
 
     @Override
-    public List<T> findAll(int firstResult, int maxResults) {
-        return dao.findAll(firstResult, maxResults);
+    public Long getCount() {
+        return dao.getCount();
     }
 }

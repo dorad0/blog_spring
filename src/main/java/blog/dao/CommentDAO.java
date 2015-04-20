@@ -8,7 +8,5 @@ import java.util.List;
  * Created by user on 19.12.2014.
  */
 public interface CommentDAO extends GenericDAO<Comment> {
-    List<Comment> getArticleComments(Long id);
-
-    void deleteCommentById(Long id);
+    List<Comment> getArticleComments(Long articleId);
 }

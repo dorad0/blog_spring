@@ -77,16 +77,6 @@ public class ArticleManagerImpl extends GenericManagerImpl<Article, ArticleDAO> 
     }
 
     @Override
-    public void deleteById(Long id) {
-        dao.deleteById(id);
-    }
-
-    @Override
-    public Article saveAndGet(Article article) {
-        return null;
-    }
-
-    @Override
     public Article save(ArticleForm form, User user) {
         Article article = new Article(form.getTitle(), form.getText(), new GregorianCalendar(), findUserByName(user.getUsername()));
         save(article);
@@ -99,13 +89,13 @@ public class ArticleManagerImpl extends GenericManagerImpl<Article, ArticleDAO> 
     }
 
     @Override
-    public int getEntityCount(Calendar date) {
-        return dao.getEntityCount(date);
+    public Long getCount(Calendar date) {
+        return dao.getCount(date);
     }
 
     @Override
-    public List<Article> getEntityGroup(int firstResult, int maxResults, Calendar date) {
-        return dao.getEntityGroup(firstResult, maxResults, date);
+    public List<Article> findAll(int firstResult, int maxResults, Calendar date) {
+        return dao.findAll(firstResult, maxResults, date);
     }
 
     @Override
@@ -117,4 +107,5 @@ public class ArticleManagerImpl extends GenericManagerImpl<Article, ArticleDAO> 
     public ArticleArchivePagination getArchivePagination() {
         return archivePagination;
     }
+
 }

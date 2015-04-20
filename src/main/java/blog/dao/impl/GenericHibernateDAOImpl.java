@@ -38,13 +38,18 @@ public abstract class GenericHibernateDAOImpl<T extends Serializable> implements
     }
 
     @Override
+    public void update(T entity) {
+        getCurrentSession().update(entity);
+    }
+
+    @Override
     public void delete(T entity) {
         getCurrentSession().delete(entity);
     }
 
     @Override
-    public void update(T entity) {
-        getCurrentSession().update(entity);
+    public void delete(Long id) {
+        getCurrentSession().createSQLQuery("DELETE FROM " +  genericType.getName() +  "WHERE id = :id ").setParameter("id", id).executeUpdate();
     }
 
     @Override
@@ -58,15 +63,6 @@ public abstract class GenericHibernateDAOImpl<T extends Serializable> implements
     }
 
     @Override
-    public Long getCount() {
-        Criteria criteriaCount = getCurrentSession().createCriteria(genericType);
-        criteriaCount.setProjection(Projections.rowCount());
-        Long result = (Long) criteriaCount.uniqueResult();
-
-        return  result;
-    }
-
-    @Override
     public List<T> findAll(int firstResult, int maxResults) {
         Criteria criteria = getCurrentSession().createCriteria(genericType);
         criteria.setFirstResult(firstResult);
@@ -75,4 +71,11 @@ public abstract class GenericHibernateDAOImpl<T extends Serializable> implements
         return criteria.list();
     }
 
+    @Override
+    public Long getCount() {
+        Criteria criteriaCount = getCurrentSession().createCriteria(genericType);
+        criteriaCount.setProjection(Projections.rowCount());
+
+        return (Long) criteriaCount.uniqueResult();
+    }
 }

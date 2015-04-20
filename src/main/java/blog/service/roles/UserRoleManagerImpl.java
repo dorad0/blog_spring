@@ -23,4 +23,5 @@ public class UserRoleManagerImpl extends GenericManagerImpl<UserRole, UserRoleDA
     public void addRoleToUser(User user, String role) {
         save(new UserRole(user, role));
     }
+
 }

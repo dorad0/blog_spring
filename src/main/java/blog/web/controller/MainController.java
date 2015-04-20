@@ -50,16 +50,6 @@ public class MainController {
         return model;
     }
 
-//    @RequestMapping(value = "/logout", method = {RequestMethod.POST, RequestMethod.GET})
-//    public String login(HttpSession session, Model model) {
-//            model.addAttribute("logout", "You've been logged out successfully.");
-////            HttpSession session = request.getSession(false);
-//            if(session != null) {
-//                session.invalidate();
-//                System.out.println("exit");
-//            }
-//        return "login";
-//    }
 
     // customize the error message
     private String getErrorMessage(HttpServletRequest request, String key) {

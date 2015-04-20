@@ -14,13 +14,13 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 -- Schema blog_mvc
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `blog_mvc` DEFAULT CHARACTER SET utf8 ;
-USE `blog_mvc` ;
+CREATE SCHEMA IF NOT EXISTS `blog_mvc_test` DEFAULT CHARACTER SET utf8 ;
+USE `blog_mvc_test` ;
 
 -- -----------------------------------------------------
 -- Table `blog_mvc`.`user`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `blog_mvc`.`user` (
+CREATE TABLE IF NOT EXISTS `blog_mvc_test`.`user` (
   `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
   `birthdate` DATETIME NOT NULL,
   `enabled` BIT(1) NOT NULL,
@@ -37,7 +37,7 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `blog_mvc`.`article`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `blog_mvc`.`article` (
+CREATE TABLE IF NOT EXISTS `blog_mvc_test`.`article` (
   `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
   `publicationDate` DATETIME NOT NULL,
   `text` LONGTEXT NOT NULL,

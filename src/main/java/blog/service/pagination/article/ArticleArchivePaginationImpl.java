@@ -30,7 +30,7 @@ public class ArticleArchivePaginationImpl extends PaginationManager<Article, Art
     @Override
     public Page<Article> getPage(int pageNumber, int pageSize, Calendar date) {
         setPageSize(pageSize);
-        int items = dao.getEntityCount(date);
+        int items = dao.getCount(date).intValue();
         int fromElement = DEFAULT_FIRST_ELEMENT;
         int pages = countPages(items, pageSize);
 //        if(pageNumber <= 0 || pageNumber > pages)
@@ -40,9 +40,9 @@ public class ArticleArchivePaginationImpl extends PaginationManager<Article, Art
             pageNumber = DEFAULT_FIRST_ELEMENT;
         if (pageNumber > 1) {
             fromElement = (pageNumber - 1) * pageSize;
-            return new Page<>(pageNumber, pages, dao.getEntityGroup(fromElement, pageSize, date));
+            return new Page<>(pageNumber, pages, dao.findAll(fromElement, pageSize, date));
         }
-        return new Page<>(pageNumber, pages, dao.getEntityGroup(fromElement, pageSize, date));
+        return new Page<>(pageNumber, pages, dao.findAll(fromElement, pageSize, date));
     }
 
     @Override

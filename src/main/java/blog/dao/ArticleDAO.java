@@ -17,14 +17,10 @@ public interface ArticleDAO extends GenericDAO<Article> {
 
     List<Article> findByMonthAndYear(Calendar date);
 
-    void deleteById(Long id);
-
-    Article saveAndGet(Article article);
-
     Article getInitializedArticleById(Long id);
 
-    int getEntityCount(Calendar date);
+    Long getCount(Calendar date);
 
-    List<Article> getEntityGroup(int firstResult, int maxResults, Calendar date);
+    List<Article> findAll(int firstResult, int maxResults, Calendar date);
 }
 

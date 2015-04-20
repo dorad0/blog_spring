@@ -10,6 +10,8 @@ public interface GenericDAO<T> {
 
     void delete(T entity);
 
+    void delete(Long id);
+
     void update(T entity);
 
     T findById(Long id);

@@ -31,11 +31,6 @@ public class CommentManagerImpl extends GenericManagerImpl<Comment, CommentDAO> 
     }
 
     @Override
-    public List<Comment> getArticleComments(long articleId) {
-        return dao.getArticleComments(articleId);
-    }
-
-    @Override
     public void addComment(long articleId, CommentForm form, String userName) {
         Comment comment = new Comment();
         comment.setText(form.getText());
@@ -49,7 +44,8 @@ public class CommentManagerImpl extends GenericManagerImpl<Comment, CommentDAO> 
     }
 
     @Override
-    public void deleteComment(long id) {
-        dao.deleteCommentById(id);
+    public List<Comment> getArticleComments(Long articleId) {
+        return dao.getArticleComments(articleId);
     }
+
 }
