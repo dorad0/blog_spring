@@ -24,6 +24,7 @@ public class ArticleDAOImpl extends GenericHibernateDAOImpl<Article> implements 
     public Set<Comment> getComments(Long id) {
         Article article = (Article) getCurrentSession().load(Article.class, id);
         Hibernate.initialize(article.getComments());
+
         return article.getComments();
     }
 
@@ -31,9 +32,11 @@ public class ArticleDAOImpl extends GenericHibernateDAOImpl<Article> implements 
     public List<Calendar> getDates() {
         List<Calendar> calendars = new ArrayList<>();
         List<Object[]> list = getCurrentSession().createSQLQuery("SELECT DISTINCT YEAR(publicationDate) AS y, MONTH(publicationDate) AS m FROM Article").list();
+
         for (Object[] mas : list) {
             calendars.add(new GregorianCalendar((Integer) mas[0], (Integer) mas[1] - 1, FIRST_DAY_OF_MONTH));
         }
+
         return calendars;
     }
 
@@ -53,6 +56,7 @@ public class ArticleDAOImpl extends GenericHibernateDAOImpl<Article> implements 
         criteria.addOrder(Order.desc("publicationDate"));
         criteria.setFirstResult(firstResult);
         criteria.setMaxResults(maxResults);
+
         return criteria.list();
     }
 
@@ -60,6 +64,7 @@ public class ArticleDAOImpl extends GenericHibernateDAOImpl<Article> implements 
     public Article getInitializedArticleById(Long id) {
         Article article = (Article) getCurrentSession().load(Article.class, id);
         Hibernate.initialize(article.getComments());
+
         return article;
     }
 
@@ -76,8 +81,8 @@ public class ArticleDAOImpl extends GenericHibernateDAOImpl<Article> implements 
                 .setInteger("year", date.get(Calendar.YEAR)).setInteger("month", date.get(Calendar.MONTH));
         query.setFirstResult(firstResult);
         query.setMaxResults(maxResults);
-
         List<Article> list = query.list();
+
         return list;
     }
 

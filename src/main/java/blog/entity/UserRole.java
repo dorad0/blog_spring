@@ -7,7 +7,7 @@ import java.io.Serializable;
  * Created by user on 07.01.2015.
  */
 @Entity
-@Table(name = "user_role")
+@Table(name = "user_roles")
 public class UserRole implements Serializable {
 
     @Id
@@ -50,7 +50,6 @@ public class UserRole implements Serializable {
         return role;
     }
 
-
     public void setRole(String role) {
         this.role = role;
     }
@@ -85,4 +84,5 @@ public class UserRole implements Serializable {
         result = 31 * result + (role != null ? role.hashCode() : 0);
         return result;
     }
+
 }

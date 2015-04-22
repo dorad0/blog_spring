@@ -80,6 +80,7 @@ public class ArticleManagerImpl extends GenericManagerImpl<Article, ArticleDAO> 
     public Article save(ArticleForm form, User user) {
         Article article = new Article(form.getTitle(), form.getText(), new GregorianCalendar(), findUserByName(user.getUsername()));
         save(article);
+
         return article;
     }
 

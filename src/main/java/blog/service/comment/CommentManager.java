@@ -12,5 +12,6 @@ import java.util.List;
  */
 public interface CommentManager extends GenericManager<Comment>{
     void addComment(long articleId, CommentForm form, String username);
+
     List<Comment> getArticleComments(Long articleId);
 }

@@ -1,18 +1,17 @@
 package blog.entity;
 
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Set;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false, unique = true)
+    @Column(name = "id", nullable = false)
     private long id;
 
     @Column(name = "enabled", nullable = false)
@@ -24,21 +23,19 @@ public class User implements Serializable {
     @Column(name = "password", nullable = false)
     private String password;
 
-    //    @Temporal(value = TemporalType.DATETIME)
-    @Column(name = "registrationdate", nullable = false)
+    @Column(name = "registration_date", nullable = false)
     private Calendar registrationDate;
 
-    //    @Temporal(value = TemporalType.TIME)
-    @Column(name = "birthdate", nullable = false)
+    @Column(name = "birth_date", nullable = false)
     private Calendar birthDate;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "user")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "users")
     private Set<Comment> comments;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "user")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "users")
     private Set<Article> articles;
 
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "users")
     private Set<UserRole> roles;
 
     public User() {
@@ -52,36 +49,20 @@ public class User implements Serializable {
         this.birthDate = birthDate;
     }
 
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    public Set<Article> getArticles() {
-        return articles;
-    }
-
-    public void setArticles(Set<Article> articles) {
-        this.articles = articles;
-    }
-
-    public Set<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(Set<Comment> comments) {
-        this.comments = comments;
-    }
-
     public long getId() {
         return id;
     }
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public String getName() {
@@ -114,6 +95,22 @@ public class User implements Serializable {
 
     public void setBirthDate(Calendar birthDate) {
         this.birthDate = birthDate;
+    }
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public Set<Article> getArticles() {
+        return articles;
+    }
+
+    public void setArticles(Set<Article> articles) {
+        this.articles = articles;
     }
 
     public Set<UserRole> getRoles() {
@@ -169,4 +166,5 @@ public class User implements Serializable {
 
         return result;
     }
+
 }

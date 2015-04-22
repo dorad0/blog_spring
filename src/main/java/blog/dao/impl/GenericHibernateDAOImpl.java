@@ -78,4 +78,5 @@ public abstract class GenericHibernateDAOImpl<T extends Serializable> implements
 
         return (Long) criteriaCount.uniqueResult();
     }
+
 }

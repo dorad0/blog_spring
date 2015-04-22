@@ -9,7 +9,7 @@ import java.util.GregorianCalendar;
 import java.util.Set;
 
 @Entity
-@Table(name = "article")
+@Table(name = "articles")
 public class Article implements Serializable {
 
     @Id
@@ -25,14 +25,14 @@ public class Article implements Serializable {
     @Column(name = "text", nullable = false)
     private String text;
 
-    @Column(name = "publicationDate", nullable = false)
+    @Column(name = "publication_date", nullable = false)
     private Calendar publicationDate;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "article")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "articles")
     private Set<Comment> comments;
 
     public void setCommentsCount(int commentsCount) {
@@ -44,7 +44,7 @@ public class Article implements Serializable {
         return commentsCount;
     }
 
-    @Formula("(SELECT COUNT(*) FROM comment WHERE comment.article_id = id)")
+    @Formula("(SELECT COUNT(*) FROM comments WHERE comments.article_id = id)")
     private int commentsCount;
 
     public Article() {
@@ -64,14 +64,6 @@ public class Article implements Serializable {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public Set<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(Set<Comment> comments) {
-        this.comments = comments;
     }
 
     public String getTitle() {
@@ -106,6 +98,14 @@ public class Article implements Serializable {
         this.user = user;
     }
 
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -132,4 +132,5 @@ public class Article implements Serializable {
         result = 31 * result + (user != null ? user.hashCode() : 0);
         return result;
     }
+
 }

@@ -1,6 +1,5 @@
 package blog.entity;
 
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Calendar;
@@ -9,7 +8,7 @@ import java.util.Calendar;
  * Created by user on 13.12.2014.
  */
 @Entity
-@Table(name = "comment")
+@Table(name = "comments")
 public class Comment implements Serializable {
 
     @Id
@@ -20,8 +19,7 @@ public class Comment implements Serializable {
     @Column(name = "text", nullable = false)
     private String text;
 
-    //    @Temporal(value = TemporalType.TIME)
-    @Column(name = "publicationDate", nullable = false)
+    @Column(name = "publication_date", nullable = false)
     private Calendar publicationDate;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -51,7 +49,6 @@ public class Comment implements Serializable {
     }
 
     public String getText() {
-
         return text;
     }
 
@@ -109,4 +106,5 @@ public class Comment implements Serializable {
         result = 31 * result + (article != null ? article.hashCode() : 0);
         return result;
     }
+
 }

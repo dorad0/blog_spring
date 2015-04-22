@@ -57,4 +57,5 @@ public abstract class GenericManagerImpl<T, D extends GenericDAO<T>> implements 
     public Long getCount() {
         return dao.getCount();
     }
+
 }
