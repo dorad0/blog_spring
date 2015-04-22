@@ -31,7 +31,7 @@ public class ArticleDAOImpl extends GenericHibernateDAOImpl<Article> implements 
     @Override
     public List<Calendar> getDates() {
         List<Calendar> calendars = new ArrayList<>();
-        List<Object[]> list = getCurrentSession().createSQLQuery("SELECT DISTINCT YEAR(publicationDate) AS y, MONTH(publicationDate) AS m FROM Article").list();
+        List<Object[]> list = getCurrentSession().createSQLQuery("SELECT DISTINCT YEAR(publication_date) AS y, MONTH(publication_date) AS m FROM articles").list();
 
         for (Object[] mas : list) {
             calendars.add(new GregorianCalendar((Integer) mas[0], (Integer) mas[1] - 1, FIRST_DAY_OF_MONTH));
@@ -42,7 +42,7 @@ public class ArticleDAOImpl extends GenericHibernateDAOImpl<Article> implements 
 
     @Override
     public List<Article> findByMonthAndYear(Calendar date) {
-        return getCurrentSession().createQuery("FROM article WHERE YEAR(publicationDate) = :year AND MONTH(publicationDate) = :month").setInteger("year", date.get(Calendar.YEAR)).setInteger("month", date.get(Calendar.MONTH)).list();
+        return getCurrentSession().createQuery("FROM Article WHERE YEAR(publicationDate) = :year AND MONTH(publicationDate) = :month").setInteger("year", date.get(Calendar.YEAR)).setInteger("month", date.get(Calendar.MONTH)).list();
     }
 
     @Override
@@ -70,7 +70,7 @@ public class ArticleDAOImpl extends GenericHibernateDAOImpl<Article> implements 
 
     @Override
     public Long getCount(Calendar date) {
-        return ((BigInteger) getCurrentSession().createSQLQuery("SELECT COUNT(*) FROM article WHERE YEAR(publicationDate) = :year AND MONTH(publicationDate) = :month")
+        return ((BigInteger) getCurrentSession().createSQLQuery("SELECT COUNT(*) FROM articles WHERE YEAR(publication_date) = :year AND MONTH(publication_date) = :month")
                 .setInteger("year", date.get(Calendar.YEAR)).setInteger("month", date.get(Calendar.MONTH)).uniqueResult()).longValue();
     }
 

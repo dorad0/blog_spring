@@ -29,13 +29,13 @@ public class User implements Serializable {
     @Column(name = "birth_date", nullable = false)
     private Calendar birthDate;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "users")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "user")
     private Set<Comment> comments;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "users")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "user")
     private Set<Article> articles;
 
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "users")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
     private Set<UserRole> roles;
 
     public User() {

@@ -20,7 +20,7 @@ import java.util.Set;
 /**
  * Created by user on 17.01.2015.
  */
-@Service("userDetailsService")
+@Service("UserDetailsService")
 public class UserDetails implements UserDetailsService {
 
     @Autowired
