@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
  * Created by user on 31.12.2014.
  */
 @Repository(value = "UserDAOImpl")
-public class UserDAOImpl extends GenericHibernateDAOImpl<User> implements UserDAO {
+public class UserDAOImpl extends GenericHibernateDAOImpl<User, Long> implements UserDAO {
 
     @Override
     public User findByName(String name) {

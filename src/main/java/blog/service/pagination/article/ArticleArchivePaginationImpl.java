@@ -17,7 +17,7 @@ import java.util.GregorianCalendar;
  */
 @Service
 @Transactional
-public class ArticleArchivePaginationImpl extends PaginationManager<Article, ArticleDAO> implements ArticleArchivePagination {
+public class ArticleArchivePaginationImpl extends PaginationManager<Article, Long, ArticleDAO> implements ArticleArchivePagination {
 
     public static final int FIRST_DAY_OF_MONTH = 1;
 

@@ -24,7 +24,7 @@ import java.util.Set;
  */
 @Service
 @Transactional
-public class ArticleManagerImpl extends GenericManagerImpl<Article, ArticleDAO> implements ArticleManager {
+public class ArticleManagerImpl extends GenericManagerImpl<Article, Long, ArticleDAO> implements ArticleManager {
 
     @Qualifier("UserDAOImpl")
     @Autowired

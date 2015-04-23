@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
  * Created by Alex on 06.02.2015.
  */
 @Service
-public class UserRoleManagerImpl extends GenericManagerImpl<UserRole, UserRoleDAO> implements UserRoleManager {
+public class UserRoleManagerImpl extends GenericManagerImpl<UserRole, Long, UserRoleDAO> implements UserRoleManager {
 
     @Override
     @Autowired

@@ -16,20 +16,20 @@ import java.util.List;
  * Created by Alex on 05.02.2015.
  */
 @Scope("prototype")
-public abstract class GenericHibernateDAOImpl<T extends Serializable> implements GenericDAO<T> {
+public abstract class GenericHibernateDAOImpl<T, ID extends Serializable> implements GenericDAO<T, ID> {
 
     private final Class<T> genericType;
 
     @Autowired
     protected SessionFactory sessionFactory;
 
-    protected final Session getCurrentSession() {
-        return sessionFactory.getCurrentSession();
-    }
-
     public GenericHibernateDAOImpl() {
         this.genericType = (Class<T>) ((ParameterizedType) getClass()
                 .getGenericSuperclass()).getActualTypeArguments()[0];
+    }
+
+    protected final Session getCurrentSession() {
+        return sessionFactory.getCurrentSession();
     }
 
     @Override
@@ -48,12 +48,12 @@ public abstract class GenericHibernateDAOImpl<T extends Serializable> implements
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(ID id) {
         getCurrentSession().createSQLQuery("DELETE FROM " +  genericType.getName() +  "WHERE id = :id ").setParameter("id", id).executeUpdate();
     }
 
     @Override
-    public T findById(Long id) {
+    public T findById(ID id) {
         return (T) getCurrentSession().get(genericType, id);
     }
 

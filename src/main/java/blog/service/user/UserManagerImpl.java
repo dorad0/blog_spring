@@ -19,7 +19,7 @@ import java.util.GregorianCalendar;
  */
 @Service
 @Transactional
-public class UserManagerImpl extends GenericManagerImpl<User, UserDAO> implements UserManager {
+public class UserManagerImpl extends GenericManagerImpl<User, Long, UserDAO> implements UserManager {
 
     @Override
     @Autowired

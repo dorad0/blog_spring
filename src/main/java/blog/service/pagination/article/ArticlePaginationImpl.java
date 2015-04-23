@@ -14,7 +14,7 @@ import javax.transaction.Transactional;
  */
 @Service
 @Transactional
-public class ArticlePaginationImpl extends PaginationManager<Article, ArticleDAO> implements ArticlePagination {
+public class ArticlePaginationImpl extends PaginationManager<Article, Long, ArticleDAO> implements ArticlePagination {
 
     @Override
     @Autowired

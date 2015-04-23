@@ -19,7 +19,7 @@ import java.util.List;
  */
 @Service
 @Transactional
-public class CommentManagerImpl extends GenericManagerImpl<Comment, CommentDAO> implements CommentManager {
+public class CommentManagerImpl extends GenericManagerImpl<Comment, Long, CommentDAO> implements CommentManager {
 
     @Autowired
     private UserManager userManager;

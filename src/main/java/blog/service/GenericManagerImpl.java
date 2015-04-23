@@ -2,7 +2,9 @@ package blog.service;
 
 import blog.dao.GenericDAO;
 
+
 import javax.transaction.Transactional;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -10,7 +12,7 @@ import java.util.List;
  */
 
 @Transactional
-public abstract class GenericManagerImpl<T, D extends GenericDAO<T>> implements GenericManager<T> {
+public abstract class GenericManagerImpl<T, ID extends Serializable, D extends GenericDAO<T, ID>> implements GenericManager<T, ID> {
 
     protected D dao;
 
@@ -29,7 +31,7 @@ public abstract class GenericManagerImpl<T, D extends GenericDAO<T>> implements 
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(ID id) {
         dao.delete(id);
     }
 
@@ -39,7 +41,7 @@ public abstract class GenericManagerImpl<T, D extends GenericDAO<T>> implements 
     }
 
     @Override
-    public T findById(Long id) {
+    public T findById(ID id) {
         return dao.findById(id);
     }
 

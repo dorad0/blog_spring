@@ -7,6 +7,6 @@ import blog.service.GenericManager;
 /**
  * Created by Alex on 06.02.2015.
  */
-public interface UserRoleManager extends GenericManager<UserRole> {
+public interface UserRoleManager extends GenericManager<UserRole, Long> {
     void addRoleToUser(User user, String role);
 }

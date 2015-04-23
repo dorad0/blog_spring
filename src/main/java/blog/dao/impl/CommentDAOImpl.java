@@ -10,7 +10,7 @@ import java.util.List;
  * Created by user on 19.12.2014.
  */
 @Repository
-public class CommentDAOImpl extends GenericHibernateDAOImpl<Comment> implements CommentDAO {
+public class CommentDAOImpl extends GenericHibernateDAOImpl<Comment, Long> implements CommentDAO {
 
     @Override
     public List<Comment> getArticleComments(Long articleId) {

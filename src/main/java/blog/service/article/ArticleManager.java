@@ -15,7 +15,7 @@ import java.util.Set;
 /**
  * Created by Alex on 05.02.2015.
  */
-public interface ArticleManager extends GenericManager<Article> {
+public interface ArticleManager extends GenericManager<Article, Long> {
     Set<Comment> getComments(Long id);
 
     List<Calendar> getDates();

@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by Alex on 05.02.2015.
  */
-public interface CommentManager extends GenericManager<Comment>{
+public interface CommentManager extends GenericManager<Comment, Long>{
     void addComment(long articleId, CommentForm form, String username);
 
     List<Comment> getArticleComments(Long articleId);
