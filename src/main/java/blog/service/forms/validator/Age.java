@@ -1,4 +1,4 @@
-package blog.service.user.validator;
+package blog.service.forms.validator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

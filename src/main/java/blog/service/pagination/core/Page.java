@@ -2,9 +2,6 @@ package blog.service.pagination.core;
 
 import java.util.List;
 
-/**
- * Created by Alex on 06.02.2015.
- */
 public class Page<T> {
 
     private int pageNumber;

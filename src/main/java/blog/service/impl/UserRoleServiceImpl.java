@@ -1,9 +1,9 @@
-package blog.service.roles;
+package blog.service.impl;
 
 import blog.dao.UserRoleDAO;
 import blog.entity.User;
 import blog.entity.UserRole;
-import blog.service.GenericManagerImpl;
+import blog.service.UserRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
  * Created by Alex on 06.02.2015.
  */
 @Service
-public class UserRoleManagerImpl extends GenericManagerImpl<UserRole, Long, UserRoleDAO> implements UserRoleManager {
+public class UserRoleServiceImpl extends GenericServiceImpl<Long, UserRole, UserRoleDAO> implements UserRoleService {
 
     @Override
     @Autowired

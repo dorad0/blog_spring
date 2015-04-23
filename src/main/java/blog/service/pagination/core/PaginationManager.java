@@ -1,13 +1,11 @@
 package blog.service.pagination.core;
 
 import blog.dao.GenericDAO;
+import blog.service.pagination.Pagination;
 
 import javax.transaction.Transactional;
 import java.io.Serializable;
 
-/**
- * Created by Alex on 06.02.2015.
- */
 @Transactional
 public abstract class PaginationManager<T, ID extends Serializable, D extends GenericDAO<T, ID>> implements Pagination<T> {
 

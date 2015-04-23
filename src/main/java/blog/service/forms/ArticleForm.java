@@ -1,4 +1,4 @@
-package blog.service.article.web;
+package blog.service.forms;
 
 import org.hibernate.validator.constraints.NotEmpty;
 

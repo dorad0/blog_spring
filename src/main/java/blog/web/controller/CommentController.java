@@ -1,9 +1,9 @@
 package blog.web.controller;
 
 import blog.entity.Article;
-import blog.service.article.ArticleManager;
-import blog.service.comment.CommentManager;
-import blog.service.comment.web.CommentForm;
+import blog.service.ArticleService;
+import blog.service.CommentService;
+import blog.service.forms.CommentForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -26,10 +26,10 @@ import javax.validation.Valid;
 public class CommentController {
 
     @Autowired
-    private ArticleManager articleService;
+    private ArticleService articleService;
 
     @Autowired
-    private CommentManager commentService;
+    private CommentService commentService;
 
     @RequestMapping("/{id}")
     public String getArticleWithComments(@PathVariable long id, Model model) {

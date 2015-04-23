@@ -17,10 +17,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
 
-/**
- * Created by user on 17.01.2015.
- */
-
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true)
@@ -42,22 +38,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .antMatchers("/resources/**").permitAll()
+                    .antMatchers("/resources/**").permitAll()
                 .and()
-                .formLogin()
-                    .loginPage("/login").failureUrl("/login?error")
-                    .usernameParameter("username")
-                    .passwordParameter("password")
-                .permitAll()
+                    .formLogin()
+                        .loginPage("/login").failureUrl("/login?error")
+                        .usernameParameter("username")
+                        .passwordParameter("password")
+                    .permitAll()
                 .and()
-                .logout()
-                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                    .deleteCookies("remove")
-                    .invalidateHttpSession(true)
-                    .logoutSuccessUrl("/login?logout=success")
-                .permitAll()
+                    .logout()
+                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                        .deleteCookies("remove")
+                        .invalidateHttpSession(true)
+                        .logoutSuccessUrl("/login?logout=success")
+                    .permitAll()
                 .and()
-                    .exceptionHandling().accessDeniedPage("/403")
+                    .exceptionHandling()
+                        .accessDeniedPage("/403")
                 .and()
                     .httpBasic();
                 /*.and()

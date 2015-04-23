@@ -1,13 +1,13 @@
-package blog.service.article;
+package blog.service.impl;
 
 import blog.dao.ArticleDAO;
 import blog.dao.UserDAO;
 import blog.entity.Article;
 import blog.entity.Comment;
-import blog.service.GenericManagerImpl;
-import blog.service.article.web.ArticleForm;
-import blog.service.pagination.article.ArticleArchivePagination;
-import blog.service.pagination.article.ArticlePagination;
+import blog.service.ArticleService;
+import blog.service.forms.ArticleForm;
+import blog.service.pagination.ArticleArchivePagination;
+import blog.service.pagination.ArticlePagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.userdetails.User;
@@ -24,7 +24,7 @@ import java.util.Set;
  */
 @Service
 @Transactional
-public class ArticleManagerImpl extends GenericManagerImpl<Article, Long, ArticleDAO> implements ArticleManager {
+public class ArticleServiceImpl extends GenericServiceImpl<Long, Article, ArticleDAO> implements ArticleService {
 
     @Qualifier("UserDAOImpl")
     @Autowired

@@ -1,17 +1,17 @@
-package blog.service.comment;
+package blog.service;
 
-import blog.dao.CommentDAO;
 import blog.entity.Comment;
-import blog.service.GenericManager;
-import blog.service.comment.web.CommentForm;
+import blog.service.forms.CommentForm;
 
 import java.util.List;
 
 /**
  * Created by Alex on 05.02.2015.
  */
-public interface CommentManager extends GenericManager<Comment, Long>{
+public interface CommentService extends GenericService<Comment, Long> {
+
     void addComment(long articleId, CommentForm form, String username);
 
     List<Comment> getArticleComments(Long articleId);
+
 }

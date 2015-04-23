@@ -1,6 +1,5 @@
 package blog.config;
 
-import blog.config.logging.SystemArchitecture;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.context.MessageSource;
@@ -18,7 +17,6 @@ import org.springframework.web.servlet.view.JstlView;
 import java.util.Properties;
 
 /**
- * Created by user on 15.01.2015.
  * A Config class, define the view’s technology and imports above SecurityConfig.java.
  */
 @Configuration //Specifies the class as configuration

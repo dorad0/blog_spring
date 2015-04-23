@@ -1,4 +1,4 @@
-package blog.service.user;
+package blog.service.impl;
 
 import blog.dao.UserDAO;
 import blog.entity.User;

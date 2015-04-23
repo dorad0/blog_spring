@@ -1,4 +1,4 @@
-package blog.service.pagination.article;
+package blog.service.pagination;
 
 import blog.entity.Article;
 import blog.service.pagination.core.Page;
@@ -19,4 +19,5 @@ public interface ArticleArchivePagination {
     Page<Article> getPage(int pageNumber, int pageSize, int year, int month);
 
     Page<Article> getPage(int pageNumber, int year, int month);
+
 }

@@ -13,9 +13,6 @@ import java.math.BigInteger;
 import java.util.*;
 import java.util.stream.Collectors;
 
-/**
- * Created by user on 15.12.2014.
- */
 @Repository(value = "ArticleDAOImpl")
 public class ArticleDAOImpl extends GenericHibernateDAOImpl<Article, Long> implements ArticleDAO {
 

@@ -8,7 +8,8 @@ import java.util.List;
 /**
  * Created by Alex on 05.02.2015.
  */
-public interface GenericManager<T, ID extends Serializable> {
+public interface GenericService<T, ID extends Serializable> {
+
     Long save(T entity);
 
     void update(T entity);
@@ -24,4 +25,5 @@ public interface GenericManager<T, ID extends Serializable> {
     List<T> findAll(int firstResult, int maxResults);
 
     Long getCount();
+
 }

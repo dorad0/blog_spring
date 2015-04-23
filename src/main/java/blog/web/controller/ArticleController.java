@@ -4,8 +4,8 @@
 package blog.web.controller;
 
 import blog.entity.Article;
-import blog.service.article.ArticleManager;
-import blog.service.article.web.ArticleForm;
+import blog.service.ArticleService;
+import blog.service.forms.ArticleForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -29,7 +29,7 @@ public class ArticleController {
     public static final int FIRST_DAY = 1;
 
     @Autowired
-    private ArticleManager service;
+    private ArticleService service;
 
     @RequestMapping("/articles")
     public String getArticles(Model model) {

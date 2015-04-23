@@ -1,7 +1,7 @@
 package blog.web.controller;
 
-import blog.service.user.UserManager;
-import blog.service.user.web.UserForm;
+import blog.service.UserService;
+import blog.service.forms.UserForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -21,7 +21,7 @@ import javax.validation.Valid;
 public class UserController {
 
     @Autowired
-    private UserManager service;
+    private UserService service;
 
     @Secured(value = "ROLE_ANONYMOUS")
     @RequestMapping(value = "/register", method = RequestMethod.GET)

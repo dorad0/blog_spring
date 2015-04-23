@@ -1,11 +1,10 @@
-package blog.service.article;
+package blog.service;
 
 import blog.entity.Article;
 import blog.entity.Comment;
-import blog.service.GenericManager;
-import blog.service.article.web.ArticleForm;
-import blog.service.pagination.article.ArticleArchivePagination;
-import blog.service.pagination.article.ArticlePagination;
+import blog.service.forms.ArticleForm;
+import blog.service.pagination.ArticleArchivePagination;
+import blog.service.pagination.ArticlePagination;
 import org.springframework.security.core.userdetails.User;
 
 import java.util.Calendar;
@@ -15,7 +14,8 @@ import java.util.Set;
 /**
  * Created by Alex on 05.02.2015.
  */
-public interface ArticleManager extends GenericManager<Article, Long> {
+public interface ArticleService extends GenericService<Article, Long> {
+
     Set<Comment> getComments(Long id);
 
     List<Calendar> getDates();
@@ -37,4 +37,5 @@ public interface ArticleManager extends GenericManager<Article, Long> {
     ArticlePagination getPagination();
 
     ArticleArchivePagination getArchivePagination();
+
 }

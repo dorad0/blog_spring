@@ -1,12 +1,13 @@
-package blog.service.roles;
+package blog.service;
 
 import blog.entity.User;
 import blog.entity.UserRole;
-import blog.service.GenericManager;
 
 /**
  * Created by Alex on 06.02.2015.
  */
-public interface UserRoleManager extends GenericManager<UserRole, Long> {
+public interface UserRoleService extends GenericService<UserRole, Long> {
+
     void addRoleToUser(User user, String role);
+
 }

@@ -1,7 +1,8 @@
-package blog.service.pagination.article;
+package blog.service.pagination.impl;
 
 import blog.dao.ArticleDAO;
 import blog.entity.Article;
+import blog.service.pagination.ArticlePagination;
 import blog.service.pagination.core.PaginationManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

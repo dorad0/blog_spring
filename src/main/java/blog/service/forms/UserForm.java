@@ -1,6 +1,6 @@
-package blog.service.user.web;
+package blog.service.forms;
 
-import blog.service.user.validator.Age;
+import blog.service.forms.validator.Age;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 

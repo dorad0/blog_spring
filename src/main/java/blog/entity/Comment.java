@@ -4,9 +4,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Calendar;
 
-/**
- * Created by user on 13.12.2014.
- */
 @Entity
 @Table(name = "comments")
 public class Comment implements Serializable {

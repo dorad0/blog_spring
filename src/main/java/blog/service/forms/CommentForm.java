@@ -1,4 +1,4 @@
-package blog.service.comment.web;
+package blog.service.forms;
 
 import javax.validation.constraints.Size;
 

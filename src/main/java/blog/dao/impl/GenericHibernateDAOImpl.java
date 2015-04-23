@@ -12,9 +12,6 @@ import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
-/**
- * Created by Alex on 05.02.2015.
- */
 @Scope("prototype")
 public abstract class GenericHibernateDAOImpl<T, ID extends Serializable> implements GenericDAO<T, ID> {
 

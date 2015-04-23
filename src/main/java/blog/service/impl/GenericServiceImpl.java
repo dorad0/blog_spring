@@ -1,6 +1,7 @@
-package blog.service;
+package blog.service.impl;
 
 import blog.dao.GenericDAO;
+import blog.service.GenericService;
 
 
 import javax.transaction.Transactional;
@@ -12,7 +13,7 @@ import java.util.List;
  */
 
 @Transactional
-public abstract class GenericManagerImpl<T, ID extends Serializable, D extends GenericDAO<T, ID>> implements GenericManager<T, ID> {
+public abstract class GenericServiceImpl<ID extends Serializable, T, D extends GenericDAO<T, ID>> implements GenericService<T, ID> {
 
     protected D dao;
 

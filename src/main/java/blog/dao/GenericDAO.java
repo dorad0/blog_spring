@@ -3,10 +3,8 @@ package blog.dao;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * Created by Alex on 05.02.2015.
- */
 public interface GenericDAO<T, ID extends Serializable> {
+
     Long save(T entity);
 
     void delete(T entity);
@@ -22,4 +20,5 @@ public interface GenericDAO<T, ID extends Serializable> {
     List<T> findAll(int firstResult, int maxResults);
 
     Long getCount();
+
 }

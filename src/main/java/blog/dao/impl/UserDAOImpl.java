@@ -4,9 +4,6 @@ import blog.dao.UserDAO;
 import blog.entity.User;
 import org.springframework.stereotype.Repository;
 
-/**
- * Created by user on 31.12.2014.
- */
 @Repository(value = "UserDAOImpl")
 public class UserDAOImpl extends GenericHibernateDAOImpl<User, Long> implements UserDAO {
 

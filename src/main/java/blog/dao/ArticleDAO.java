@@ -7,10 +7,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Created by user on 19.12.2014.
- */
 public interface ArticleDAO extends GenericDAO<Article, Long> {
+
     Set<Comment> getComments(Long id);
 
     List<Calendar> getDates();
@@ -22,5 +20,6 @@ public interface ArticleDAO extends GenericDAO<Article, Long> {
     Long getCount(Calendar date);
 
     List<Article> findAll(int firstResult, int maxResults, Calendar date);
+
 }
 

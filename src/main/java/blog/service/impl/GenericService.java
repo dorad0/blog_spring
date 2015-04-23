@@ -1,12 +1,11 @@
-package blog.service.comment;
+package blog.service.impl;
 
 import blog.dao.CommentDAO;
 import blog.entity.Article;
 import blog.entity.Comment;
-import blog.service.GenericManagerImpl;
-import blog.service.article.ArticleManager;
-import blog.service.comment.web.CommentForm;
-import blog.service.user.UserManager;
+import blog.service.CommentService;
+import blog.service.forms.CommentForm;
+import blog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,10 +18,10 @@ import java.util.List;
  */
 @Service
 @Transactional
-public class CommentManagerImpl extends GenericManagerImpl<Comment, Long, CommentDAO> implements CommentManager {
+public class GenericService extends GenericServiceImpl<Long, Comment, CommentDAO> implements CommentService {
 
     @Autowired
-    private UserManager userManager;
+    private UserService userService;
 
     @Override
     @Autowired
@@ -35,7 +34,7 @@ public class CommentManagerImpl extends GenericManagerImpl<Comment, Long, Commen
         Comment comment = new Comment();
         comment.setText(form.getText());
         comment.setPublicationDate(new GregorianCalendar());
-        comment.setUser(userManager.findByName(userName));
+        comment.setUser(userService.findByName(userName));
 
         Article article = new Article();
         article.setId(articleId);
