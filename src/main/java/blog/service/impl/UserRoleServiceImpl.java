@@ -7,9 +7,6 @@ import blog.service.UserRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/**
- * Created by Alex on 06.02.2015.
- */
 @Service
 public class UserRoleServiceImpl extends GenericServiceImpl<Long, UserRole, UserRoleDAO> implements UserRoleService {
 

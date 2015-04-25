@@ -4,9 +4,6 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.Calendar;
 
-/**
- * Created by user on 21.01.2015.
- */
 public class AgeConstraintValidator implements ConstraintValidator<Age, Calendar> {
 
     private int annotationAge;

@@ -12,7 +12,7 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
-    private long id;
+    private Long id;
 
     @Column(name = "enabled", nullable = false)
     private boolean enabled;

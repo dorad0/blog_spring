@@ -14,9 +14,6 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.GregorianCalendar;
 
-/**
- * Created by Alex on 05.02.2015.
- */
 @Service
 @Transactional
 public class UserServiceImpl extends GenericServiceImpl<Long, User, UserDAO> implements UserService {

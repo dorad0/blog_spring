@@ -11,9 +11,6 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Created by Alex on 05.02.2015.
- */
 public interface ArticleService extends GenericService<Article, Long> {
 
     Set<Comment> getComments(Long id);

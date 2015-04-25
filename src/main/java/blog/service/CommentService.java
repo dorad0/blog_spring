@@ -5,9 +5,6 @@ import blog.service.forms.CommentForm;
 
 import java.util.List;
 
-/**
- * Created by Alex on 05.02.2015.
- */
 public interface CommentService extends GenericService<Comment, Long> {
 
     void addComment(long articleId, CommentForm form, String username);

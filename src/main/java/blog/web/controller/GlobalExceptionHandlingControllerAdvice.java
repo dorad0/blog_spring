@@ -15,9 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
-/**
- * Created by Alex on 05.03.2015.
- */
 @ControllerAdvice
 public class GlobalExceptionHandlingControllerAdvice {
 

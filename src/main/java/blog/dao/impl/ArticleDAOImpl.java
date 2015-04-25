@@ -33,7 +33,12 @@ public class ArticleDAOImpl extends GenericHibernateDAOImpl<Article, Long> imple
                 .createSQLQuery("SELECT DISTINCT YEAR(publication_date) AS y, MONTH(publication_date) AS m FROM articles")
                 .list();
 
-        calendars.addAll(list.stream().map(mas -> new GregorianCalendar((Integer) mas[0], (Integer) mas[1] - 1, FIRST_DAY_OF_MONTH)).collect(Collectors.toList()));
+        calendars
+                .addAll(
+                    list.stream()
+                        .map(mas -> new GregorianCalendar((Integer) mas[0], (Integer) mas[1] - 1, FIRST_DAY_OF_MONTH))
+                        .collect(Collectors.toList())
+                );
 
         return calendars;
     }

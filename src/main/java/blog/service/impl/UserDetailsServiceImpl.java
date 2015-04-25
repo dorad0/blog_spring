@@ -17,11 +17,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Created by user on 17.01.2015.
- */
 @Service("UserDetailsService")
-public class UserDetails implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     @Qualifier(value = "UserDAOImpl")

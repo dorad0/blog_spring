@@ -4,9 +4,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.Size;
 
-/**
- * Created by Alex on 15.02.2015.
- */
 public class ArticleForm {
 
     @NotEmpty

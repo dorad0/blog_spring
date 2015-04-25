@@ -16,9 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-/**
- * Created by user on 17.01.2015.
- */
 @Controller
 public class MainController {
 

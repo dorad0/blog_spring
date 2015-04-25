@@ -3,14 +3,9 @@ package blog.service.impl;
 import blog.dao.GenericDAO;
 import blog.service.GenericService;
 
-
 import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.List;
-
-/**
- * Created by Alex on 05.02.2015.
- */
 
 @Transactional
 public abstract class GenericServiceImpl<ID extends Serializable, T, D extends GenericDAO<T, ID>> implements GenericService<T, ID> {

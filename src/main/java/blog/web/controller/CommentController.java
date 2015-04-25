@@ -18,9 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 
-/**
- * Created by Alex on 18.02.2015.
- */
 @Controller
 @RequestMapping("/comments")
 public class CommentController {

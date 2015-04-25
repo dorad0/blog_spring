@@ -13,9 +13,6 @@ import javax.transaction.Transactional;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-/**
- * Created by Alex on 05.02.2015.
- */
 @Service
 @Transactional
 public class GenericService extends GenericServiceImpl<Long, Comment, CommentDAO> implements CommentService {

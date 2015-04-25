@@ -9,9 +9,6 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import java.util.Calendar;
 
-/**
- * Created by Alex on 01.02.2015.
- */
 public class UserForm {
 
     @NotEmpty

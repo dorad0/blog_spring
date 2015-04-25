@@ -4,9 +4,6 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.*;
 
-/**
- * Created by user on 21.01.2015.
- */
 @Documented
 @Constraint(validatedBy = AgeConstraintValidator.class)
 @Target( { ElementType.METHOD, ElementType.FIELD })

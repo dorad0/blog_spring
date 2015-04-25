@@ -13,9 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
 
-/**
- * Created by user on 20.01.2015.
- */
 @Controller
 @RequestMapping("/user")
 public class UserController {

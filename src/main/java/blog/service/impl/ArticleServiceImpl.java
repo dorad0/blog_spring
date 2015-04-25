@@ -19,9 +19,6 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Created by Alex on 05.02.2015.
- */
 @Service
 @Transactional
 public class ArticleServiceImpl extends GenericServiceImpl<Long, Article, ArticleDAO> implements ArticleService {

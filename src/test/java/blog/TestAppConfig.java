@@ -1,35 +1,27 @@
 package blog;
 
-/**
- * Created by alex on 4/20/2015.
- */
-
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.SessionFactory;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.*;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import java.util.Properties;
 
-
-/**
- * Created by user on 15.01.2015.
- * A Config class, define the view’s technology and imports above SecurityConfig.java.
- */
 @Configuration //Specifies the class as configuration
-@ComponentScan("blog") //Specifies which package to scan
+@ComponentScan(basePackages = { "blog" }, excludeFilters = { @ComponentScan.Filter(type = FilterType.ANNOTATION, value = Configuration.class), @ComponentScan.Filter(type = FilterType.ANNOTATION, value = EnableWebMvc.class), @ComponentScan.Filter(type = FilterType.ANNOTATION, value = EnableWebSecurity.class) })
 @EnableTransactionManagement
 @EnableAspectJAutoProxy
-public class TestAppConfig extends WebMvcConfigurerAdapter {
+public class TestAppConfig {
 
     private static final String PROPERTY_NAME_DATABASE_DRIVER = "com.mysql.jdbc.Driver";
-    private static final String PROPERTY_NAME_DATABASE_URL = "jdbc:mysql://localhost:3306/blog_mvc";
+    private static final String PROPERTY_NAME_DATABASE_URL = "jdbc:mysql://localhost:3306/blog_mvc_test";
     private static final String PROPERTY_NAME_DATABASE_USERNAME = "root";
     private static final String PROPERTY_NAME_DATABASE_PASSWORD = "1234";
 
@@ -41,6 +33,12 @@ public class TestAppConfig extends WebMvcConfigurerAdapter {
                 .addProperties(getHibernateProperties());
 
         return builder.buildSessionFactory();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        PasswordEncoder encoder = new BCryptPasswordEncoder();
+        return encoder;
     }
 
     private Properties getHibernateProperties() {
@@ -64,9 +62,9 @@ public class TestAppConfig extends WebMvcConfigurerAdapter {
         return ds;
     }
 
-    //Create a transaction manager
     @Bean
     public HibernateTransactionManager txManager() {
         return new HibernateTransactionManager(sessionFactory());
     }
+
 }

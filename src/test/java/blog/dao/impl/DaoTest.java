@@ -1,6 +1,7 @@
 package blog.dao.impl;
 
 import blog.TestAppConfig;
+import blog.config.WebAppConfig;
 import blog.dao.UserDAO;
 import blog.entity.User;
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
@@ -23,7 +25,7 @@ import org.springframework.test.context.transaction.TransactionalTestExecutionLi
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes= TestAppConfig.class)
+@ContextConfiguration(loader=AnnotationConfigContextLoader.class, classes = {TestAppConfig.class})
 @TestExecutionListeners({DependencyInjectionTestExecutionListener.class,
         DirtiesContextTestExecutionListener.class,
         TransactionalTestExecutionListener.class,
