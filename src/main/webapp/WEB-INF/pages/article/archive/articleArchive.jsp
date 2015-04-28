@@ -1,6 +1,6 @@
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <div class="col-sm-8 blog-main">
     <c:forEach var="article" items="${page.entities}">
         <div class="blog-post">
@@ -12,10 +12,11 @@
                 <fmt:formatDate value="${article.publicationDate.time}"
                                 pattern="MMMMM d, yyyy"/>
                 by <a
-                    href="/user/${article.user.name}/">${article.user.name}</a>
+                    href="/user/<c:out value="${article.user.name}"/> "> <c:out
+                    value="${article.user.name}"/> </a>
             </p>
             <p>
-                    ${article.text}
+                ${article.text}
             </p>
             <p>
                 <a href="/comments/${article.id}/">Read comments(${article.commentsCount})</a>
@@ -24,18 +25,20 @@
                 <form method="post" action="/article/delete?id=${article.id}">
                     <input type="hidden" name="${_csrf.parameterName}"
                            value="${_csrf.token}"/>
-                    <input type="submit" class="btn btn-lg btn-success" value="Delete article"/>
+                    <input type="submit" class="btn btn-lg btn-success" value="Delete"/>
                 </form>
             </sec:authorize>
         </div>
     </c:forEach>
     <nav>
         <ul class="pager">
+
             <c:if test="${page.previous}">
-                <li><a href="/article/page/${page.previousPage}/">Previous</a></li>
+                <li><a href="/article/archive/${date.get(1)}/${date.get(2)}/page/${page.previousPage}/">Previous</a>
+                </li>
             </c:if>
             <c:if test="${page.next}">
-                <li><a href="/article/page/${page.nextPage}/">Next</a></li>
+                <li><a href="/article/archive/${date.get(1)}/${date.get(2)}/page/${page.nextPage}/">Next</a></li>
             </c:if>
         </ul>
     </nav>

@@ -24,13 +24,13 @@ public class UserController {
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String loadFormPage(Model m) {
         m.addAttribute("userForm", new UserForm());
-        return "user/registerForm";
+        return "userRegisterForm";
     }
 
     @RequestMapping(value = "/form", method = RequestMethod.POST)
     public String submitForm(@Valid UserForm userForm, BindingResult result, Model m) {
         if (result.hasErrors()) {
-            return "user/registerForm";
+            return "userRegisterForm";
         }
         service.saveUserFromForm(userForm);
         m.addAttribute("user", userForm);
@@ -40,13 +40,14 @@ public class UserController {
     @RequestMapping(value = "/{username}", method = RequestMethod.GET)
     public String showUserProfile(@PathVariable String username, Model model) {
         model.addAttribute(service.findByName(username));
-        return "user/profile";
+        return "userProfile";
     }
 
     @Secured(value = "ROLE_ADMIN")
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
     public String deleteUser(@PathVariable long id) {
         service.delete(id);
-        return "user/deletedUser";
+        return "deletedUser";
     }
+
 }

@@ -8,11 +8,15 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.InternalResourceView;
 import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
+import org.springframework.web.servlet.view.tiles3.TilesView;
+import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
 import java.util.Properties;
 
@@ -33,12 +37,13 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
     private static final String PROPERTY_NAME_DATABASE_PASSWORD = "1234";
 
     @Bean
-    public InternalResourceViewResolver viewResolver() {
-        InternalResourceViewResolver viewResolver
-                = new InternalResourceViewResolver();
-        viewResolver.setViewClass(JstlView.class);
-        viewResolver.setPrefix("/WEB-INF/pages/");
-        viewResolver.setSuffix(".jsp");
+    public TilesViewResolver viewResolver() {
+        TilesViewResolver viewResolver
+                = new TilesViewResolver();
+//        viewResolver.setViewClass(TilesView.class);
+//        viewResolver.setPrefix("/WEB-INF/pages/");
+//        viewResolver.setSuffix(".jsp");
+
         return viewResolver;
     }
 
@@ -59,6 +64,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
         prop.put("hibernate.dialect",
                 "org.hibernate.dialect.MySQL5Dialect");
 //        prop.put("hibernate.hbm2ddl.auto", "create");
+
         return prop;
     }
 
@@ -69,10 +75,10 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
         ds.setUrl(PROPERTY_NAME_DATABASE_URL);
         ds.setUsername(PROPERTY_NAME_DATABASE_USERNAME);
         ds.setPassword(PROPERTY_NAME_DATABASE_PASSWORD);
+
         return ds;
     }
 
-    //Create a transaction manager
     @Bean
     public HibernateTransactionManager txManager() {
         return new HibernateTransactionManager(sessionFactory());
@@ -82,6 +88,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
     public MessageSource messageSource() {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
         messageSource.setBasename("messages");
+
         return messageSource;
     }
 
@@ -89,4 +96,19 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**").addResourceLocations("/static/");
     }
+
+    @Bean
+    public TilesConfigurer tilesConfigurer() {
+        TilesConfigurer tiles = new TilesConfigurer();
+        tiles.setDefinitions(new String[]{"WEB-INF/layout/tiles.xml"});
+        tiles.setCheckRefresh(true);
+
+        return tiles;
+    }
+//
+//    @Bean
+//    public ViewResolver viewResolver() {
+//        return new TilesViewResolver();
+//    }
+
 }

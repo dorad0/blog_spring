@@ -36,9 +36,9 @@ public class CommentController {
             model.addAttribute("comments", commentService.getArticleComments(id));
             model.addAttribute("commentForm", new CommentForm());
             model.addAttribute("dates", articleService.getDates());
-            return "comment/article";
+            return "articleComments";
         } else {
-            return "comment/empty";
+            return "noArticle";
         }
     }
 
@@ -46,7 +46,7 @@ public class CommentController {
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     public String addComment(@Valid CommentForm form, @PathVariable long articleId, BindingResult result) {
         if (result.hasErrors()) {
-            return "comment/article";
+            return "articleComments";
         }
         commentService.addComment(articleId, form, ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername());
         return "redirect:/comments/" + articleId + "#end";
@@ -58,4 +58,5 @@ public class CommentController {
         commentService.delete(commentId);
         return "redirect:/comments/" + articleId;
     }
+
 }

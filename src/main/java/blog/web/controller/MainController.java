@@ -23,6 +23,7 @@ public class MainController {
     public ModelAndView defaultPage() {
         ModelAndView model = new ModelAndView();
         model.setViewName("redirect:/article/");
+//        model.setViewName("home");
         return model;
     }
 
@@ -55,11 +56,11 @@ public class MainController {
 
         String error = "";
         if (exception instanceof BadCredentialsException) {
-            error = "Invalid username and password!";
+            error = "Invalid username or password!";
         } else if (exception instanceof LockedException) {
             error = exception.getMessage();
         } else {
-            error = "Invalid username and password!";
+            error = "Invalid username or password!";
         }
 
         return error;
@@ -84,4 +85,5 @@ public class MainController {
         model.setViewName("403");
         return model;
     }
+
 }

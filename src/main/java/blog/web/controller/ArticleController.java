@@ -1,6 +1,3 @@
-/**
- * Created by user on 22.01.2015.
- */
 package blog.web.controller;
 
 import blog.entity.Article;
@@ -34,7 +31,8 @@ public class ArticleController {
     @RequestMapping("/articles")
     public String getArticles(Model model) {
         getArticlesPage(FIRST_PAGE, model);
-        return "article/articles";
+//        return "article/articles";
+        return "articles";
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -51,13 +49,13 @@ public class ArticleController {
     public String getArticlesPage(@PathVariable int pagenumber, Model model) {
         model.addAttribute("dates", service.getDates());
         model.addAttribute("page", service.getPagination().getPage(pagenumber));
-        return "article/articles";
+        return "articles";
     }
 
     @RequestMapping(value = "archive/{year}/{month}", method = RequestMethod.GET)
     public String getArchiveArticles(Model model, @PathVariable(value = "year") int year, @PathVariable(value = "month") int month) {
         getArchiveArticlesPage(model, year, month, FIRST_PAGE);
-        return "article/archive/archiveArticles";
+        return "articleArchive";
     }
 
     @RequestMapping(value = "archive/{year}/{month}/page/{pagenumber}", method = RequestMethod.GET)
@@ -65,21 +63,21 @@ public class ArticleController {
         model.addAttribute("page", service.getArchivePagination().getPage(pagenumber, year, month));
         model.addAttribute("date", new GregorianCalendar(year, month, FIRST_DAY));
         model.addAttribute("dates", service.getDates());
-        return "article/archive/archiveArticles";
+        return "articleArchive";
     }
 
     @RequestMapping(value = "/form", method = RequestMethod.GET)
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     public String createArticle(Model model) {
         model.addAttribute("articleForm", new ArticleForm());
-        return "article/createForm";
+        return "createArticleForm";
     }
 
     @RequestMapping(value = "/form", method = RequestMethod.POST)
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     public String submitForm(@Valid ArticleForm articleForm, BindingResult result, Model entity) {
         if (result.hasErrors()) {
-            return "article/createForm";
+            return "createArticleForm";
         }
 
         Article article = service.save(articleForm, (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
@@ -93,6 +91,7 @@ public class ArticleController {
         m.addAttribute("article", service.findById(id));
         service.delete(id);
         m.addAttribute("dates", service.getDates());
-        return "article/sucsessDelete";
+        return "deletedArticle";
     }
+
 }
