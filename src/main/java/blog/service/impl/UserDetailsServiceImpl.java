@@ -1,5 +1,6 @@
 package blog.service.impl;
 
+import blog.annotation.ExceptionTranslation;
 import blog.dao.UserDAO;
 import blog.entity.User;
 import blog.entity.UserRole;
@@ -24,6 +25,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Qualifier(value = "UserDAOImpl")
     private UserDAO userDAO;
 
+    @ExceptionTranslation
     @Transactional(readOnly = true)
     @Override
     public org.springframework.security.core.userdetails.UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {

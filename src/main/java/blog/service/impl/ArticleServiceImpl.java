@@ -1,10 +1,12 @@
 package blog.service.impl;
 
+import blog.annotation.ExceptionTranslation;
 import blog.dao.ArticleDAO;
 import blog.dao.UserDAO;
 import blog.entity.Article;
 import blog.entity.Comment;
 import blog.service.ArticleService;
+import blog.service.exception.ServiceException;
 import blog.service.forms.ArticleForm;
 import blog.service.pagination.ArticleArchivePagination;
 import blog.service.pagination.ArticlePagination;
@@ -34,6 +36,7 @@ public class ArticleServiceImpl extends GenericServiceImpl<Long, Article, Articl
     @Autowired
     private ArticleArchivePagination archivePagination;
 
+
     @Override
     @Autowired
     protected void setDao(@Qualifier("ArticleDAOImpl") ArticleDAO dao) {
@@ -44,21 +47,25 @@ public class ArticleServiceImpl extends GenericServiceImpl<Long, Article, Articl
         return userDAO.findByName(userName);
     }
 
+    @ExceptionTranslation
     @Override
     public Set<Comment> getComments(Long id) {
         return dao.getComments(id);
     }
 
+    @ExceptionTranslation
     @Override
     public List<Calendar> getDates() {
         return dao.getDates();
     }
 
+    @ExceptionTranslation
     @Override
     public List<Article> findByMonthAndYear(Calendar date) {
         return dao.findByMonthAndYear(date);
     }
 
+    @ExceptionTranslation
     @Override
     public void save(Article article, String userName) {
         article.setUser(findUserByName(userName));
@@ -66,6 +73,7 @@ public class ArticleServiceImpl extends GenericServiceImpl<Long, Article, Articl
         save(article);
     }
 
+    @ExceptionTranslation
     @Override
     public void save(Article article, User user) {
         article.setUser(findUserByName(user.getUsername()));
@@ -73,6 +81,7 @@ public class ArticleServiceImpl extends GenericServiceImpl<Long, Article, Articl
         save(article);
     }
 
+    @ExceptionTranslation
     @Override
     public Article save(ArticleForm form, User user) {
         Article article = new Article(form.getTitle(), form.getText(), new GregorianCalendar(), findUserByName(user.getUsername()));
@@ -81,26 +90,31 @@ public class ArticleServiceImpl extends GenericServiceImpl<Long, Article, Articl
         return article;
     }
 
+    @ExceptionTranslation
     @Override
     public Article getInitializedArticleById(Long id) {
         return dao.getInitializedArticleById(id);
     }
 
+    @ExceptionTranslation
     @Override
     public Long getCount(Calendar date) {
         return dao.getCount(date);
     }
 
+    @ExceptionTranslation
     @Override
     public List<Article> findAll(int firstResult, int maxResults, Calendar date) {
         return dao.findAll(firstResult, maxResults, date);
     }
 
+    @ExceptionTranslation
     @Override
     public ArticlePagination getPagination() {
         return (ArticlePagination) pagination;
     }
 
+    @ExceptionTranslation
     @Override
     public ArticleArchivePagination getArchivePagination() {
         return archivePagination;

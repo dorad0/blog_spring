@@ -38,5 +38,6 @@
     <definition name="deletedUser" extends="base">
         <put-attribute name="body" value="/WEB-INF/pages/user/deletedUser.jsp"/>
     </definition>
-    <definition name="error" template="/WEB-INF/pages/error.jsp"/>
+    <definition name="error" template="/WEB-INF/pages/error/error.jsp"/>
+    <definition name="databaseError" template="/WEB-INF/pages/error/databaseError.jsp"/>
 </tiles-definitions>

@@ -1,5 +1,6 @@
 package blog.service.impl;
 
+import blog.annotation.ExceptionTranslation;
 import blog.dao.CommentDAO;
 import blog.entity.Article;
 import blog.entity.Comment;
@@ -26,6 +27,7 @@ public class GenericService extends GenericServiceImpl<Long, Comment, CommentDAO
         super.setDao(dao);
     }
 
+    @ExceptionTranslation
     @Override
     public void addComment(long articleId, CommentForm form, String userName) {
         Comment comment = new Comment();
@@ -39,6 +41,7 @@ public class GenericService extends GenericServiceImpl<Long, Comment, CommentDAO
         dao.save(comment);
     }
 
+    @ExceptionTranslation
     @Override
     public List<Comment> getArticleComments(Long articleId) {
         return dao.getArticleComments(articleId);

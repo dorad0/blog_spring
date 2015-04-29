@@ -1,5 +1,6 @@
 package blog.dao.impl;
 
+import blog.annotation.ExceptionTranslation;
 import blog.dao.ArticleDAO;
 import blog.entity.Article;
 import blog.entity.Comment;
@@ -18,6 +19,7 @@ public class ArticleDAOImpl extends GenericHibernateDAOImpl<Article, Long> imple
 
     public static final int FIRST_DAY_OF_MONTH = 1;
 
+    @ExceptionTranslation
     @Override
     public Set<Comment> getComments(Long id) {
         Article article = (Article) getCurrentSession().load(Article.class, id);
@@ -26,6 +28,7 @@ public class ArticleDAOImpl extends GenericHibernateDAOImpl<Article, Long> imple
         return article.getComments();
     }
 
+    @ExceptionTranslation
     @Override
     public List<Calendar> getDates() {
         List<Calendar> calendars = new ArrayList<>();
@@ -43,6 +46,7 @@ public class ArticleDAOImpl extends GenericHibernateDAOImpl<Article, Long> imple
         return calendars;
     }
 
+    @ExceptionTranslation
     @Override
     public List<Article> findByMonthAndYear(Calendar date) {
         return getCurrentSession()
@@ -52,11 +56,13 @@ public class ArticleDAOImpl extends GenericHibernateDAOImpl<Article, Long> imple
                 .list();
     }
 
+    @ExceptionTranslation
     @Override
     public List<Article> findAll() {
         return getCurrentSession().createCriteria(Article.class).addOrder(Order.desc("publicationdate")).list();
     }
 
+    @ExceptionTranslation
     @Override
     public List<Article> findAll(int firstResult, int maxResults) {
         Criteria criteria = getCurrentSession().createCriteria(Article.class);
@@ -67,6 +73,7 @@ public class ArticleDAOImpl extends GenericHibernateDAOImpl<Article, Long> imple
         return criteria.list();
     }
 
+    @ExceptionTranslation
     @Override
     public Article getInitializedArticleById(Long id) {
         Article article = (Article) getCurrentSession().load(Article.class, id);
@@ -75,6 +82,7 @@ public class ArticleDAOImpl extends GenericHibernateDAOImpl<Article, Long> imple
         return article;
     }
 
+    @ExceptionTranslation
     @Override
     public Long getCount(Calendar date) {
         return ((BigInteger) getCurrentSession()
@@ -85,6 +93,7 @@ public class ArticleDAOImpl extends GenericHibernateDAOImpl<Article, Long> imple
                 .longValue();
     }
 
+    @ExceptionTranslation
     @Override
     public List<Article> findAll(int firstResult, int maxResults, Calendar date) {
         Query query = getCurrentSession()

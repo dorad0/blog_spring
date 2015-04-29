@@ -24,6 +24,7 @@ public class UserController {
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String loadFormPage(Model m) {
         m.addAttribute("userForm", new UserForm());
+
         return "userRegisterForm";
     }
 
@@ -32,14 +33,17 @@ public class UserController {
         if (result.hasErrors()) {
             return "userRegisterForm";
         }
+
         service.saveUserFromForm(userForm);
         m.addAttribute("user", userForm);
+
         return "redirect:/user/" + userForm.getName();
     }
 
     @RequestMapping(value = "/{username}", method = RequestMethod.GET)
     public String showUserProfile(@PathVariable String username, Model model) {
         model.addAttribute(service.findByName(username));
+
         return "userProfile";
     }
 
@@ -47,6 +51,7 @@ public class UserController {
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
     public String deleteUser(@PathVariable long id) {
         service.delete(id);
+
         return "deletedUser";
     }
 

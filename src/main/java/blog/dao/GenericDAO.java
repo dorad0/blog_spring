@@ -1,24 +1,26 @@
 package blog.dao;
 
+import blog.dao.exception.DaoException;
+
 import java.io.Serializable;
 import java.util.List;
 
 public interface GenericDAO<T, ID extends Serializable> {
 
-    Long save(T entity);
+    Long save(T entity) throws DaoException;
 
-    void update(T entity);
+    void update(T entity) throws DaoException;
 
-    void delete(T entity);
+    void delete(T entity) throws DaoException;
 
-    void delete(ID id);
+    void delete(ID id) throws DaoException;
 
-    T findById(ID id);
+    T findById(ID id) throws DaoException;
 
-    List<T> findAll();
+    List<T> findAll() throws DaoException;
 
-    List<T> findAll(int firstResult, int maxResults);
+    List<T> findAll(int firstResult, int maxResults) throws DaoException;
 
-    Long getCount();
+    Long getCount() throws DaoException;
 
 }

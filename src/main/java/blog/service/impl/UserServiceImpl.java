@@ -1,10 +1,12 @@
 package blog.service.impl;
 
+import blog.annotation.ExceptionTranslation;
 import blog.dao.UserDAO;
 import blog.entity.User;
 import blog.entity.UserRole;
 import blog.service.UserRoleService;
 import blog.service.UserService;
+import blog.service.exception.ServiceException;
 import blog.service.forms.UserForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -31,6 +33,7 @@ public class UserServiceImpl extends GenericServiceImpl<Long, User, UserDAO> imp
     @Autowired
     private UserRoleService roleManager;
 
+    @ExceptionTranslation
     @Override
     public void saveUserFromForm(UserForm form) {
         User user = new User();
@@ -44,6 +47,7 @@ public class UserServiceImpl extends GenericServiceImpl<Long, User, UserDAO> imp
         roleManager.save(role);
     }
 
+    @ExceptionTranslation
     @Override
     public User findByName(String name) {
         return dao.findByName(name);

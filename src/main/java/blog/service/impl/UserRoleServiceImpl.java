@@ -1,5 +1,6 @@
 package blog.service.impl;
 
+import blog.annotation.ExceptionTranslation;
 import blog.dao.UserRoleDAO;
 import blog.entity.User;
 import blog.entity.UserRole;
@@ -16,6 +17,7 @@ public class UserRoleServiceImpl extends GenericServiceImpl<Long, UserRole, User
         super.setDao(dao);
     }
 
+    @ExceptionTranslation
     @Override
     public void addRoleToUser(User user, String role) {
         save(new UserRole(user, role));

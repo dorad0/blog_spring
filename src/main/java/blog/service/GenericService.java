@@ -1,24 +1,26 @@
 package blog.service;
 
+import blog.service.exception.ServiceException;
+
 import java.io.Serializable;
 import java.util.List;
 
 public interface GenericService<T, ID extends Serializable> {
 
-    Long save(T entity);
+    Long save(T entity) throws ServiceException;
 
-    void update(T entity);
+    void update(T entity) throws ServiceException;
 
-    void delete(T entity);
+    void delete(T entity) throws ServiceException;
 
-    void delete(ID id);
+    void delete(ID id) throws ServiceException;
 
-    T findById(ID id);
+    T findById(ID id) throws ServiceException;
 
-    List<T> findAll();
+    List<T> findAll() throws ServiceException;
 
-    List<T> findAll(int firstResult, int maxResults);
+    List<T> findAll(int firstResult, int maxResults) throws ServiceException;
 
-    Long getCount();
+    Long getCount() throws ServiceException;
 
 }

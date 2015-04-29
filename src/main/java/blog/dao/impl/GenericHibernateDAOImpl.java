@@ -1,6 +1,8 @@
 package blog.dao.impl;
 
+import blog.annotation.ExceptionTranslation;
 import blog.dao.GenericDAO;
+import blog.service.exception.ServiceException;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -29,36 +31,43 @@ public abstract class GenericHibernateDAOImpl<T, ID extends Serializable> implem
         return sessionFactory.getCurrentSession();
     }
 
+    @ExceptionTranslation
     @Override
     public Long save(T entity) {
         return (Long) getCurrentSession().save(entity);
     }
 
+    @ExceptionTranslation
     @Override
     public void update(T entity) {
         getCurrentSession().update(entity);
     }
 
+    @ExceptionTranslation
     @Override
     public void delete(T entity) {
         getCurrentSession().delete(entity);
     }
 
+    @ExceptionTranslation
     @Override
     public void delete(ID id) {
         getCurrentSession().createSQLQuery("DELETE FROM " +  genericType.getName() +  "WHERE id = :id ").setParameter("id", id).executeUpdate();
     }
 
+    @ExceptionTranslation
     @Override
     public T findById(ID id) {
         return (T) getCurrentSession().get(genericType, id);
     }
 
+    @ExceptionTranslation
     @Override
     public List<T> findAll() {
         return getCurrentSession().createQuery("FROM " + genericType.getName()).list();
     }
 
+    @ExceptionTranslation
     @Override
     public List<T> findAll(int firstResult, int maxResults) {
         Criteria criteria = getCurrentSession().createCriteria(genericType);
@@ -68,6 +77,7 @@ public abstract class GenericHibernateDAOImpl<T, ID extends Serializable> implem
         return criteria.list();
     }
 
+    @ExceptionTranslation
     @Override
     public Long getCount() {
         Criteria criteriaCount = getCurrentSession().createCriteria(genericType);
