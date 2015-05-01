@@ -13,7 +13,7 @@ public interface GenericDAO<T, ID extends Serializable> {
 
     void delete(T entity) throws DaoException;
 
-    void delete(ID id) throws DaoException;
+    Long delete(ID id) throws DaoException;
 
     T findById(ID id) throws DaoException;
 

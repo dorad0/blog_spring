@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 /**
  * Created by alex on 3/29/2015.
  */
-@Aspect
-@Component
+//@Aspect
+//@Component
 public class SystemArchitecture {
 
     /** Following is the definition for a pointcut to select

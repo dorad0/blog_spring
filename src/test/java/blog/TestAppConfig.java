@@ -15,9 +15,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import java.util.Properties;
 
 @Configuration //Specifies the class as configuration
-@ComponentScan(basePackages = { "blog" }, excludeFilters = { @ComponentScan.Filter(type = FilterType.ANNOTATION, value = Configuration.class), @ComponentScan.Filter(type = FilterType.ANNOTATION, value = EnableWebMvc.class), @ComponentScan.Filter(type = FilterType.ANNOTATION, value = EnableWebSecurity.class) })
+@ComponentScan(basePackages = { "blog.dao.*", "blog.entity" }, excludeFilters = {
+        @ComponentScan.Filter(type = FilterType.ANNOTATION, value = Configuration.class),
+        @ComponentScan.Filter(type = FilterType.ANNOTATION, value = EnableWebMvc.class),
+        @ComponentScan.Filter(type = FilterType.ANNOTATION, value = EnableWebSecurity.class),
+//        @ComponentScan.Filter(type = FilterType.ANNOTATION, value = EnableTransactionManagement.class),
+        @ComponentScan.Filter(type = FilterType.ANNOTATION, value = ComponentScan.class)
+})
+//@EnableAspectJAutoProxy
 @EnableTransactionManagement
-@EnableAspectJAutoProxy
 public class TestAppConfig {
 
     private static final String PROPERTY_NAME_DATABASE_DRIVER = "com.mysql.jdbc.Driver";

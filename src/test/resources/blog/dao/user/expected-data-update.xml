@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <USERS ID="1"
+           BIRTH_DATE="1993-10-11" ENABLED="1" NAME="Aaron" PASSWORD="123456"
+           REGISTRATION_DATE="2015-11-11 14:00:00"/>
+    <USERS ID="2" BIRTH_DATE="1994-09-01" ENABLED="1" NAME="Ralph" PASSWORD="qwerty"
+           REGISTRATION_DATE="2015-05-11 10:00:00"/>
+</dataset>

@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Projections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
@@ -51,8 +52,8 @@ public abstract class GenericHibernateDAOImpl<T, ID extends Serializable> implem
 
     @ExceptionTranslation
     @Override
-    public void delete(ID id) {
-        getCurrentSession().createSQLQuery("DELETE FROM " +  genericType.getName() +  "WHERE id = :id ").setParameter("id", id).executeUpdate();
+    public Long delete(ID id) {
+        return Long.valueOf(getCurrentSession().createQuery("DELETE FROM " +  genericType.getName() +  " WHERE id = :id ").setParameter("id", id).executeUpdate());
     }
 
     @ExceptionTranslation
@@ -80,10 +81,12 @@ public abstract class GenericHibernateDAOImpl<T, ID extends Serializable> implem
     @ExceptionTranslation
     @Override
     public Long getCount() {
-        Criteria criteriaCount = getCurrentSession().createCriteria(genericType);
-        criteriaCount.setProjection(Projections.rowCount());
+//        Criteria criteriaCount = getCurrentSession().createCriteria(genericType);
+//        criteriaCount.setProjection(Projections.rowCount());
+//        Long count = (Long) criteriaCount.uniqueResult();
+        Long count = ((Long) getCurrentSession().createQuery("SELECT COUNT(*) FROM " + genericType.getName()).uniqueResult());
 
-        return (Long) criteriaCount.uniqueResult();
+        return count;
     }
 
 }

@@ -8,14 +8,10 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.view.InternalResourceView;
-import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
-import org.springframework.web.servlet.view.tiles3.TilesView;
 import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
 import java.util.Properties;
@@ -40,9 +36,6 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
     public TilesViewResolver viewResolver() {
         TilesViewResolver viewResolver
                 = new TilesViewResolver();
-//        viewResolver.setViewClass(TilesView.class);
-//        viewResolver.setPrefix("/WEB-INF/pages/");
-//        viewResolver.setSuffix(".jsp");
 
         return viewResolver;
     }
@@ -105,10 +98,5 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 
         return tiles;
     }
-//
-//    @Bean
-//    public ViewResolver viewResolver() {
-//        return new TilesViewResolver();
-//    }
 
 }
