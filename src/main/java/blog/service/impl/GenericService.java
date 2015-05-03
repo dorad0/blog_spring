@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class GenericService extends GenericServiceImpl<Long, Comment, CommentDAO
     public void addComment(long articleId, CommentForm form, String userName) {
         Comment comment = new Comment();
         comment.setText(form.getText());
-        comment.setPublicationDate(new GregorianCalendar());
+        comment.setPublicationDate(LocalDateTime.now());
         comment.setUser(userService.findByName(userName));
 
         Article article = new Article();

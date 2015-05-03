@@ -2,9 +2,9 @@ package blog.service.forms.validator;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import java.util.Calendar;
+import java.time.LocalDate;
 
-public class AgeConstraintValidator implements ConstraintValidator<Age, Calendar> {
+public class AgeConstraintValidator implements ConstraintValidator<Age, LocalDate> {
 
     private int annotationAge;
 
@@ -14,16 +14,15 @@ public class AgeConstraintValidator implements ConstraintValidator<Age, Calendar
     }
 
     @Override
-    public boolean isValid(Calendar target, ConstraintValidatorContext cxt) {
+    public boolean isValid(LocalDate target, ConstraintValidatorContext cxt) {
         if (target == null) {
             return true;
         }
 
-        Calendar c = Calendar.getInstance();
-        int currentYear = c.get(Calendar.YEAR);
-        int targetYear = target.get(Calendar.YEAR);
+        LocalDate c = LocalDate.now();
+        int currentYear = c.getYear();
+        int targetYear = target.getYear();
         int age = currentYear - targetYear;
         return age >= annotationAge;
     }
-
 }

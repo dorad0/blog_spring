@@ -7,17 +7,22 @@
             <h2 class="blog-post-title">
                 <a href="/comments/${article.id}/">${article.title}</a>
             </h2>
+
             <p class="blog-post-meta">
                 <fmt:setLocale scope="session" value="en_US"/>
-                <fmt:formatDate value="${article.publicationDate.time}"
-                                pattern="MMMMM d, yyyy"/>
+                <fmt:parseDate value="${article.publicationDate}" pattern="yyyy-MM-dd"
+                               var="parsedDate" type="both"/>
+                <fmt:formatDate value="${parsedDate}"
+                                type="both" pattern="MMMMM d, yyyy"/>
                 by <a
                     href="/user/<c:out value="${article.user.name}"/> "> <c:out
                     value="${article.user.name}"/> </a>
             </p>
+
             <p>
-                ${article.text}
+                    ${article.text}
             </p>
+
             <p>
                 <a href="/comments/${article.id}/">Read comments(${article.commentsCount})</a>
             </p>
@@ -32,13 +37,13 @@
     </c:forEach>
     <nav>
         <ul class="pager">
-
             <c:if test="${page.previous}">
-                <li><a href="/article/archive/${date.get(1)}/${date.get(2)}/page/${page.previousPage}/">Previous</a>
+                <li><a href="/article/archive/${date.getYear()}/${date.getMonthValue()}/page/${page.previousPage}/">Previous</a>
                 </li>
             </c:if>
             <c:if test="${page.next}">
-                <li><a href="/article/archive/${date.get(1)}/${date.get(2)}/page/${page.nextPage}/">Next</a></li>
+                <li><a href="/article/archive/${date.getYear()}/${date.getMonthValue()}/page/${page.nextPage}/">Next</a>
+                </li>
             </c:if>
         </ul>
     </nav>

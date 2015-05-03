@@ -1,11 +1,11 @@
 package blog.entity;
 
+import blog.dao.converter.LocalDateTimePersistenceConverter;
 import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
@@ -25,18 +25,28 @@ public class Article implements Serializable {
     @Column(name = "text", nullable = false)
     private String text;
 
+    @Convert(converter = LocalDateTimePersistenceConverter.class)
     @Column(name = "publication_date", nullable = false)
-    private Calendar publicationDate;
+    private LocalDateTime publicationDate;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "article")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "article")
     private Set<Comment> comments;
+    @Formula("(SELECT COUNT(*) FROM comments WHERE comments.article_id = id)")
+    private int commentsCount;
 
-    public void setCommentsCount(int commentsCount) {
-        this.commentsCount = commentsCount;
+    public Article() {
+        this.publicationDate = LocalDateTime.now();
+    }
+
+    public Article(String title, String text, LocalDateTime publicationDate, User user) {
+        this.title = title;
+        this.text = text;
+        this.publicationDate = publicationDate;
+        this.user = user;
     }
 
     public int getCommentsCount() {
@@ -44,18 +54,8 @@ public class Article implements Serializable {
         return commentsCount;
     }
 
-    @Formula("(SELECT COUNT(*) FROM comments WHERE comments.article_id = id)")
-    private int commentsCount;
-
-    public Article() {
-        this.publicationDate = new GregorianCalendar();
-    }
-
-    public Article(String title, String text, Calendar publicationDate, User user) {
-        this.title = title;
-        this.text = text;
-        this.publicationDate = publicationDate;
-        this.user = user;
+    public void setCommentsCount(int commentsCount) {
+        this.commentsCount = commentsCount;
     }
 
     public long getId() {
@@ -82,11 +82,11 @@ public class Article implements Serializable {
         this.text = text;
     }
 
-    public Calendar getPublicationDate() {
+    public LocalDateTime getPublicationDate() {
         return publicationDate;
     }
 
-    public void setPublicationDate(Calendar publicationDate) {
+    public void setPublicationDate(LocalDateTime publicationDate) {
         this.publicationDate = publicationDate;
     }
 

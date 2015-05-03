@@ -1,7 +1,12 @@
 package blog.entity;
 
+import blog.dao.converter.LocalDatePersistenceConverter;
+import blog.dao.converter.LocalDateTimePersistenceConverter;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Set;
 
@@ -23,25 +28,27 @@ public class User implements Serializable {
     @Column(name = "password", nullable = false)
     private String password;
 
+    @Convert(converter = LocalDateTimePersistenceConverter.class)
     @Column(name = "registration_date", nullable = false)
-    private Calendar registrationDate;
+    private LocalDateTime registrationDate;
 
+    @Convert(converter = LocalDatePersistenceConverter.class)
     @Column(name = "birth_date", nullable = false)
-    private Calendar birthDate;
+    private LocalDate birthDate;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "user")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
     private Set<Comment> comments;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "user")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
     private Set<Article> articles;
 
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private Set<UserRole> roles;
 
     public User() {
     }
 
-    public User(boolean enabled, String name, String password, Calendar registrationDate, Calendar birthDate) {
+    public User(boolean enabled, String name, String password, LocalDateTime registrationDate, LocalDate birthDate) {
         this.enabled = enabled;
         this.name = name;
         this.password = password;
@@ -81,19 +88,19 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public Calendar getRegistrationDate() {
+    public LocalDateTime getRegistrationDate() {
         return registrationDate;
     }
 
-    public void setRegistrationDate(Calendar registrationDate) {
+    public void setRegistrationDate(LocalDateTime registrationDate) {
         this.registrationDate = registrationDate;
     }
 
-    public Calendar getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Calendar birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 

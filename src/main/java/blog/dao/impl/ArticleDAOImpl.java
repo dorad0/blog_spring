@@ -11,6 +11,8 @@ import org.hibernate.criterion.Order;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigInteger;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -30,29 +32,29 @@ public class ArticleDAOImpl extends GenericHibernateDAOImpl<Article, Long> imple
 
     @ExceptionTranslation
     @Override
-    public List<Calendar> getDates() {
-        List<Calendar> calendars = new ArrayList<>();
+    public List<LocalDate> getDates() {
+        List<LocalDate> dates = new ArrayList<>();
         List<Object[]> list = getCurrentSession()
                 .createSQLQuery("SELECT DISTINCT YEAR(publication_date) AS y, MONTH(publication_date) AS m FROM articles")
                 .list();
 
-        calendars
+        dates
                 .addAll(
-                    list.stream()
-                        .map(mas -> new GregorianCalendar((Integer) mas[0], (Integer) mas[1] - 1, FIRST_DAY_OF_MONTH))
-                        .collect(Collectors.toList())
+                        list.stream()
+                                .map(mas -> LocalDate.of((Integer) mas[0], (Integer) mas[1], FIRST_DAY_OF_MONTH))
+                                .collect(Collectors.toList())
                 );
 
-        return calendars;
+        return dates;
     }
 
     @ExceptionTranslation
     @Override
-    public List<Article> findByMonthAndYear(Calendar date) {
+    public List<Article> findByMonthAndYear(LocalDate date) {
         return getCurrentSession()
                 .createQuery("FROM Article WHERE YEAR(publicationDate) = :year AND MONTH(publicationDate) = :month")
-                .setInteger("year", date.get(Calendar.YEAR))
-                .setInteger("month", date.get(Calendar.MONTH))
+                .setInteger("year", date.getYear())
+                .setInteger("month", date.getMonthValue())
                 .list();
     }
 
@@ -84,22 +86,22 @@ public class ArticleDAOImpl extends GenericHibernateDAOImpl<Article, Long> imple
 
     @ExceptionTranslation
     @Override
-    public Long getCount(Calendar date) {
+    public Long getCount(LocalDate date) {
         return ((BigInteger) getCurrentSession()
                 .createSQLQuery("SELECT COUNT(*) FROM articles WHERE YEAR(publication_date) = :year AND MONTH(publication_date) = :month")
-                .setInteger("year", date.get(Calendar.YEAR))
-                .setInteger("month", date.get(Calendar.MONTH))
+                .setInteger("year", date.getYear())
+                .setInteger("month", date.getMonthValue())
                 .uniqueResult())
                 .longValue();
     }
 
     @ExceptionTranslation
     @Override
-    public List<Article> findAll(int firstResult, int maxResults, Calendar date) {
+    public List<Article> findAll(int firstResult, int maxResults, LocalDate date) {
         Query query = getCurrentSession()
                 .createQuery("FROM Article WHERE YEAR(publicationDate) = :year AND MONTH(publicationDate) = :month ORDER BY publicationDate DESC")
-                .setInteger("year", date.get(Calendar.YEAR))
-                .setInteger("month", date.get(Calendar.MONTH));
+                .setInteger("year", date.getYear())
+                .setInteger("month", date.getMonthValue());
 
         query.setFirstResult(firstResult);
         query.setMaxResults(maxResults);

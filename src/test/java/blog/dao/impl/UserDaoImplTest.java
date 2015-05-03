@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.GregorianCalendar;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
@@ -31,11 +33,11 @@ public class UserDaoImplTest extends DaoTest {
             assertionMode = DatabaseAssertionMode.NON_STRICT)
     public void testSave() {
         User Aaron = new User();
-        Aaron.setBirthDate(new GregorianCalendar(1993, 9, 10));
+        Aaron.setBirthDate(LocalDate.of(1993, 10, 10));
         Aaron.setEnabled(true);
         Aaron.setName("Aaron");
         Aaron.setPassword("123456");
-        Aaron.setRegistrationDate(new GregorianCalendar(2015, 10, 11, 14, 0, 0));
+        Aaron.setRegistrationDate(LocalDateTime.of(2015, 11, 11, 14, 0, 0));
 
         userDao.save(Aaron);
     }
@@ -45,26 +47,23 @@ public class UserDaoImplTest extends DaoTest {
     @ExpectedDatabase(value = "/blog/dao/user/expected-data-update.xml",
             assertionMode = DatabaseAssertionMode.NON_STRICT)
     public void testUpdate() {
-//        User user = new User();
-//        user.setId(1L);
-//        user.setBirthDate(new GregorianCalendar(1993, 10, 10));
-//        user.setEnabled(true);
-//        user.setName("Aaron");
-//        user.setPassword("123456");
-//        user.setRegistrationDate(new GregorianCalendar(2015, 10, 11, 14, 0, 0));
-//        user.setComments(null);
-
-//        userDao.update(user);
+        User user = userDao.findById(1L);
+        user.setName("Aaron");
+        user.setPassword("123456");
+        userDao.update(user);
     }
 
-//    @Test
-//    @DatabaseSetup(value = "/blog/dao/user/data.xml")
-//    @ExpectedDatabase(value = "/blog/dao/user/expected-data-delete.xml",
-//            assertionMode = DatabaseAssertionMode.NON_STRICT)
-//    public void testDelete() {
-//        User user = userDao.findById(1L);
-//        userDao.delete(user);
-//    }
+    @Test
+    @DatabaseSetup(value = "/blog/dao/user/data.xml")
+    @ExpectedDatabase(value = "/blog/dao/user/expected-data-delete.xml",
+            assertionMode = DatabaseAssertionMode.NON_STRICT)
+    public void testDelete() {
+        User user = userDao.findById(1L);
+//        User user = new User();
+//        user.setId(1L);
+        userDao.delete(user);
+
+    }
 
     @Test
     @DatabaseSetup(value = "/blog/dao/user/data.xml")
@@ -77,40 +76,27 @@ public class UserDaoImplTest extends DaoTest {
     @Test
     @DatabaseSetup(value = "/blog/dao/user/data.xml")
     public void testFindByName() {
-        User oliver = new User();
-        oliver.setId(1L);
-        oliver.setBirthDate(new GregorianCalendar(1993, 9, 10));
-        oliver.setEnabled(true);
-        oliver.setName("Oliver");
-        oliver.setPassword("6543210");
-        oliver.setRegistrationDate(new GregorianCalendar(2015, 04, 12, 14, 0, 0));
+        User oliver = userDao.findById(1L);
+        User userTest = userDao.findByName("Oliver");
 
-        User user = userDao.findByName("Oliver");
-
-        assertEquals(oliver, user);
+        assertEquals(oliver, userTest);
     }
 
 
-//    @Test
-//    @DatabaseSetup(value = "/blog/dao/user/data.xml")
-//    public void testFindById() {
-//        User oliver = new User();
-//        oliver.setId(1L);
-//        oliver.setBirthDate(new GregorianCalendar(1993, 9, 10));
-//        oliver.setEnabled(true);
-//        oliver.setName("Oliver");
-//        oliver.setPassword("6543210");
-//        oliver.setRegistrationDate(new GregorianCalendar(2015, 04, 12, 14, 0, 0));
-//
-//        User user = userDao.findById(1L);
-//        assertEquals(oliver, user);
-//
-//    }
+    @Test
+    @DatabaseSetup(value = "/blog/dao/user/data.xml")
+    public void testFindById() {
+        User user = userDao.findById(1L);
+
+        assertEquals(1L, user.getId());
+        assertEquals("Oliver", user.getName());
+    }
 
     @Test
     @DatabaseSetup(value = "/blog/dao/user/data.xml")
     public void testFindAll() {
         List<User> users = userDao.findAll();
+
         assertEquals(2, users.size());
     }
 
@@ -118,7 +104,7 @@ public class UserDaoImplTest extends DaoTest {
     @DatabaseSetup(value = "/blog/dao/user/data.xml")
     public void testGetCount() {
         Long count = userDao.getCount();
+
         assertEquals(Long.valueOf(2L), count);
     }
-
 }

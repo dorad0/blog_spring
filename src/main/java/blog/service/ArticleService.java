@@ -8,6 +8,7 @@ import blog.service.pagination.ArticleArchivePagination;
 import blog.service.pagination.ArticlePagination;
 import org.springframework.security.core.userdetails.User;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
@@ -16,13 +17,13 @@ public interface ArticleService extends GenericService<Article, Long> {
 
     Set<Comment> getComments(Long id) throws ServiceException;
 
-    List<Calendar> getDates() throws ServiceException;
+    List<LocalDate> getDates() throws ServiceException;
 
-    Long getCount(Calendar date) throws ServiceException;
+    Long getCount(LocalDate date) throws ServiceException;
 
-    List<Article> findByMonthAndYear(Calendar date) throws ServiceException;
+    List<Article> findByMonthAndYear(LocalDate date) throws ServiceException;
 
-    List<Article> findAll(int firstResult, int maxResults, Calendar date) throws ServiceException;
+    List<Article> findAll(int firstResult, int maxResults, LocalDate date) throws ServiceException;
 
     void save(Article article, String userName) throws ServiceException;
 

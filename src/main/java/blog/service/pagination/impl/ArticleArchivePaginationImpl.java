@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -29,7 +30,7 @@ public class ArticleArchivePaginationImpl extends PaginationManager<Article, Lon
     }
 
     @Override
-    public Page<Article> getPage(int pageNumber, int pageSize, Calendar date) {
+    public Page<Article> getPage(int pageNumber, int pageSize, LocalDate date) {
         setPageSize(pageSize);
         int items = dao.getCount(date).intValue();
         int fromElement = DEFAULT_FIRST_ELEMENT;
@@ -47,18 +48,19 @@ public class ArticleArchivePaginationImpl extends PaginationManager<Article, Lon
     }
 
     @Override
-    public Page<Article> getPage(int pageNumber, Calendar date) {
+    public Page<Article> getPage(int pageNumber, LocalDate date) {
         return getPage(pageNumber, pageSize, date);
     }
 
     @Override
-    public Page<Article> getFirstPage(Calendar date) {
+    public Page<Article> getFirstPage(LocalDate  date) {
         return getPage(DEFAULT_FIRST_PAGE_NUMBER, date);
     }
 
     @Override
     public Page<Article> getPage(int pageNumber, int pageSize, int year, int month) {
-        Calendar date = new GregorianCalendar(year, month, FIRST_DAY_OF_MONTH);
+//        Calendar date = new GregorianCalendar(year, month, FIRST_DAY_OF_MONTH);
+        LocalDate date = LocalDate.of(year,month,FIRST_DAY_OF_MONTH);
         return getPage(pageNumber, date);
     }
 

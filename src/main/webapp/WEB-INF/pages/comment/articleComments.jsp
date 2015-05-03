@@ -9,8 +9,10 @@
         </h2>
         <p class="blog-post-meta">
             <fmt:setLocale scope="session" value="en_US"/>
-            <fmt:formatDate value="${article.publicationDate.time}"
-                            pattern="MMMMM d, yyyy"/>
+            <fmt:parseDate value="${article.publicationDate}" pattern="yyyy-MM-dd"
+                           var="parsedDate" type="both" />
+            <fmt:formatDate value="${parsedDate}"
+                            type="both" pattern="MMMMM d, yyyy" />
             by <a
                 href="/user/${article.user.name}/"> <c:out
                 value="${article.user.name}"/> </a>
@@ -34,9 +36,11 @@
                                <%-- <fmt:formatDate type="both"
                                                 dateStyle="short" timeStyle="short"
                                                 value="${comment.publicationDate.time}"/>--%><%--5 days ago--%>
+                                    <fmt:parseDate value="${article.publicationDate}" pattern="yyyy-MM-dd"
+                                                   var="parsedDate" type="both" />
                                     <fmt:formatDate type="both"
                                                     pattern="HH:mm:ss dd/M/yyyy"
-                                                    value="${comment.publicationDate.time}"/>
+                                                    value="${parsedDate}"/>
                                 </span>
                     </div>
                     <div class="panel-body">

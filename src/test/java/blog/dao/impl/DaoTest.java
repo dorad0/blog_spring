@@ -18,7 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
         DirtiesContextTestExecutionListener.class,
         TransactionalTestExecutionListener.class,
         DbUnitTestExecutionListener.class})
-//@Transactional
 public abstract class DaoTest {
 
 }

@@ -14,6 +14,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.GregorianCalendar;
 
 @Service
@@ -37,10 +39,11 @@ public class UserServiceImpl extends GenericServiceImpl<Long, User, UserDAO> imp
     @Override
     public void saveUserFromForm(UserForm form) {
         User user = new User();
-        user.setRegistrationDate(GregorianCalendar.getInstance());
+        user.setRegistrationDate(LocalDateTime.now());
         user.setName(form.getName());
         user.setPassword(encoder.encode(form.getPassword()));
-        user.setBirthDate(form.getBirthDate());
+//        user.setBirthDate(form.getBirthDate());
+        user.setBirthDate(LocalDate.now());
         user.setEnabled(true);
         save(user);
         UserRole role = new UserRole(user, "ROLE_USER");

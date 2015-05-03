@@ -42,12 +42,15 @@ public abstract class GenericHibernateDAOImpl<T, ID extends Serializable> implem
     @Override
     public void update(T entity) {
         getCurrentSession().update(entity);
+        getCurrentSession().flush();
     }
 
     @ExceptionTranslation
     @Override
     public void delete(T entity) {
+
         getCurrentSession().delete(entity);
+        getCurrentSession().flush();
     }
 
     @ExceptionTranslation

@@ -1,7 +1,10 @@
 package blog.entity;
 
+import blog.dao.converter.LocalDateTimePersistenceConverter;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 
 @Entity
@@ -16,8 +19,9 @@ public class Comment implements Serializable {
     @Column(name = "text", nullable = false)
     private String text;
 
+    @Convert(converter = LocalDateTimePersistenceConverter.class)
     @Column(name = "publication_date", nullable = false)
-    private Calendar publicationDate;
+    private LocalDateTime publicationDate;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)
@@ -30,7 +34,7 @@ public class Comment implements Serializable {
     public Comment() {
     }
 
-    public Comment(String text, Calendar publicationDate, User user, Article article) {
+    public Comment(String text, LocalDateTime publicationDate, User user, Article article) {
         this.text = text;
         this.publicationDate = publicationDate;
         this.user = user;
@@ -53,11 +57,11 @@ public class Comment implements Serializable {
         this.text = text;
     }
 
-    public Calendar getPublicationDate() {
+    public LocalDateTime getPublicationDate() {
         return publicationDate;
     }
 
-    public void setPublicationDate(Calendar publicationDate) {
+    public void setPublicationDate(LocalDateTime publicationDate) {
         this.publicationDate = publicationDate;
     }
 

@@ -1,12 +1,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: Alex
-  Date: 23.02.2015
-  Time: 14:15
-  To change this template use File | Settings | File Templates.
---%>
+
 <div id="sticky" class="col-sm-3 col-sm-offset-1 blog-sidebar">
     <div class="sidebar-module sidebar-module-inset">
         <h4>About</h4>
@@ -19,9 +13,12 @@
         <ol class="list-unstyled">
             <c:forEach var="date" items="${dates}">
                 <li>
-                    <a href="/article/archive/${date.get(1)}/${date.get(2) + 1}/" >
-                        <fmt:formatDate value="${date.time}" type="date"
-                                        pattern="MMMMM yyyy"/>
+                    <a href="/article/archive/${date.getYear()}/${date.getMonthValue()}/">
+                        <fmt:setLocale scope="session" value="en_US"/>
+                        <fmt:parseDate value="${date}" pattern="yyyy-MM-dd"
+                                       var="parsedDate" type="both"/>
+                        <fmt:formatDate value="${parsedDate}"
+                                        type="both" pattern="MMMMM yyyy"/>
                     </a>
                 </li>
             </c:forEach>
@@ -36,4 +33,3 @@
         </ol>
     </div>
 </div>
-<!-- /.blog-sidebar -->

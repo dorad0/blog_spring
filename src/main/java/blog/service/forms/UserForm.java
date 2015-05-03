@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 import java.util.Calendar;
 
 public class UserForm {
@@ -23,12 +24,12 @@ public class UserForm {
     @NotNull
     @Past
     @Age(18)
-    private Calendar birthDate;
+    private LocalDate birthDate;
 
     public UserForm() {
     }
 
-    public UserForm(String name, String password, Calendar birthDate) {
+    public UserForm(String name, String password, LocalDate birthDate) {
         this.name = name;
         this.password = password;
         this.birthDate = birthDate;
@@ -50,11 +51,11 @@ public class UserForm {
         this.password = password;
     }
 
-    public Calendar getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Calendar birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 }

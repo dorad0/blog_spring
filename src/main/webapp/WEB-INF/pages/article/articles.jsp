@@ -9,8 +9,10 @@
             </h2>
             <p class="blog-post-meta">
                 <fmt:setLocale scope="session" value="en_US"/>
-                <fmt:formatDate value="${article.publicationDate.time}"
-                                pattern="MMMMM d, yyyy"/>
+                <fmt:parseDate value="${article.publicationDate}" pattern="yyyy-MM-dd"
+                               var="parsedDate" type="both" />
+                <fmt:formatDate value="${parsedDate}"
+                                type="both" pattern="MMMMM d, yyyy" />
                 by <a
                     href="/user/${article.user.name}/">${article.user.name}</a>
             </p>
@@ -29,14 +31,15 @@
             </sec:authorize>
         </div>
     </c:forEach>
-    <nav>
-        <ul class="pager">
-            <c:if test="${page.previous}">
-                <li><a href="/article/page/${page.previousPage}/">Previous</a></li>
-            </c:if>
-            <c:if test="${page.next}">
-                <li><a href="/article/page/${page.nextPage}/">Next</a></li>
-            </c:if>
-        </ul>
-    </nav>
+
+<nav>
+    <ul class="pager">
+        <c:if test="${page.previous}">
+            <li><a href="/article/page/${page.previousPage}/">Previous</a></li>
+        </c:if>
+        <c:if test="${page.next}">
+            <li><a href="/article/page/${page.nextPage}/">Next</a></li>
+        </c:if>
+    </ul>
+</nav>
 </div>

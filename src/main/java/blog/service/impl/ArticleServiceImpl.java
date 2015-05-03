@@ -16,6 +16,8 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -55,13 +57,13 @@ public class ArticleServiceImpl extends GenericServiceImpl<Long, Article, Articl
 
     @ExceptionTranslation
     @Override
-    public List<Calendar> getDates() {
+    public List<LocalDate> getDates() {
         return dao.getDates();
     }
 
     @ExceptionTranslation
     @Override
-    public List<Article> findByMonthAndYear(Calendar date) {
+    public List<Article> findByMonthAndYear(LocalDate date) {
         return dao.findByMonthAndYear(date);
     }
 
@@ -69,7 +71,7 @@ public class ArticleServiceImpl extends GenericServiceImpl<Long, Article, Articl
     @Override
     public void save(Article article, String userName) {
         article.setUser(findUserByName(userName));
-        article.setPublicationDate(new GregorianCalendar());
+//        article.setPublicationDate(new GregorianCalendar());
         save(article);
     }
 
@@ -77,17 +79,18 @@ public class ArticleServiceImpl extends GenericServiceImpl<Long, Article, Articl
     @Override
     public void save(Article article, User user) {
         article.setUser(findUserByName(user.getUsername()));
-        article.setPublicationDate(new GregorianCalendar());
+//        article.setPublicationDate(new GregorianCalendar());
         save(article);
     }
 
     @ExceptionTranslation
     @Override
     public Article save(ArticleForm form, User user) {
-        Article article = new Article(form.getTitle(), form.getText(), new GregorianCalendar(), findUserByName(user.getUsername()));
+        Article article = new Article(form.getTitle(), form.getText(), LocalDateTime.now(), findUserByName(user.getUsername()));
         save(article);
 
         return article;
+
     }
 
     @ExceptionTranslation
@@ -98,13 +101,13 @@ public class ArticleServiceImpl extends GenericServiceImpl<Long, Article, Articl
 
     @ExceptionTranslation
     @Override
-    public Long getCount(Calendar date) {
+    public Long getCount(LocalDate date) {
         return dao.getCount(date);
     }
 
     @ExceptionTranslation
     @Override
-    public List<Article> findAll(int firstResult, int maxResults, Calendar date) {
+    public List<Article> findAll(int firstResult, int maxResults, LocalDate date) {
         return dao.findAll(firstResult, maxResults, date);
     }
 
