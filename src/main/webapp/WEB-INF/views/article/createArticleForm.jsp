@@ -8,8 +8,9 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@page session="true" %>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org">
+<html>
 <head>
     <title>Add article page</title>
     <!-- Bootstrap core CSS -->
@@ -49,6 +50,8 @@
                                        value=""></textarea>
                                 <form:errors path="text" cssClass="has-error"/>
                             </div>
+                                <sec:authentication var="userName" property="principal.username" />
+                                <input name="userName" type="hidden" value="${userName}"/>
                             <input type="hidden" name="${_csrf.parameterName}"
                                    value="${_csrf.token}"/>
                             <input class="btn btn-lg btn-success btn-block" type="submit" value="Add article">

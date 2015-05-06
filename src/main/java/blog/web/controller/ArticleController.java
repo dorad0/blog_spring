@@ -5,8 +5,6 @@ import blog.service.ArticleService;
 import blog.service.forms.ArticleForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
-import java.util.GregorianCalendar;
 
 @Controller
 @RequestMapping("/article")
@@ -27,7 +24,9 @@ public class ArticleController {
     public static final int FIRST_DAY = 1;
 
     @Autowired
-    private ArticleService service;
+    private ArticleService articleService;
+
+
 
     @RequestMapping("/articles")
     public String getArticles(Model model) {
@@ -48,8 +47,8 @@ public class ArticleController {
 
     @RequestMapping(value = "/page/{pagenumber}", method = RequestMethod.GET)
     public String getArticlesPage(@PathVariable int pagenumber, Model model) {
-        model.addAttribute("dates", service.getDates());
-        model.addAttribute("page", service.getPagination().getPage(pagenumber));
+        model.addAttribute("dates", articleService.getDates());
+        model.addAttribute("page", articleService.getPagination().getPage(pagenumber));
         return "articles";
     }
 
@@ -61,9 +60,9 @@ public class ArticleController {
 
     @RequestMapping(value = "archive/{year}/{month}/page/{pagenumber}", method = RequestMethod.GET)
     public String getArchiveArticlesPage(Model model, @PathVariable(value = "year") int year, @PathVariable(value = "month") int month, @PathVariable int pagenumber) {
-        model.addAttribute("page", service.getArchivePagination().getPage(pagenumber, year, month));
+        model.addAttribute("page", articleService.getArchivePagination().getPage(pagenumber, year, month));
         model.addAttribute("date", LocalDate.of(year, month, FIRST_DAY));
-        model.addAttribute("dates", service.getDates());
+        model.addAttribute("dates", articleService.getDates());
         return "articleArchive";
     }
 
@@ -81,17 +80,20 @@ public class ArticleController {
             return "createArticleForm";
         }
 
-        Article article = service.save(articleForm, (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        Long articleId= articleService.save(articleForm);
+
+        Article article = articleService.findById(articleId);
         entity.addAttribute(article);
-        return "redirect:/comments/" + article.getId();
+
+        return "redirect:/comments/" + articleId;
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     @Secured("ROLE_ADMIN")
     public String deleteArticle(@RequestParam(required = true) long id, Model m) {
-        m.addAttribute("article", service.findById(id));
-        service.delete(id);
-        m.addAttribute("dates", service.getDates());
+        m.addAttribute("article", articleService.findById(id));
+        articleService.delete(id);
+        m.addAttribute("dates", articleService.getDates());
         return "deletedArticle";
     }
 

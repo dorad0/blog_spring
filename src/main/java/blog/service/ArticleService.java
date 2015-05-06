@@ -25,11 +25,13 @@ public interface ArticleService extends GenericService<Article, Long> {
 
     List<Article> findAll(int firstResult, int maxResults, LocalDate date) throws ServiceException;
 
-    void save(Article article, String userName) throws ServiceException;
+//    void save(Article article, String userName) throws ServiceException;
+//
+//    void save(Article article, User user) throws ServiceException;
 
-    void save(Article article, User user) throws ServiceException;
+    Long save(ArticleForm articleForm) throws ServiceException;
 
-    Article save(ArticleForm form, User user) throws ServiceException;
+//    Article save(ArticleForm form, User user) throws ServiceException;
 
     Article getInitializedArticleById(Long id) throws ServiceException;
 

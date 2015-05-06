@@ -22,7 +22,6 @@ import java.util.Properties;
 //        @ComponentScan.Filter(type = FilterType.ANNOTATION, value = EnableTransactionManagement.class),
         @ComponentScan.Filter(type = FilterType.ANNOTATION, value = ComponentScan.class)
 })
-//@EnableAspectJAutoProxy
 @EnableTransactionManagement
 public class TestAppConfig {
 

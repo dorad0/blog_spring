@@ -13,6 +13,9 @@ public class ArticleForm {
     @NotEmpty
     private String title;
 
+
+    private String userName;
+
     public ArticleForm() {
     }
 
@@ -36,4 +39,13 @@ public class ArticleForm {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
 }

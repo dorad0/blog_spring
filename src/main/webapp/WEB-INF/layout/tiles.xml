@@ -3,41 +3,41 @@
         "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
         "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
-    <definition name="base" template="/WEB-INF/pages/template/default/base.jsp">
-        <put-attribute name="header" value="/WEB-INF/pages/template/default/header.jsp"/>
-        <put-attribute name="menu" value="/WEB-INF/pages/template/default/menu.jsp"/>
-        <put-attribute name="body" value="/WEB-INF/pages/template/default/body.jsp"/>
-        <put-attribute name="sidebar" value="/WEB-INF/pages/template/default/sidebar.jsp"/>
-        <put-attribute name="footer" value="/WEB-INF/pages/template/default/footer.jsp"/>
+    <definition name="base" template="/WEB-INF/views/template/default/base.jsp">
+        <put-attribute name="header" value="/WEB-INF/views/template/default/header.jsp"/>
+        <put-attribute name="menu" value="/WEB-INF/views/template/default/menu.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/views/template/default/body.jsp"/>
+        <put-attribute name="sidebar" value="/WEB-INF/views/template/default/sidebar.jsp"/>
+        <put-attribute name="footer" value="/WEB-INF/views/template/default/footer.jsp"/>
     </definition>
     <definition name="articles" extends="base">
         <put-attribute name="title" value="Last articles"/>
-        <put-attribute name="body" value="/WEB-INF/pages/article/articles.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/views/article/articles.jsp"/>
     </definition>
     <definition name="deletedArticle" extends="base">
         <put-attribute name="title" value="Deleted article"/>
-        <put-attribute name="body" value="/WEB-INF/pages/article/deletedArticle.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/views/article/deletedArticle.jsp"/>
     </definition>
     <definition name="noArticle" extends="base">
-        <put-attribute name="body" value="/WEB-INF/pages/article/noArticle.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/views/article/noArticle.jsp"/>
     </definition>
     <definition name="articleArchive" extends="base">
         <put-attribute name="title" value="Archive of articles"/>
-        <put-attribute name="body" value="/WEB-INF/pages/article/archive/articleArchive.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/views/article/archive/articleArchive.jsp"/>
     </definition>
     <definition name="articleComments" extends="base">
         <put-attribute name="title" value="Comments"/>
-        <put-attribute name="body" value="/WEB-INF/pages/comment/articleComments.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/views/comment/articleComments.jsp"/>
     </definition>
-    <definition name="createArticleForm" template="/WEB-INF/pages/article/createArticleForm.jsp"/>
-    <definition name="login" template="/WEB-INF/pages/login.jsp"/>
-    <definition name="userRegisterForm" template="/WEB-INF/pages/user/userRegisterForm.jsp"/>
+    <definition name="createArticleForm" template="/WEB-INF/views/article/createArticleForm.jsp"/>
+    <definition name="login" template="/WEB-INF/views/login.jsp"/>
+    <definition name="userRegisterForm" template="/WEB-INF/views/user/userRegisterForm.jsp"/>
     <definition name="userProfile" extends="base">
-        <put-attribute name="body" value="/WEB-INF/pages/user/userProfile.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/views/user/userProfile.jsp"/>
     </definition>
     <definition name="deletedUser" extends="base">
-        <put-attribute name="body" value="/WEB-INF/pages/user/deletedUser.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/views/user/deletedUser.jsp"/>
     </definition>
-    <definition name="error" template="/WEB-INF/pages/error/error.jsp"/>
-    <definition name="databaseError" template="/WEB-INF/pages/error/databaseError.jsp"/>
+    <definition name="error" template="/WEB-INF/views/error/error.jsp"/>
+    <definition name="databaseError" template="/WEB-INF/views/error/databaseError.jsp"/>
 </tiles-definitions>

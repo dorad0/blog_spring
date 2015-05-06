@@ -10,6 +10,7 @@ import blog.service.exception.ServiceException;
 import blog.service.forms.ArticleForm;
 import blog.service.pagination.ArticleArchivePagination;
 import blog.service.pagination.ArticlePagination;
+import blog.service.util.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.userdetails.User;
@@ -18,8 +19,6 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Set;
 
@@ -37,6 +36,9 @@ public class ArticleServiceImpl extends GenericServiceImpl<Long, Article, Articl
 
     @Autowired
     private ArticleArchivePagination archivePagination;
+
+    @Autowired
+    private Converter converter;
 
 
     @Override
@@ -68,29 +70,38 @@ public class ArticleServiceImpl extends GenericServiceImpl<Long, Article, Articl
     }
 
     @ExceptionTranslation
-    @Override
+//    @Override
     public void save(Article article, String userName) {
         article.setUser(findUserByName(userName));
-//        article.setPublicationDate(new GregorianCalendar());
+        article.setPublicationDate(LocalDateTime.now());
         save(article);
     }
 
     @ExceptionTranslation
-    @Override
+//    @Override
     public void save(Article article, User user) {
         article.setUser(findUserByName(user.getUsername()));
-//        article.setPublicationDate(new GregorianCalendar());
+        article.setPublicationDate(LocalDateTime.now());
         save(article);
     }
 
     @ExceptionTranslation
-    @Override
+//    @Override
     public Article save(ArticleForm form, User user) {
         Article article = new Article(form.getTitle(), form.getText(), LocalDateTime.now(), findUserByName(user.getUsername()));
         save(article);
 
         return article;
 
+    }
+
+    @ExceptionTranslation
+    @Override
+    public Long save(ArticleForm articleForm) throws ServiceException {
+        Article article = converter.convertArticleFormInArticle(articleForm);
+        Long artileId = save(article);
+
+        return artileId;
     }
 
     @ExceptionTranslation
