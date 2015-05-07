@@ -47,8 +47,8 @@ public class UserRoleDaoImplTest extends DaoTest {
 
 //
 //    @Test
-//    @DatabaseSetup(value = "/blog/dao/user_role/data.xml")
-//    @ExpectedDatabase(value = "/blog/dao/user_role/expected-data-delete.xml",
+//    @DatabaseSetup(value = "/blog/genericDAO/user_role/data.xml")
+//    @ExpectedDatabase(value = "/blog/genericDAO/user_role/expected-data-delete.xml",
 //            assertionMode = DatabaseAssertionMode.NON_STRICT)
 //    public void testDelete() {
 //        User user = userDao.findById(1L);
@@ -59,15 +59,15 @@ public class UserRoleDaoImplTest extends DaoTest {
 //    }
 //
 //    @Test
-//    @DatabaseSetup(value = "/blog/dao/user_role/data.xml")
-//    @ExpectedDatabase(value = "/blog/dao/user_role/expected-data-delete.xml",
+//    @DatabaseSetup(value = "/blog/genericDAO/user_role/data.xml")
+//    @ExpectedDatabase(value = "/blog/genericDAO/user_role/expected-data-delete.xml",
 //            assertionMode = DatabaseAssertionMode.NON_STRICT)
 //    public void testDeleteById() {
 //        userDao.delete(1L);
 //    }
 //
 //    @Test
-//    @DatabaseSetup(value = "/blog/dao/user_role/data.xml")
+//    @DatabaseSetup(value = "/blog/genericDAO/user_role/data.xml")
 //    public void testFindByName() {
 //        User oliver = userDao.findById(1L);
 //        User userTest = userDao.findByName("Oliver");
@@ -77,7 +77,7 @@ public class UserRoleDaoImplTest extends DaoTest {
 //
 //
 //    @Test
-//    @DatabaseSetup(value = "/blog/dao/user_role/data.xml")
+//    @DatabaseSetup(value = "/blog/genericDAO/user_role/data.xml")
 //    public void testFindById() {
 //        User user = userDao.findById(1L);
 //
@@ -86,7 +86,7 @@ public class UserRoleDaoImplTest extends DaoTest {
 //    }
 //
 //    @Test
-//    @DatabaseSetup(value = "/blog/dao/user_role/data.xml")
+//    @DatabaseSetup(value = "/blog/genericDAO/user_role/data.xml")
 //    public void testFindAll() {
 //        List<User> users = userDao.findAll();
 //
@@ -94,7 +94,7 @@ public class UserRoleDaoImplTest extends DaoTest {
 //    }
 //
 //    @Test
-//    @DatabaseSetup(value = "/blog/dao/user_role/data.xml")
+//    @DatabaseSetup(value = "/blog/genericDAO/user_role/data.xml")
 //    public void testGetCount() {
 //        Long count = userDao.getCount();
 //

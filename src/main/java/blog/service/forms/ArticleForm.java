@@ -13,15 +13,9 @@ public class ArticleForm {
     @NotEmpty
     private String title;
 
-
     private String userName;
 
     public ArticleForm() {
-    }
-
-    public ArticleForm(String text, String title) {
-        this.text = text;
-        this.title = title;
     }
 
     public String getText() {

@@ -6,8 +6,6 @@ import blog.service.CommentService;
 import blog.service.forms.CommentForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -36,6 +34,7 @@ public class CommentController {
             model.addAttribute("comments", commentService.getArticleComments(id));
             model.addAttribute("commentForm", new CommentForm());
             model.addAttribute("dates", articleService.getDates());
+
             return "articleComments";
         } else {
             return "noArticle";
@@ -44,11 +43,13 @@ public class CommentController {
 
     @RequestMapping(value = "/add/{articleId}", method = RequestMethod.POST)
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
-    public String addComment(@Valid CommentForm form, @PathVariable long articleId, BindingResult result) {
+    public String addComment(@Valid CommentForm commentForm, @PathVariable long articleId, BindingResult result) {
         if (result.hasErrors()) {
             return "articleComments";
         }
-        commentService.addComment(articleId, form, ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername());
+
+        commentService.save(commentForm);
+
         return "redirect:/comments/" + articleId + "#end";
     }
 
@@ -56,6 +57,7 @@ public class CommentController {
     @Secured("ROLE_ADMIN")
     public String deleteComment(@RequestParam(required = true) long commentId, @RequestParam(required = true) long articleId) {
         commentService.delete(commentId);
+
         return "redirect:/comments/" + articleId;
     }
 

@@ -43,8 +43,8 @@ public class ArticleServiceImpl extends GenericServiceImpl<Long, Article, Articl
 
     @Override
     @Autowired
-    protected void setDao(@Qualifier("ArticleDAOImpl") ArticleDAO dao) {
-        super.setDao(dao);
+    protected void setGenericDAO(@Qualifier("ArticleDAOImpl") ArticleDAO genericDAO) {
+        super.setGenericDAO(genericDAO);
     }
 
     private blog.entity.User findUserByName(String userName) {
@@ -54,19 +54,19 @@ public class ArticleServiceImpl extends GenericServiceImpl<Long, Article, Articl
     @ExceptionTranslation
     @Override
     public Set<Comment> getComments(Long id) {
-        return dao.getComments(id);
+        return genericDAO.getComments(id);
     }
 
     @ExceptionTranslation
     @Override
     public List<LocalDate> getDates() {
-        return dao.getDates();
+        return genericDAO.getDates();
     }
 
     @ExceptionTranslation
     @Override
     public List<Article> findByMonthAndYear(LocalDate date) {
-        return dao.findByMonthAndYear(date);
+        return genericDAO.findByMonthAndYear(date);
     }
 
     @ExceptionTranslation
@@ -98,28 +98,35 @@ public class ArticleServiceImpl extends GenericServiceImpl<Long, Article, Articl
     @ExceptionTranslation
     @Override
     public Long save(ArticleForm articleForm) throws ServiceException {
-        Article article = converter.convertArticleFormInArticle(articleForm);
-        Long artileId = save(article);
+        Article article = converter.convertArticleFormToArticle(articleForm);
 
-        return artileId;
+        return save(article);
+    }
+
+    @Override
+    public Article saveArticleFromForm(ArticleForm articleForm) throws ServiceException {
+        Article article = converter.convertArticleFormToArticle(articleForm);
+        Long articleId = save(article);
+
+        return genericDAO.findById(articleId);
     }
 
     @ExceptionTranslation
     @Override
     public Article getInitializedArticleById(Long id) {
-        return dao.getInitializedArticleById(id);
+        return genericDAO.getInitializedArticleById(id);
     }
 
     @ExceptionTranslation
     @Override
     public Long getCount(LocalDate date) {
-        return dao.getCount(date);
+        return genericDAO.getCount(date);
     }
 
     @ExceptionTranslation
     @Override
     public List<Article> findAll(int firstResult, int maxResults, LocalDate date) {
-        return dao.findAll(firstResult, maxResults, date);
+        return genericDAO.findAll(firstResult, maxResults, date);
     }
 
     @ExceptionTranslation

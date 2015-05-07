@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface CommentService extends GenericService<Comment, Long> {
 
-    void addComment(long articleId, CommentForm form, String username) throws ServiceException;
+    Long save(CommentForm form) throws ServiceException;
 
     List<Comment> getArticleComments(Long articleId) throws ServiceException;
 

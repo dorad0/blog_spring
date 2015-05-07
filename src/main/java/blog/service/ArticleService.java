@@ -33,6 +33,8 @@ public interface ArticleService extends GenericService<Article, Long> {
 
 //    Article save(ArticleForm form, User user) throws ServiceException;
 
+    Article saveArticleFromForm(ArticleForm form) throws ServiceException;
+
     Article getInitializedArticleById(Long id) throws ServiceException;
 
     ArticlePagination getPagination() throws ServiceException;

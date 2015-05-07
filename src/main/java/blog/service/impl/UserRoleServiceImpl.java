@@ -13,8 +13,8 @@ public class UserRoleServiceImpl extends GenericServiceImpl<Long, UserRole, User
 
     @Override
     @Autowired
-    protected void setDao(UserRoleDAO dao) {
-        super.setDao(dao);
+    protected void setGenericDAO(UserRoleDAO genericDAO) {
+        super.setGenericDAO(genericDAO);
     }
 
     @ExceptionTranslation

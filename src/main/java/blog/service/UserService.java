@@ -8,6 +8,6 @@ public interface UserService extends GenericService<User, Long> {
 
     User findByName(String name) throws ServiceException;
 
-    void saveUserFromForm(UserForm form) throws ServiceException;
+    Long saveUserFromForm(UserForm form) throws ServiceException;
 
 }

@@ -32,6 +32,7 @@ public class Comment implements Serializable {
     private Article article;
 
     public Comment() {
+//        publicationDate = LocalDateTime.now();
     }
 
     public Comment(String text, LocalDateTime publicationDate, User user, Article article) {

@@ -36,10 +36,10 @@
                                <%-- <fmt:formatDate type="both"
                                                 dateStyle="short" timeStyle="short"
                                                 value="${comment.publicationDate.time}"/>--%><%--5 days ago--%>
-                                    <fmt:parseDate value="${article.publicationDate}" pattern="yyyy-MM-dd"
+                                    <fmt:parseDate value="${comment.publicationDate}" pattern="yyyy-MM-dd'T'HH:mm:ss"
                                                    var="parsedDate" type="both" />
                                     <fmt:formatDate type="both"
-                                                    pattern="HH:mm:ss dd/M/yyyy"
+                                                    pattern="HH:mm:ss dd/MM/yyyy"
                                                     value="${parsedDate}"/>
                                 </span>
                     </div>
@@ -68,6 +68,9 @@
                     <div class="form-group">
                         <input type="text" class="form-control" name="text" placeholder="Your comment"/>
                         <form:errors path="text" cssClass="has-error"/>
+                        <sec:authentication var="userName" property="principal.username"/>
+                        <input name="userName" value="${userName}" type="hidden"/>
+                        <input name="articleId" value="${article.id}" type="hidden"/>
                         <button type="submit" class="btn btn-default">Add</button>
                     </div>
                     <input type="hidden" name="${_csrf.parameterName}"

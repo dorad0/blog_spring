@@ -27,7 +27,6 @@ public class ArticleController {
     private ArticleService articleService;
 
 
-
     @RequestMapping("/articles")
     public String getArticles(Model model) {
         getArticlesPage(FIRST_PAGE, model);
@@ -80,12 +79,11 @@ public class ArticleController {
             return "createArticleForm";
         }
 
-        Long articleId= articleService.save(articleForm);
+        Article article = articleService.saveArticleFromForm(articleForm);
 
-        Article article = articleService.findById(articleId);
         entity.addAttribute(article);
 
-        return "redirect:/comments/" + articleId;
+        return "redirect:/comments/" + article.getId();
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
