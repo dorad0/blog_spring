@@ -5,7 +5,6 @@ import blog.dao.converter.LocalDateTimePersistenceConverter;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Calendar;
 
 @Entity
 @Table(name = "comments")

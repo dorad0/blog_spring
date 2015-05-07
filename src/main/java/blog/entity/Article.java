@@ -35,6 +35,7 @@ public class Article implements Serializable {
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "article")
     private Set<Comment> comments;
+
     @Formula("(SELECT COUNT(*) FROM comments WHERE comments.article_id = id)")
     private int commentsCount;
 

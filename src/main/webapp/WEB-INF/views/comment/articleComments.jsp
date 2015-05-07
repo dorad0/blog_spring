@@ -33,9 +33,6 @@
                         <strong><a href="/user/${username}/">${username}</a></strong>
                                 <span class="text-muted">at
                                     <fmt:setLocale scope="session" value="en_US"/>
-                               <%-- <fmt:formatDate type="both"
-                                                dateStyle="short" timeStyle="short"
-                                                value="${comment.publicationDate.time}"/>--%><%--5 days ago--%>
                                     <fmt:parseDate value="${comment.publicationDate}" pattern="yyyy-MM-dd'T'HH:mm:ss"
                                                    var="parsedDate" type="both" />
                                     <fmt:formatDate type="both"

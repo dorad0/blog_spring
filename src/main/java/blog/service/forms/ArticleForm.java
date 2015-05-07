@@ -1,18 +1,17 @@
 package blog.service.forms;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 import javax.validation.constraints.Size;
 
 public class ArticleForm {
 
-    @NotEmpty
+
     @Size(min = 1, max = 1000)
     private String text;
 
-    @NotEmpty
+    @Size(min = 1, max = 140)
     private String title;
 
+    @Size(min = 1, max = 30)
     private String userName;
 
     public ArticleForm() {

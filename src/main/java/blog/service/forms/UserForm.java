@@ -1,28 +1,24 @@
 package blog.service.forms;
 
 import blog.service.forms.validator.Age;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
-import java.util.Calendar;
 
 public class UserForm {
 
-    @NotEmpty
-    @Size(min = 2, max = 30)
+    @Size(min = 1, max = 30)
     private String name;
 
-    @NotEmpty
     @Size(min = 6, max = 30)
     private String password;
 
     @DateTimeFormat(pattern = "MM/dd/yyyy")
     @NotNull
-    @Past
+//    Dublicat ?
+//    @Past
     @Age(18)
     private LocalDate birthDate;
 

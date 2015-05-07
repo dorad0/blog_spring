@@ -8,7 +8,8 @@
 <%--<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>--%>
 <html>
 <head>
-    <title>Simple Blog</title>
+    <title><tiles:insertAttribute name="title" ignore="true"/></title>
+    <%--<meta name="description" content="<tiles:insertAttribute name="page_description" ignore="true"/>">--%>
     <link rel="icon" href="/resources/fonts/favicon.ico">
     <!-- Bootstrap core CSS -->
     <link href="/resources/css/bootstrap.min.css" rel="stylesheet">

@@ -7,7 +7,13 @@
     </p>
 
     <p>
-        Register: <fmt:formatDate value="${user.registrationDate.time}" pattern="yyyy-MM-dd HH:mm:ss"/>
+        <fmt:setLocale scope="session" value="en_US"/>
+        <fmt:parseDate value="${user.registrationDate}" pattern="yyyy-MM-dd'T'HH:mm:ss"
+                       var="parsedDate" type="both" />
+        <fmt:formatDate var="userRegistrationDate" type="both"
+                        pattern="HH:mm:ss dd/MM/yyyy"
+                        value="${parsedDate}"/>
+        Register: ${userRegistrationDate}
     </p>
     <sec:authorize ifAnyGranted="ROLE_ADMIN">
         <form name="deleteUserForm" action="/user/delete/${user.id}" method="post">

@@ -9,10 +9,11 @@
             </h2>
             <p class="blog-post-meta">
                 <fmt:setLocale scope="session" value="en_US"/>
-                <fmt:parseDate value="${article.publicationDate}" pattern="yyyy-MM-dd"
+                <fmt:parseDate value="${article.publicationDate}" pattern="yyyy-MM-dd'T'HH:mm:ss"
                                var="parsedDate" type="both" />
-                <fmt:formatDate value="${parsedDate}"
-                                type="both" pattern="MMMMM d, yyyy" />
+                <fmt:formatDate type="both"
+                                pattern="MMMMM d, yyyy"
+                                value="${parsedDate}"/>
                 by <a
                     href="/user/${article.user.name}/">${article.user.name}</a>
             </p>

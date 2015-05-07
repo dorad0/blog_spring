@@ -19,6 +19,7 @@
         <put-attribute name="body" value="/WEB-INF/views/article/deletedArticle.jsp"/>
     </definition>
     <definition name="noArticle" extends="base">
+        <put-attribute name="title" value="No article"/>
         <put-attribute name="body" value="/WEB-INF/views/article/noArticle.jsp"/>
     </definition>
     <definition name="articleArchive" extends="base">
@@ -33,9 +34,11 @@
     <definition name="login" template="/WEB-INF/views/login.jsp"/>
     <definition name="userRegisterForm" template="/WEB-INF/views/user/userRegisterForm.jsp"/>
     <definition name="userProfile" extends="base">
+        <put-attribute name="title" value="User's profile"/>
         <put-attribute name="body" value="/WEB-INF/views/user/userProfile.jsp"/>
     </definition>
     <definition name="deletedUser" extends="base">
+        <put-attribute name="title" value="Delete user"/>
         <put-attribute name="body" value="/WEB-INF/views/user/deletedUser.jsp"/>
     </definition>
     <definition name="error" template="/WEB-INF/views/error/error.jsp"/>

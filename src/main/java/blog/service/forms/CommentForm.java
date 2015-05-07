@@ -1,5 +1,6 @@
 package blog.service.forms;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class CommentForm {
@@ -7,8 +8,10 @@ public class CommentForm {
     @Size(min = 1, max = 300)
     private String text;
 
+    @Size(min = 1, max = 30)
     private String userName;
 
+    @NotNull
     private Long articleId;
 
     public String getText() {
