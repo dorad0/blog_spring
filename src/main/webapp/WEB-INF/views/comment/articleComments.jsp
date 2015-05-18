@@ -2,18 +2,18 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <div class="col-sm-8 blog-main">
     <div class="blog-post">
         <h2 class="blog-post-title">
             ${article.title}
         </h2>
         <p class="blog-post-meta">
-            <fmt:setLocale scope="session" value="en_US"/>
             <fmt:parseDate value="${article.publicationDate}" pattern="yyyy-MM-dd"
                            var="parsedDate" type="both" />
             <fmt:formatDate value="${parsedDate}"
                             type="both" pattern="MMMMM d, yyyy" />
-            by <a
+            <spring:message code="article.by"/> <a
                 href="/user/${article.user.name}/"> <c:out
                 value="${article.user.name}"/> </a>
         </p>
@@ -31,8 +31,7 @@
                     <div class="panel-heading">
                         <c:set var="username" scope="request" value="${comment.user.name}"/>
                         <strong><a href="/user/${username}/">${username}</a></strong>
-                                <span class="text-muted">at
-                                    <fmt:setLocale scope="session" value="en_US"/>
+                                <span class="text-muted"><spring:message code="comment.at"/>
                                     <fmt:parseDate value="${comment.publicationDate}" pattern="yyyy-MM-dd'T'HH:mm:ss"
                                                    var="parsedDate" type="both" />
                                     <fmt:formatDate type="both"
@@ -50,9 +49,10 @@
                             <form name="deleteCommentForm"
                                   action="/comments/delete?commentId=${comment.id}&articleId=${article.id}"
                                   method="post">
+                                <spring:message var="deleteButtonValue" code="comment.delete"/>
                                 <input type="hidden" name="${_csrf.parameterName}"
                                        value="${_csrf.token}"/>
-                                <input type="submit" class="btn btn-lg btn-success" value="Delete comment"/>
+                                <input type="submit" class="btn btn-lg btn-success" value="${deleteButtonValue}"/>
                             </form>
                         </div>
                     </sec:authorize>
@@ -63,12 +63,13 @@
                 <form:form name="addCommentForm" action="/comments/add/${article.id}" cssClass="form-inline"
                            modelAttribute="commentForm">
                     <div class="form-group">
-                        <input type="text" class="form-control" name="text" placeholder="Your comment"/>
+                        <spring:message var="commentFormText" code="comment.form"/>
+                        <input type="text" class="form-control" name="text" placeholder="${commentFormText}"/>
                         <form:errors path="text" cssClass="has-error"/>
                         <sec:authentication var="userName" property="principal.username"/>
                         <input name="userName" value="${userName}" type="hidden"/>
                         <input name="articleId" value="${article.id}" type="hidden"/>
-                        <button type="submit" class="btn btn-default">Add</button>
+                        <button type="submit" class="btn btn-default"><spring:message code="comment.add"/></button>
                     </div>
                     <input type="hidden" name="${_csrf.parameterName}"
                            value="${_csrf.token}"/>

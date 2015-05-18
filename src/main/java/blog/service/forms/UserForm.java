@@ -2,11 +2,14 @@ package blog.service.forms;
 
 import blog.service.forms.validator.Age;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.stereotype.Component;
 
+import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
+@Entity(name = "user")
 public class UserForm {
 
     @Size(min = 1, max = 30)

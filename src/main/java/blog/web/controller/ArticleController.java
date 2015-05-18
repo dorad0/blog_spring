@@ -48,12 +48,14 @@ public class ArticleController {
     public String getArticlesPage(@PathVariable int pagenumber, Model model) {
         model.addAttribute("dates", articleService.getDates());
         model.addAttribute("page", articleService.getPagination().getPage(pagenumber));
+
         return "articles";
     }
 
     @RequestMapping(value = "archive/{year}/{month}", method = RequestMethod.GET)
     public String getArchiveArticles(Model model, @PathVariable(value = "year") int year, @PathVariable(value = "month") int month) {
         getArchiveArticlesPage(model, year, month, FIRST_PAGE);
+
         return "articleArchive";
     }
 
@@ -62,6 +64,7 @@ public class ArticleController {
         model.addAttribute("page", articleService.getArchivePagination().getPage(pagenumber, year, month));
         model.addAttribute("date", LocalDate.of(year, month, FIRST_DAY));
         model.addAttribute("dates", articleService.getDates());
+
         return "articleArchive";
     }
 
@@ -69,6 +72,7 @@ public class ArticleController {
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     public String createArticle(Model model) {
         model.addAttribute("articleForm", new ArticleForm());
+
         return "createArticleForm";
     }
 
@@ -92,6 +96,17 @@ public class ArticleController {
         m.addAttribute("article", articleService.findById(id));
         articleService.delete(id);
         m.addAttribute("dates", articleService.getDates());
+
+        return "deletedArticle";
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    @Secured("ROLE_ADMIN")
+    public String deleteArticleREST(@PathVariable long id, Model m) {
+        m.addAttribute("article", articleService.findById(id));
+        articleService.delete(id);
+        m.addAttribute("dates", articleService.getDates());
+
         return "deletedArticle";
     }
 

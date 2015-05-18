@@ -1,6 +1,8 @@
+<%@ page pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@page session="true" %>
 <html>
 <head>
@@ -17,7 +19,7 @@
         <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Please enter your article</h3>
+                    <h3 class="panel-title"><spring:message code="article.create"/></h3>
                 </div>
                 <div class="panel-body">
                     <form:form accept-charset="UTF-8" name="articleForm" action="/article/form" method="post" modelAttribute="articleForm">
@@ -33,12 +35,14 @@
                                 <%--</div>--%>
                             <%--</c:if>--%>
                             <div class="form-group">
-                                <form:input path="title" id="title" cssClass="form-control" placeholder="Title"/>
+                                <spring:message var="Title" code="article.title"/>
+                                <form:input path="title" id="title" cssClass="form-control" placeholder="${Title}"/>
                                 <%--<input class="form-control" placeholder="Title" name="title" type="text">--%>
                                 <form:errors path="title" cssClass="has-error"/>
                             </div>
                             <div class="form-group">
-                                <textarea class="form-control" rows="15" placeholder="Article text" name="text" type="text"
+                                <spring:message var="Text" code="article.text"/>
+                                <textarea class="form-control" rows="15" placeholder="${Text}" name="text" type="text"
                                        value=""></textarea>
                                 <form:errors path="text" cssClass="has-error"/>
                             </div>
@@ -46,7 +50,8 @@
                                 <input name="userName" type="hidden" value="${userName}"/>
                             <input type="hidden" name="${_csrf.parameterName}"
                                    value="${_csrf.token}"/>
-                            <input class="btn btn-lg btn-success btn-block" type="submit" value="Add article">
+                                <spring:message var="addButtonValue" code="article.add"/>
+                            <input class="btn btn-lg btn-success btn-block" type="submit" value="${addButtonValue}">
                         </fieldset>
                     </form:form>
                 </div>

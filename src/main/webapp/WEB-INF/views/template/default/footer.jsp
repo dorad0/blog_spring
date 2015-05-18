@@ -1,10 +1,11 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ page pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" language="java" %>
 <footer class="blog-footer">
     <p>Blog template built for <a href="http://getbootstrap.com/">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.
     </p>
 
     <p>
-        <a href="#top">Back to top</a>
+        <a href="#top"><spring:message code="footer.top"/></a>
     </p>
 </footer>
 <!-- Bootstrap core JavaScript

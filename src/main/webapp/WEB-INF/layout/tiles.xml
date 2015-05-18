@@ -43,4 +43,5 @@
     </definition>
     <definition name="error" template="/WEB-INF/views/error/error.jsp"/>
     <definition name="databaseError" template="/WEB-INF/views/error/databaseError.jsp"/>
+    <definition name="adminPage" template="/WEB-INF/views/admin/adminPage.jsp"/>
 </tiles-definitions>
