@@ -21,8 +21,6 @@ import java.util.GregorianCalendar;
 @Transactional
 public class ArticleArchivePaginationImpl extends PaginationManager<Article, Long, ArticleDAO> implements ArticleArchivePagination {
 
-    public static final int FIRST_DAY_OF_MONTH = 1;
-
     @Override
     @Autowired
     public void setDao(@Qualifier("ArticleDAOImpl") ArticleDAO dao) {
@@ -30,9 +28,9 @@ public class ArticleArchivePaginationImpl extends PaginationManager<Article, Lon
     }
 
     @Override
-    public Page<Article> getPage(int pageNumber, int pageSize, LocalDate date) {
+    public Page<Article> getPage(int pageNumber, int pageSize, int year, int month) {
         setPageSize(pageSize);
-        int items = dao.getCount(date).intValue();
+        int items = dao.getCount(year, month).intValue();
         int fromElement = DEFAULT_FIRST_ELEMENT;
         int pages = countPages(items, pageSize);
 //        if(pageNumber <= 0 || pageNumber > pages)
@@ -42,30 +40,15 @@ public class ArticleArchivePaginationImpl extends PaginationManager<Article, Lon
             pageNumber = DEFAULT_FIRST_ELEMENT;
         if (pageNumber > 1) {
             fromElement = (pageNumber - 1) * pageSize;
-            return new Page<>(pageNumber, pages, dao.findAll(fromElement, pageSize, date));
+            return new Page<>(pageNumber, pages, dao.findAll(fromElement, pageSize, year, month));
         }
-        return new Page<>(pageNumber, pages, dao.findAll(fromElement, pageSize, date));
+        return new Page<>(pageNumber, pages, dao.findAll(fromElement, pageSize, year, month));
     }
 
-    @Override
-    public Page<Article> getPage(int pageNumber, LocalDate date) {
-        return getPage(pageNumber, pageSize, date);
-    }
-
-    @Override
-    public Page<Article> getFirstPage(LocalDate  date) {
-        return getPage(DEFAULT_FIRST_PAGE_NUMBER, date);
-    }
-
-    @Override
-    public Page<Article> getPage(int pageNumber, int pageSize, int year, int month) {
-//        Calendar date = new GregorianCalendar(year, month, FIRST_DAY_OF_MONTH);
-        LocalDate date = LocalDate.of(year,month,FIRST_DAY_OF_MONTH);
-        return getPage(pageNumber, date);
-    }
 
     @Override
     public Page<Article> getPage(int pageNumber, int year, int month) {
         return getPage(pageNumber, pageSize, year, month);
     }
+
 }

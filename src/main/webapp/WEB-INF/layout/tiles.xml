@@ -7,6 +7,7 @@
         <put-attribute name="header" value="/WEB-INF/views/template/default/header.jsp"/>
         <put-attribute name="menu" value="/WEB-INF/views/template/default/menu.jsp"/>
         <put-attribute name="body" value="/WEB-INF/views/template/default/body.jsp"/>
+        <put-attribute name="navbar" value="/WEB-INF/views/template/default/navbar.jsp"/>
         <put-attribute name="sidebar" value="/WEB-INF/views/template/default/sidebar.jsp"/>
         <put-attribute name="footer" value="/WEB-INF/views/template/default/footer.jsp"/>
     </definition>
@@ -25,6 +26,7 @@
     <definition name="articleArchive" extends="base">
         <put-attribute name="title" value="Archive of articles"/>
         <put-attribute name="body" value="/WEB-INF/views/article/archive/articleArchive.jsp"/>
+        <put-attribute name="navbar" value="/WEB-INF/views/article/archive/navbarArchive.jsp"/>
     </definition>
     <definition name="articleComments" extends="base">
         <put-attribute name="title" value="Comments"/>
@@ -43,5 +45,21 @@
     </definition>
     <definition name="error" template="/WEB-INF/views/error/error.jsp"/>
     <definition name="databaseError" template="/WEB-INF/views/error/databaseError.jsp"/>
-    <definition name="adminPage" template="/WEB-INF/views/admin/adminPage.jsp"/>
+
+    <definition name="adminBase" template="/WEB-INF/views/template/admin/adminBase.jsp">
+        <put-attribute name="header" value="/WEB-INF/views/template/admin/adminHeader.jsp"/>
+        <put-attribute name="menu" value="/WEB-INF/views/template/default/menu.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/views/template/default/body.jsp"/>
+        <put-attribute name="sidebar" value="/WEB-INF/views/template/admin/adminSidebar.jsp"/>
+        <put-attribute name="footer" value="/WEB-INF/views/template/default/footer.jsp"/>
+    </definition>
+    <definition name="adminPage" extends="adminBase">
+        <put-attribute name="title" value="Admin page"/>
+        <put-attribute name="body" value="/WEB-INF/views/admin/adminPage.jsp"/>
+    </definition>
+    <definition name="adminArticles" extends="adminBase">
+        <put-attribute name="title" value="Last articles"/>
+        <put-attribute name="body" value="/WEB-INF/views/admin/adminArticles.jsp"/>
+    </definition>
+
 </tiles-definitions>

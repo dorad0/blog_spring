@@ -14,14 +14,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
-import java.time.LocalDate;
 
 @Controller
 @RequestMapping("/article")
 public class ArticleController {
 
     public static final int FIRST_PAGE = 1;
-    public static final int FIRST_DAY = 1;
+//    public static final int FIRST_DAY = 1;
 
     @Autowired
     private ArticleService articleService;
@@ -53,16 +52,20 @@ public class ArticleController {
     }
 
     @RequestMapping(value = "archive/{year}/{month}", method = RequestMethod.GET)
-    public String getArchiveArticles(Model model, @PathVariable(value = "year") int year, @PathVariable(value = "month") int month) {
+    public String getArchiveArticles(Model model, @PathVariable(value = "year") int year,
+                                     @PathVariable(value = "month") int month) {
         getArchiveArticlesPage(model, year, month, FIRST_PAGE);
 
         return "articleArchive";
     }
 
     @RequestMapping(value = "archive/{year}/{month}/page/{pagenumber}", method = RequestMethod.GET)
-    public String getArchiveArticlesPage(Model model, @PathVariable(value = "year") int year, @PathVariable(value = "month") int month, @PathVariable int pagenumber) {
+    public String getArchiveArticlesPage(Model model, @PathVariable(value = "year") int year,
+                                         @PathVariable(value = "month") int month, @PathVariable int pagenumber) {
         model.addAttribute("page", articleService.getArchivePagination().getPage(pagenumber, year, month));
-        model.addAttribute("date", LocalDate.of(year, month, FIRST_DAY));
+//        model.addAttribute("date", LocalDate.of(year, month, FIRST_DAY));
+        model.addAttribute("year", year);
+        model.addAttribute("month", month);
         model.addAttribute("dates", articleService.getDates());
 
         return "articleArchive";

@@ -97,11 +97,37 @@ public class ArticleDAOImpl extends GenericHibernateDAOImpl<Article, Long> imple
 
     @ExceptionTranslation
     @Override
+    public Long getCount(int year, int month) {
+        return ((BigInteger) getCurrentSession()
+                .createSQLQuery("SELECT COUNT(*) FROM articles WHERE YEAR(publication_date) = :year AND MONTH(publication_date) = :month")
+                .setInteger("year", year)
+                .setInteger("month", month)
+                .uniqueResult())
+                .longValue();
+    }
+
+    @ExceptionTranslation
+    @Override
     public List<Article> findAll(int firstResult, int maxResults, LocalDate date) {
         Query query = getCurrentSession()
                 .createQuery("FROM Article WHERE YEAR(publicationDate) = :year AND MONTH(publicationDate) = :month ORDER BY publicationDate DESC")
                 .setInteger("year", date.getYear())
                 .setInteger("month", date.getMonthValue());
+
+        query.setFirstResult(firstResult);
+        query.setMaxResults(maxResults);
+        List<Article> list = query.list();
+
+        return list;
+    }
+
+    @ExceptionTranslation
+    @Override
+    public List<Article> findAll(int firstResult, int maxResults, int year, int month) {
+        Query query = getCurrentSession()
+                .createQuery("FROM Article WHERE YEAR(publicationDate) = :year AND MONTH(publicationDate) = :month ORDER BY publicationDate DESC")
+                .setInteger("year", year)
+                .setInteger("month", month);
 
         query.setFirstResult(firstResult);
         query.setMaxResults(maxResults);

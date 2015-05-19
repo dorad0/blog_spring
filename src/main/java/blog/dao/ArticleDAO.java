@@ -3,6 +3,7 @@ package blog.dao;
 import blog.dao.exception.DaoException;
 import blog.entity.Article;
 import blog.entity.Comment;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -22,7 +23,11 @@ public interface ArticleDAO extends GenericDAO<Article, Long> {
 
     Long getCount(LocalDate date) throws DaoException;
 
+    Long getCount(int year, int month) throws DaoException;
+
     List<Article> findAll(int firstResult, int maxResults, LocalDate date) throws DaoException;
+
+    List<Article> findAll(int firstResult, int maxResults, int year, int month) throws DaoException;
 
 }
 

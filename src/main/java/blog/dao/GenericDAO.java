@@ -1,6 +1,7 @@
 package blog.dao;
 
 import blog.dao.exception.DaoException;
+import org.springframework.data.repository.CrudRepository;
 
 import java.io.Serializable;
 import java.util.List;

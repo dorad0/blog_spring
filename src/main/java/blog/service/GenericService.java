@@ -1,6 +1,7 @@
 package blog.service;
 
 import blog.service.exception.ServiceException;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.io.Serializable;
 import java.util.List;
