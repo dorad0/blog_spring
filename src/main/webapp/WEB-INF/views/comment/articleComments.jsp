@@ -3,7 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<div class="col-sm-8 blog-main">
+<%--<div class="col-sm-8 blog-main">--%>
     <div class="blog-post">
         <h2 class="blog-post-title">
             ${article.title}
@@ -22,7 +22,8 @@
             <form:form name="deleteArticleForm" action="/article/delete?id=${article.id}">
                 <input type="hidden" name="${_csrf.parameterName}"
                        value="${_csrf.token}"/>
-                <input type="submit" class="btn btn-lg btn-success" value="Delete article"/>
+                <spring:message var="deleteButtonValue" code="article.delete"/>
+                <input type="submit" class="btn btn-lg btn-success" value="${deleteButtonValue}"/>
             </form:form>
         </sec:authorize>
         <div class="col-lg-12">
@@ -77,4 +78,4 @@
             </sec:authorize>
         </div>
     </div>
-</div>
+<%--</div>--%>

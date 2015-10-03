@@ -30,7 +30,7 @@ public class Converter {
 
     public User convertUserFormToUser(UserForm userForm) {
         User user = new User();
-        user.setName(user.getName());
+        user.setName(userForm.getName());
         user.setBirthDate(userForm.getBirthDate());
         user.setPassword(userForm.getPassword());
 

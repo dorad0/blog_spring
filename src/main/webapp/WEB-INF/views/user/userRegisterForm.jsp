@@ -43,8 +43,8 @@
                             <div class="form-group">
                                 <!--BirthDate-->
                                 <div class="date" id="datetimepicker1">
-                                    <spring:message var="BirhDate" code="user.birthDate"/>
-                                    <form:input path="birthDate" id="birthDateInput" placeholder="${BirhDate}"
+                                    <spring:message var="BirthDate" code="user.birthDate"/>
+                                    <form:input path="birthDate" id="birthDateInput" placeholder="${BirthDate}"
                                                 cssClass="form-control"/>
                                     <form:errors path="birthDate" cssClass="has-error"/>
                                 </div>
@@ -53,7 +53,7 @@
                             <script>
                                 $(document).ready(function () {
                                     $('#birthDateInput').datepicker({
-                                        format: "dd/mm/yyyy"
+                                        format: "yyyy-MM-dd"
                                     });
                                 });
                             </script>

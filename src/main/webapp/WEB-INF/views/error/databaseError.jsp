@@ -1,9 +1,3 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-    Database error!
-</body>
-</html>
+<div class="col-sm-8 blog-main">
+    Sorry... Database is not working.
+</div>

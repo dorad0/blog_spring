@@ -3,10 +3,6 @@ package blog.config.core;
 import blog.config.WebAppConfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-/**
- * Created by user on 17.01.2015.
- * Create a Initializer class, to load everything.
- */
 public class SpringMvcInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     @Override

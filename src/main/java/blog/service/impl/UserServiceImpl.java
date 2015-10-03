@@ -46,7 +46,7 @@ public class UserServiceImpl extends GenericServiceImpl<Long, User, UserDAO> imp
 
         user.setRegistrationDate(LocalDateTime.now());
         user.setPassword(encodedPassword);
-        user.setBirthDate(LocalDate.now());
+       // user.setBirthDate(user.getBirthDate());
         user.setEnabled(true);
 
         Long userId = save(user);

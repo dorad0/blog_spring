@@ -40,7 +40,6 @@ public class ArticleServiceImpl extends GenericServiceImpl<Long, Article, Articl
     @Autowired
     private Converter converter;
 
-
     @Override
     @Autowired
     protected void setGenericDAO(@Qualifier("ArticleDAOImpl") ArticleDAO genericDAO) {
@@ -141,4 +140,10 @@ public class ArticleServiceImpl extends GenericServiceImpl<Long, Article, Articl
         return archivePagination;
     }
 
+    @ExceptionTranslation
+    @Override
+    public void delete(Long aLong) {
+
+        super.delete(aLong);
+    }
 }

@@ -8,8 +8,8 @@ import org.aspectj.lang.annotation.Aspect;
 import org.hibernate.HibernateException;
 import org.springframework.stereotype.Component;
 
-@Aspect
-@Component
+//@Aspect
+//@Component
 public aspect ExceptionTranslationAspect {
 
     @Around("execution(* blog.dao..*(..)) &&" +

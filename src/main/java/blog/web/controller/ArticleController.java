@@ -97,20 +97,21 @@ public class ArticleController {
     @Secured("ROLE_ADMIN")
     public String deleteArticle(@RequestParam(required = true) long id, Model m) {
         m.addAttribute("article", articleService.findById(id));
-        articleService.delete(id);
+//        articleService.delete(id);
+        articleService.delete(articleService.findById(id));
         m.addAttribute("dates", articleService.getDates());
 
         return "deletedArticle";
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    @Secured("ROLE_ADMIN")
-    public String deleteArticleREST(@PathVariable long id, Model m) {
-        m.addAttribute("article", articleService.findById(id));
-        articleService.delete(id);
-        m.addAttribute("dates", articleService.getDates());
-
-        return "deletedArticle";
-    }
+//    @RequestMapping(value = "/{id}", method = RequestMethod.POST)
+//    @Secured("ROLE_ADMIN")
+//    public String deleteArticleREST(@PathVariable long id, Model m) {
+//        m.addAttribute("article", articleService.findById(id));
+//        articleService.delete(id);
+//        m.addAttribute("dates", articleService.getDates());
+//
+//        return "deletedArticle";
+//    }
 
 }

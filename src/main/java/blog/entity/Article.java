@@ -33,7 +33,7 @@ public class Article implements Serializable {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "article")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, mappedBy = "article")
     private Set<Comment> comments;
 
     @Formula("(SELECT COUNT(*) FROM comments WHERE comments.article_id = id)")

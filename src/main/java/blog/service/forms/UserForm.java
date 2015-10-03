@@ -1,8 +1,6 @@
 package blog.service.forms;
 
-import blog.service.forms.validator.Age;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
@@ -18,11 +16,12 @@ public class UserForm {
     @Size(min = 6, max = 30)
     private String password;
 
-    @DateTimeFormat(pattern = "MM/dd/yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull
 //    Dublicat ?
 //    @Past
-    @Age(18)
+//    @Convert(converter = LocalDateConverter.class)
+//    @Age(18)
     private LocalDate birthDate;
 
     public UserForm() {

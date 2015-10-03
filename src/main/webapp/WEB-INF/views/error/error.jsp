@@ -1,10 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-    error!
-${exception}
-</body>
-</html>
+<div class="col-sm-8 blog-main">
+    Sorry... Error has happened.
+    <%--${exception}--%>
+</div>

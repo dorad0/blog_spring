@@ -11,7 +11,7 @@
         </h2>
         <p class="blog-post-meta">
                 <%--<fmt:setLocale scope="session" value="en_US"/>--%>
-            <fmt:parseDate value="${article.publicationDate}" pattern="yyyy-MM-dd'T'HH:mm:ss"
+            <fmt:parseDate value="${article.publicationDate}" pattern="yyyy-MM-dd"
                            var="parsedDate" type="both"/>
             <fmt:formatDate type="both"
                             pattern="MMMMM d, yyyy"
@@ -35,25 +35,14 @@
             <%--<input type="submit" class="btn btn-lg btn-success" value="Delete article"/>--%>
             <%--</form>--%>
             <%--</sec:authorize>--%>
-        <%--<sec:authorize ifAnyGranted="ROLE_ADMIN">--%>
-            <%--<form method="post" action="/article/${article.id}">--%>
-                <%--<input type="hidden" name="${_csrf.parameterName}"--%>
-                       <%--value="${_csrf.token}"/>--%>
-                <%--<spring:message var="deleteButtonValue" code="article.delete"/>--%>
-                <%--<input type="submit" class="btn btn-lg btn-success" value="${deleteButtonValue}"/>--%>
-            <%--</form>--%>
-        <%--</sec:authorize>--%>
+        <sec:authorize ifAnyGranted="ROLE_ADMIN">
+            <form method="post" action="/article/delete?id=${article.id}">
+                <input type="hidden" name="${_csrf.parameterName}"
+                       value="${_csrf.token}"/>
+                <spring:message var="deleteButtonValue" code="article.delete"/>
+                <input type="submit" class="btn btn-lg btn-success" value="${deleteButtonValue}"/>
+            </form>
+        </sec:authorize>
     </div>
 </c:forEach>
-<%--<nav>--%>
-<%--<ul class="pager">--%>
-<%--<c:if test="${page.previous}">--%>
-<%--<li><a href="/article/page/${page.previousPage}/"><spring:message code="nav.prev"/></a></li>--%>
-<%--</c:if>--%>
-<%--<c:if test="${page.next}">--%>
-<%--<li><a href="/article/page/${page.nextPage}/"><spring:message code="nav.next"/></a></li>--%>
-<%--</c:if>--%>
-<%--</ul>--%>
-<%--</nav>--%>
-<%--<tiles:insertAttribute name="navbar"/>--%>
 

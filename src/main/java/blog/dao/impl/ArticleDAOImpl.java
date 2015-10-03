@@ -61,7 +61,7 @@ public class ArticleDAOImpl extends GenericHibernateDAOImpl<Article, Long> imple
     @ExceptionTranslation
     @Override
     public List<Article> findAll() {
-        return getCurrentSession().createCriteria(Article.class).addOrder(Order.desc("publicationdate")).list();
+        return getCurrentSession().createCriteria(Article.class).addOrder(Order.desc("publicationDate")).list();
     }
 
     @ExceptionTranslation
