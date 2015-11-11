@@ -29,9 +29,9 @@ CREATE TABLE IF NOT EXISTS `blog_mvc`.`users` (
   `registration_date` DATETIME NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `UK_gj2fy3dcix7ph7k8684gka40c` (`name` ASC))
-ENGINE = InnoDB
-AUTO_INCREMENT = 2
-DEFAULT CHARACTER SET = utf8;
+  ENGINE = InnoDB
+  AUTO_INCREMENT = 6
+  DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
@@ -47,10 +47,10 @@ CREATE TABLE IF NOT EXISTS `blog_mvc`.`articles` (
   UNIQUE INDEX `UK_571gx7oqo5xpmgocegaidlcu9` (`title` ASC),
   INDEX `fk_articles_to_users` (`user_id` ASC),
   CONSTRAINT `fk_articles_to_users`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `blog_mvc`.`users` (`id`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+  FOREIGN KEY (`user_id`)
+  REFERENCES `blog_mvc`.`users` (`id`))
+  ENGINE = InnoDB
+  DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
@@ -66,13 +66,17 @@ CREATE TABLE IF NOT EXISTS `blog_mvc`.`comments` (
   INDEX `fk_comments_to_articles` (`article_id` ASC),
   INDEX `fk_comments_to_users` (`user_id` ASC),
   CONSTRAINT `fk_comments_to_articles`
-    FOREIGN KEY (`article_id`)
-    REFERENCES `blog_mvc`.`articles` (`id`),
+  FOREIGN KEY (`article_id`)
+  REFERENCES `blog_mvc`.`articles` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_comments_to_users`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `blog_mvc`.`users` (`id`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+  FOREIGN KEY (`user_id`)
+  REFERENCES `blog_mvc`.`users` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+  ENGINE = InnoDB
+  DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
@@ -85,10 +89,13 @@ CREATE TABLE IF NOT EXISTS `blog_mvc`.`user_roles` (
   PRIMARY KEY (`id`),
   INDEX `fk_user_roles_to_users` (`user_id` ASC),
   CONSTRAINT `fk_user_roles_to_users`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `blog_mvc`.`users` (`id`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+  FOREIGN KEY (`user_id`)
+  REFERENCES `blog_mvc`.`users` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+  ENGINE = InnoDB
+  AUTO_INCREMENT = 3
+  DEFAULT CHARACTER SET = utf8;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
