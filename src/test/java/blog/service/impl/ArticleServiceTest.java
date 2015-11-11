@@ -1,6 +1,7 @@
 package blog.service.impl;
 
 import blog.dao.ArticleDAO;
+import blog.dao.impl.ArticleDAOImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,10 +10,13 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.mockito.Matchers.anyLong;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.*;
+import static org.junit.Assert.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ArticleServiceTest {
@@ -36,5 +40,15 @@ public class ArticleServiceTest {
 
         verifyNoMoreInteractions(articleDAO);
     }
+
+    @Test
+    public void testGetDates() {
+        articleService.getDates();
+        verify(articleDAO, times(1)).getDates();
+
+        verifyNoMoreInteractions(articleDAO);
+    }
+
+
 
 }

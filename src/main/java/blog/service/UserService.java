@@ -10,4 +10,6 @@ public interface UserService extends GenericService<User, Long> {
 
     Long saveUserFromForm(UserForm form) throws ServiceException;
 
+    void setUserLoginTime(String userName) throws ServiceException;
+
 }

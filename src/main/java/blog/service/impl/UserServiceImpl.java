@@ -6,6 +6,7 @@ import blog.entity.User;
 import blog.entity.UserRole;
 import blog.service.UserRoleService;
 import blog.service.UserService;
+import blog.service.exception.ServiceException;
 import blog.service.forms.UserForm;
 import blog.service.util.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,7 @@ public class UserServiceImpl extends GenericServiceImpl<Long, User, UserDAO> imp
         String encodedPassword = encoder.encode(user.getPassword());
 
         user.setRegistrationDate(LocalDateTime.now());
+//        user.setLastVisit(LocalDateTime.now());
         user.setPassword(encodedPassword);
        // user.setBirthDate(user.getBirthDate());
         user.setEnabled(true);
@@ -56,6 +58,13 @@ public class UserServiceImpl extends GenericServiceImpl<Long, User, UserDAO> imp
         roleManager.save(role);
 
         return userId;
+    }
+
+    @Override
+    public void setUserLoginTime(String userName) throws ServiceException {
+        User loginUser = findByName(userName);
+//        loginUser.setLastVisit(LocalDateTime.now());
+        save(loginUser);
     }
 
     @ExceptionTranslation

@@ -35,6 +35,10 @@ public class User implements Serializable {
     @Column(name = "birth_date", nullable = false)
     private LocalDate birthDate;
 
+//    @Convert(converter = LocalDateTimePersistenceConverter.class)
+//    @Column(name = "last_visit")
+//    private LocalDateTime lastVisit;
+
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
     private Set<Comment> comments;
 
@@ -126,6 +130,14 @@ public class User implements Serializable {
     public void setRoles(Set<UserRole> roles) {
         this.roles = roles;
     }
+
+//    public LocalDateTime getLastVisit() {
+//        return lastVisit;
+//    }
+
+//    public void setLastVisit(LocalDateTime lastVisit) {
+//        this.lastVisit = lastVisit;
+//    }
 
     @Override
     public String toString() {

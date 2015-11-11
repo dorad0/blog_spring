@@ -38,6 +38,7 @@ public class UserDaoImplTest extends DaoTest {
         Aaron.setName("Aaron");
         Aaron.setPassword("123456");
         Aaron.setRegistrationDate(LocalDateTime.of(2015, 11, 11, 14, 0, 0));
+//        Aaron.setLastVisit(LocalDateTime.of(2015, 5,12,14,0,0));
 
         userDao.save(Aaron);
     }
@@ -76,10 +77,11 @@ public class UserDaoImplTest extends DaoTest {
     @Test
     @DatabaseSetup(value = "/blog/dao/user/data.xml")
     public void testFindByName() {
-        User oliver = userDao.findById(1L);
+//        User oliver = userDao.findById(1L);
         User userTest = userDao.findByName("Oliver");
 
-        assertEquals(oliver, userTest);
+    //        assertEquals(oliver, userTest);
+        assertEquals("Oliver", userTest.getName());
     }
 
 
