@@ -31,6 +31,9 @@
             <%--<a class="blog-nav-item" href="http://getbootstrap.com/examples/blog/#">About</a>--%>
             <a class="blog-nav-item" href="/?mylocale=en">English </a> |
             <a class="blog-nav-item" href="/?mylocale=ru">Русский </a>
+            <sec:authorize access="hasRole('ROLE_ADMIN')">
+                <a class="blog-nav-item" href="/admin">Admin's page</a>
+            </sec:authorize>
         </nav>
     </div>
 </div>

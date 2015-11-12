@@ -35,6 +35,12 @@ public class AdminController {
         return "adminPage";
     }
 
+//    @Secured(value = "ROLE_ADMIN")
+//    @RequestMapping(value = "/admin", method = RequestMethod.GET)
+//    public String getMainPage() {
+//        return "adminPage";
+//    }
+
     @Secured(value = "ROLE_ADMIN")
     @RequestMapping(value = "/articles", method = RequestMethod.GET)
     public String getArticles() {
