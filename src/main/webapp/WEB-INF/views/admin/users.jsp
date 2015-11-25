@@ -1,16 +1,12 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: alex
-  Date: 8/6/2015
-  Time: 3:10 PM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-
-</body>
-</html>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<div class="col-sm-8 blog-main">
+    <p>List of users</p>
+    <c:forEach var="user" items="${users}">
+        <p>
+            <a href="/admin/user/${user.name}">${user.name}</a>
+        </p>
+    </c:forEach>
+</div>

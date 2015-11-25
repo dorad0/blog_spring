@@ -95,7 +95,7 @@ public class MainController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (!(auth instanceof AnonymousAuthenticationToken)) {
             UserDetails userDetail = (UserDetails) auth.getPrincipal();
-            System.out.println(userDetail);
+//            System.out.println(userDetail);
 
             model.addObject("username", userDetail.getUsername());
 

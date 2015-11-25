@@ -86,4 +86,8 @@
         <put-attribute name="title" value="Admin page"/>
         <put-attribute name="body" value="/WEB-INF/views/admin/articleComments.jsp"/>
     </definition>
+    <definition name="adminUserProfile" extends="adminBase">
+        <put-attribute name="title" value="User details"/>
+        <put-attribute name="body" value="/WEB-INF/views/admin/user/userProfile.jsp"/>
+    </definition>
 </tiles-definitions>

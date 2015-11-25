@@ -94,13 +94,4 @@ public class AdminController {
 
         return "deletedArticle";
     }
-
-    @Secured(value = "ROLE_ADMIN")
-    @RequestMapping(value = "/deleteUser/{id}", method = RequestMethod.POST)
-    public String deleteUser(@PathVariable long id) {
-        userService.delete(userService.findById(id));
-
-        return "deletedUser";
-    }
-
 }
