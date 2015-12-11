@@ -12,4 +12,6 @@ public interface CommentService extends GenericService<Comment, Long> {
 
     List<Comment> getArticleComments(Long articleId) throws ServiceException;
 
+    List<Comment> getUserComments(String userName) throws ServiceException;
+
 }

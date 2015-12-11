@@ -1,4 +1,4 @@
-package blog.web.controller;
+package blog.web.controller.admin;
 
 import blog.entity.Article;
 import blog.service.ArticleService;

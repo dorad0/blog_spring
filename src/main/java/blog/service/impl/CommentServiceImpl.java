@@ -5,6 +5,7 @@ import blog.dao.CommentDAO;
 import blog.entity.Comment;
 import blog.service.CommentService;
 import blog.service.UserService;
+import blog.service.exception.ServiceException;
 import blog.service.forms.CommentForm;
 import blog.service.util.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +18,6 @@ import java.util.List;
 @Service
 @Transactional
 public class CommentServiceImpl extends GenericServiceImpl<Long, Comment, CommentDAO> implements CommentService {
-
-//    @Autowired
-//    private UserService userService;
 
     @Autowired
     private Converter converter;
@@ -43,6 +41,13 @@ public class CommentServiceImpl extends GenericServiceImpl<Long, Comment, Commen
     @Override
     public List<Comment> getArticleComments(Long articleId) {
         return genericDAO.getArticleComments(articleId);
+    }
+
+    @ExceptionTranslation
+    @Override
+    public List<Comment> getUserComments(String userName) throws ServiceException {
+
+        return genericDAO.getUserComments(userName);
     }
 
 }

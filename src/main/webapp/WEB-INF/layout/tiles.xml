@@ -90,4 +90,24 @@
         <put-attribute name="title" value="User details"/>
         <put-attribute name="body" value="/WEB-INF/views/admin/user/userProfile.jsp"/>
     </definition>
+    <definition name="adminArticleComments" extends="adminBase">
+        <put-attribute name="title" value="User's article"/>
+        <put-attribute name="body" value="/WEB-INF/views/admin/article/articleComments.jsp"/>
+    </definition>
+    <definition name="adminNoArticle" extends="adminBase">
+        <put-attribute name="title" value="No such article"/>
+        <put-attribute name="body" value="/WEB-INF/views/admin/article/noArticles.jsp"/>
+    </definition>
+    <definition name="userComments" extends="adminBase">
+        <put-attribute name="title" value="User's comments"/>
+        <put-attribute name="body" value="/WEB-INF/views/admin/user/userComments.jsp"/>
+    </definition>
+    <definition name="adminUserArticles" extends="adminBase">
+        <put-attribute name="title" value="User's articles"/>
+        <put-attribute name="body" value="/WEB-INF/views/admin/article/userArticles.jsp"/>
+    </definition>
+    <definition name="adminNoUserArticles" extends="adminBase">
+        <put-attribute name="title" value="User's articles"/>
+        <put-attribute name="body" value="/WEB-INF/views/admin/article/noArticles.jsp"/>
+    </definition>
 </tiles-definitions>

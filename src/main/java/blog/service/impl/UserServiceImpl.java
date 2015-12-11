@@ -2,6 +2,7 @@ package blog.service.impl;
 
 import blog.annotation.ExceptionTranslation;
 import blog.dao.UserDAO;
+import blog.entity.Article;
 import blog.entity.User;
 import blog.entity.UserRole;
 import blog.service.UserRoleService;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @Transactional
@@ -48,7 +50,7 @@ public class UserServiceImpl extends GenericServiceImpl<Long, User, UserDAO> imp
         user.setRegistrationDate(LocalDateTime.now());
 //        user.setLastVisit(LocalDateTime.now());
         user.setPassword(encodedPassword);
-       // user.setBirthDate(user.getBirthDate());
+        // user.setBirthDate(user.getBirthDate());
         user.setEnabled(true);
 
         Long userId = save(user);
@@ -65,6 +67,19 @@ public class UserServiceImpl extends GenericServiceImpl<Long, User, UserDAO> imp
         User loginUser = findByName(userName);
 //        loginUser.setLastVisit(LocalDateTime.now());
         save(loginUser);
+    }
+
+    @ExceptionTranslation
+    @Override
+    public List<Article> findUserArticles(String userName) throws ServiceException {
+        List<Article> articles = null;
+        User user = genericDAO.findByName(userName);
+
+        if (user != null) {
+            articles = genericDAO.getUserArticles(user.getId());
+        }
+
+        return articles;
     }
 
     @ExceptionTranslation

@@ -9,4 +9,6 @@ public interface CommentDAO extends GenericDAO<Comment, Long> {
 
     List<Comment> getArticleComments(Long articleId) throws DaoException;
 
+    List<Comment> getUserComments(String userName) throws DaoException;
+
 }

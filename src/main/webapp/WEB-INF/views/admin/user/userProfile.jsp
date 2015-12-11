@@ -21,10 +21,10 @@
     <p>Register: ${userRegistrationDate}</p>
     <p>Birthday: ${userBirthDate}</p>
     <p>
-        <a href="/admin/user/comments/${user.name}/">View all comments of user</a>
+        <a href="/admin/comments/${user.name}/">View all comments of user</a>
     </p>
     <p>
-        <a href="/admin/user/articles/${user.name}/">View all articles of user</a>
+        <a href="/admin/user/${user.name}/articles">View all articles of user</a>
     </p>
     <sec:authorize ifAnyGranted="ROLE_ADMIN">
         <form name="deleteUserForm" action="/user/delete/${user.id}" method="post">
