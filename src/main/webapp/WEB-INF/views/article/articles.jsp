@@ -35,14 +35,14 @@
             <%--<input type="submit" class="btn btn-lg btn-success" value="Delete article"/>--%>
             <%--</form>--%>
             <%--</sec:authorize>--%>
-        <sec:authorize ifAnyGranted="ROLE_ADMIN">
-            <form method="post" action="/article/delete?id=${article.id}">
-                <input type="hidden" name="${_csrf.parameterName}"
-                       value="${_csrf.token}"/>
-                <spring:message var="deleteButtonValue" code="article.delete"/>
-                <input type="submit" class="btn btn-lg btn-success" value="${deleteButtonValue}"/>
-            </form>
-        </sec:authorize>
+        <%--<sec:authorize ifAnyGranted="ROLE_ADMIN">--%>
+            <%--<form method="post" action="/article/delete?id=${article.id}">--%>
+                <%--<input type="hidden" name="${_csrf.parameterName}"--%>
+                       <%--value="${_csrf.token}"/>--%>
+                <%--<spring:message var="deleteButtonValue" code="article.delete"/>--%>
+                <%--<input type="submit" class="btn btn-lg btn-success" value="${deleteButtonValue}"/>--%>
+            <%--</form>--%>
+        <%--</sec:authorize>--%>
     </div>
 </c:forEach>
 

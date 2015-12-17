@@ -18,14 +18,14 @@
                 value="${article.user.name}"/> </a>
         </p>
         <p>${article.text}</p>
-        <sec:authorize ifAnyGranted="ROLE_ADMIN">
-            <form:form name="deleteArticleForm" action="/article/delete?id=${article.id}">
-                <input type="hidden" name="${_csrf.parameterName}"
-                       value="${_csrf.token}"/>
-                <spring:message var="deleteButtonValue" code="article.delete"/>
-                <input type="submit" class="btn btn-lg btn-success" value="${deleteButtonValue}"/>
-            </form:form>
-        </sec:authorize>
+        <%--<sec:authorize ifAnyGranted="ROLE_ADMIN">--%>
+            <%--<form:form name="deleteArticleForm" action="/article/delete?id=${article.id}">--%>
+                <%--<input type="hidden" name="${_csrf.parameterName}"--%>
+                       <%--value="${_csrf.token}"/>--%>
+                <%--<spring:message var="deleteButtonValue" code="article.delete"/>--%>
+                <%--<input type="submit" class="btn btn-lg btn-success" value="${deleteButtonValue}"/>--%>
+            <%--</form:form>--%>
+        <%--</sec:authorize>--%>
         <div class="col-lg-12">
             <c:forEach var="comment" items="${comments}">
                 <div class="panel panel-default">
@@ -45,18 +45,18 @@
                             ${comment.text}
                         </p>
                     </div>
-                    <sec:authorize ifAnyGranted="ROLE_ADMIN">
-                        <div class="panel-footer">
-                            <form name="deleteCommentForm"
-                                  action="/comments/delete?commentId=${comment.id}&articleId=${article.id}"
-                                  method="post">
-                                <spring:message var="deleteButtonValue" code="comment.delete"/>
-                                <input type="hidden" name="${_csrf.parameterName}"
-                                       value="${_csrf.token}"/>
-                                <input type="submit" class="btn btn-lg btn-success" value="${deleteButtonValue}"/>
-                            </form>
-                        </div>
-                    </sec:authorize>
+                    <%--<sec:authorize ifAnyGranted="ROLE_ADMIN">--%>
+                        <%--<div class="panel-footer">--%>
+                            <%--<form name="deleteCommentForm"--%>
+                                  <%--action="/comments/delete?commentId=${comment.id}&articleId=${article.id}"--%>
+                                  <%--method="post">--%>
+                                <%--<spring:message var="deleteButtonValue" code="comment.delete"/>--%>
+                                <%--<input type="hidden" name="${_csrf.parameterName}"--%>
+                                       <%--value="${_csrf.token}"/>--%>
+                                <%--<input type="submit" class="btn btn-lg btn-success" value="${deleteButtonValue}"/>--%>
+                            <%--</form>--%>
+                        <%--</div>--%>
+                    <%--</sec:authorize>--%>
                 </div>
             </c:forEach>
             <div id="end"></div>

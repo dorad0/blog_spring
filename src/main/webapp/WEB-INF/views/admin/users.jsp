@@ -9,4 +9,7 @@
             <a href="/admin/user/${user.name}">${user.name}</a>
         </p>
     </c:forEach>
+    <p>
+        <a href="/admin/">Go back</a>
+    </p>
 </div>

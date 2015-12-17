@@ -55,9 +55,10 @@ public class AdminArticleController {
 //    }
 
     @Secured(value = "ROLE_ADMIN")
-    @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public String getArticles() {
-        return "adminArticles";
+    @RequestMapping(value = "/titles", method = RequestMethod.GET)
+    public String getArticlesTitles(Model model) {
+        model.addAttribute("articles", articleService.findAll());
+        return "adminArticleTitles";
     }
 
     @Secured(value = "ROLE_ADMIN")
@@ -79,7 +80,7 @@ public class AdminArticleController {
     @RequestMapping(method = RequestMethod.GET)
     public String getDefaultArticlePage(Model model) {
 //        return getArticles(model);
-        return "adminArticleBaseFeatures";
+        return "adminArticleBasicFeatures";
     }
 
     @Secured(value = "ROLE_ADMIN")

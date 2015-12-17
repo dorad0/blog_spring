@@ -3,7 +3,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
-
+<p>
+    <a href="/admin/article/">Go back</a>
+</p>
 <c:forEach var="article" items="${page.entities}">
     <div class="blog-post">
         <h2 class="blog-post-title">
@@ -45,4 +47,6 @@
         </sec:authorize>
     </div>
 </c:forEach>
-
+<p>
+    <a href="/admin/article/">Go back</a>
+</p>

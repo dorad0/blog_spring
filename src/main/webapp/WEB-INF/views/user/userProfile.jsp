@@ -15,13 +15,13 @@
                         value="${parsedDate}"/>
         Register: ${userRegistrationDate}
     </p>
-    <sec:authorize ifAnyGranted="ROLE_ADMIN">
-        <form name="deleteUserForm" action="/user/delete/${user.id}" method="post">
-            <input type="hidden" name="${_csrf.parameterName}"
-                   value="${_csrf.token}"/>
-            <input type="submit" class="btn btn-lg btn-success" value="Delete user"/>
-        </form>
-    </sec:authorize>
+    <%--<sec:authorize ifAnyGranted="ROLE_ADMIN">--%>
+        <%--<form name="deleteUserForm" action="/user/delete/${user.id}" method="post">--%>
+            <%--<input type="hidden" name="${_csrf.parameterName}"--%>
+                   <%--value="${_csrf.token}"/>--%>
+            <%--<input type="submit" class="btn btn-lg btn-success" value="Delete user"/>--%>
+        <%--</form>--%>
+    <%--</sec:authorize>--%>
     <p>
         <a href="/article/">Go back</a>
     </p>

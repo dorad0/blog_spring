@@ -45,7 +45,7 @@ public class AdminController {
     @RequestMapping(value = "/articlesByTitle", method = RequestMethod.GET)
     public String getArticlesByTitle(Model model) {
         model.addAttribute("articles", articleService.findAll());
-        return "adminArticlesByTitle";
+        return "adminArticleTitles";
     }
 
     @Secured(value = "ROLE_ADMIN")
