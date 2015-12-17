@@ -9,7 +9,7 @@
   <!-- Bootstrap core CSS -->
   <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom styles for this template -->
-  <link href="/resources/css/blog.css" rel="stylesheet">
+  <link href="/resources/css/admin_blog.css" rel="stylesheet">
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!--[if lt IE 9]>
   <script src="/resources/js/html5shiv.min.js"></script>
@@ -23,7 +23,7 @@
   <div class="row">
     <div class="col-sm-8 blog-main">
       <tiles:insertAttribute name="body"/>
-      <%--<tiles:insertAttribute name="navbar"/>--%>
+      <tiles:insertAttribute name="navbar"/>
     </div>
     <tiles:insertAttribute name="sidebar"/>
   </div>

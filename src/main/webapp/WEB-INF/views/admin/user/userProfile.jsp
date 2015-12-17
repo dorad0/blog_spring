@@ -21,7 +21,7 @@
     <p>Register: ${userRegistrationDate}</p>
     <p>Birthday: ${userBirthDate}</p>
     <p>
-        <a href="/admin/comments/${user.name}/">View all comments of user</a>
+        <a href="/admin/comments/user/${user.name}/">View all comments of user</a>
     </p>
     <p>
         <a href="/admin/user/${user.name}/articles">View all articles of user</a>
