@@ -15,6 +15,9 @@
   <script src="/resources/js/html5shiv.min.js"></script>
   <script src="/resources/js/respond.min.js"></script>
   <![endif]-->
+  <script src="/resources/js/Chart.Core.js"></script>
+  <script src="/resources/js/Chart.Line.js"></script>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 <body>
 <tiles:insertAttribute name="menu"/>

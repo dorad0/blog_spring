@@ -10,6 +10,7 @@ import blog.service.UserService;
 import blog.service.exception.ServiceException;
 import blog.service.forms.UserForm;
 import blog.service.util.Converter;
+import blog.service.chart.models.NewData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,7 +19,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.*;
 
 @Service
 @Transactional
@@ -88,4 +89,65 @@ public class UserServiceImpl extends GenericServiceImpl<Long, User, UserDAO> imp
         return genericDAO.findByName(name);
     }
 
+    @Override
+    public NewData getUsersRegisterData() throws ServiceException {
+        class Point{
+            LocalDate date;
+            int numberRegisterUsers;
+
+            public LocalDate getDate() {
+                return date;
+            }
+
+            public void setDate(LocalDate date) {
+                this.date = date;
+            }
+
+            public int getNumberRegisterUsers() {
+                return numberRegisterUsers;
+            }
+
+            public void setNumberRegisterUsers(int numberRegisterUsers) {
+                this.numberRegisterUsers = numberRegisterUsers;
+            }
+        }
+
+        List<User> users = genericDAO.findAll();
+        List<Point> points = new ArrayList<>();
+        Set<LocalDate> dates = new HashSet<>();
+
+        for (User user : users) {
+            dates.add(user.getRegistrationDate().toLocalDate());
+        }
+
+        for (LocalDate date: dates) {
+            Point point = new Point();
+            point.setDate(date);
+
+            points.add(point);
+        }
+
+        for (User user : users) {
+            for(Point point: points) {
+                if (user.getRegistrationDate().toLocalDate().isEqual(point.date)){
+                    point.numberRegisterUsers++;
+                }
+            }
+        }
+
+        List<String> labels = new ArrayList<>();
+        List<String> data = new ArrayList<>();
+        for(Point point: points) {
+            labels.add(point.getDate().toString());
+            data.add(Integer.toString(point.getNumberRegisterUsers()));
+        }
+
+        NewData returnData = new NewData();
+        returnData.setLabels(labels);
+        returnData.setData(data);
+
+
+
+        return returnData;
+    }
 }
