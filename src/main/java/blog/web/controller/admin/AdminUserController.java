@@ -50,6 +50,7 @@ public class AdminUserController {
     /*
 *
 *Write a light method for article titles*/
+    @Secured(value = "ROLE_ADMIN")
     @RequestMapping(value = "/{userName}/articles", method = RequestMethod.GET)
     public String getUserArticle(@PathVariable String userName, Model model) {
         List<Article> userArticles = userService.findUserArticles(userName);

@@ -1,25 +1,24 @@
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
-<p>
-    <a href="/admin/article/">Go back</a>
-</p>
+
 <c:forEach var="article" items="${page.entities}">
     <div class="blog-post">
         <h2 class="blog-post-title">
             <a href="/admin/comments/${article.id}/">${article.title}</a>
         </h2>
+
         <p class="blog-post-meta">
                 <%--<fmt:setLocale scope="session" value="en_US"/>--%>
-            <fmt:parseDate value="${article.publicationDate}" pattern="yyyy-MM-dd"
+            <fmt:parseDate value="${article.publicationDate}" pattern="yyyy-MM-dd'T'HH:mm:ss"
                            var="parsedDate" type="both"/>
             <fmt:formatDate type="both"
                             pattern="MMMMM d, yyyy"
                             value="${parsedDate}"/>
             <spring:message code="article.by"/> <a
-                href="/admin/user/${article.user.name}/">${article.user.name}</a>
+                href="/admin/user/<c:out value="${article.user.name}"/> "> <c:out
+                value="${article.user.name}"/> </a>
         </p>
 
         <p>
@@ -27,16 +26,8 @@
         </p>
 
         <p>
-            <a href="/admin/comments/${article.id}/"><spring:message
-                    code="article.comment"/>(${article.commentsCount})</a>
+            <a href="/admin/comments/${article.id}/"><spring:message code="article.comment"/>(${article.commentsCount})</a>
         </p>
-            <%--<sec:authorize ifAnyGranted="ROLE_ADMIN">--%>
-            <%--<form method="post" action="/article/delete?id=${article.id}">--%>
-            <%--<input type="hidden" name="${_csrf.parameterName}"--%>
-            <%--value="${_csrf.token}"/>--%>
-            <%--<input type="submit" class="btn btn-lg btn-success" value="Delete article"/>--%>
-            <%--</form>--%>
-            <%--</sec:authorize>--%>
         <sec:authorize ifAnyGranted="ROLE_ADMIN">
             <form method="post" action="/admin/article/delete?id=${article.id}">
                 <input type="hidden" name="${_csrf.parameterName}"
@@ -47,6 +38,5 @@
         </sec:authorize>
     </div>
 </c:forEach>
-<p>
-    <a href="/admin/article/">Go back</a>
-</p>
+
+

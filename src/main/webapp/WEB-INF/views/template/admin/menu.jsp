@@ -6,7 +6,7 @@
 <div class="blog-masthead">
     <div class="container">
         <nav class="blog-nav" id="top">
-            <a class="blog-nav-item active" href="/article/"><spring:message code="menu.home"/></a>
+            <a class="blog-nav-item active" href="/admin/"><spring:message code="menu.home"/></a>
             <%--<a class="blog-nav-item" href="http://getbootstrap.com/examples/blog/#">New features</a>
             <a class="blog-nav-item" href="http://getbootstrap.com/examples/blog/#">Press</a>--%>
             <c:if test="${pageContext.request.userPrincipal.name == null}">
@@ -32,7 +32,7 @@
             <a class="blog-nav-item" href="/?mylocale=en">English </a> |
             <a class="blog-nav-item" href="/?mylocale=ru">Русский </a>
             <sec:authorize access="hasRole('ROLE_ADMIN')">
-                <a class="blog-nav-item" href="/admin">Admin's page</a>
+                <a class="blog-nav-item" href="/article">Go to main</a>
             </sec:authorize>
         </nav>
     </div>

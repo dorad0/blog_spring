@@ -55,6 +55,7 @@ public class AdminController {
         return "adminUsers";
     }
 
+    @Secured(value = "ROLE_ADMIN")
     @RequestMapping("/article/{id}")
     public String getArticleWithComments(@PathVariable long id, Model model) {
         Article article = articleService.findById(id);

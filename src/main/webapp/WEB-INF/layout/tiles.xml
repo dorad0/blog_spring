@@ -98,6 +98,11 @@
         <put-attribute name="sidebar" value="/WEB-INF/views/template/admin/sidebar.jsp"/>
         <put-attribute name="footer" value="/WEB-INF/views/template/admin/footer.jsp"/>
     </definition>
+    <definition name="adminArticleArchive" extends="adminBase">
+        <put-attribute name="title" value="Archive of articles"/>
+        <put-attribute name="body" value="/WEB-INF/views/admin/article/archive/articleArchive.jsp"/>
+        <put-attribute name="navbar" value="/WEB-INF/views/admin/article/archive/navbarArchive.jsp"/>
+    </definition>
     <definition name="adminArticleComments" extends="adminBase">
         <put-attribute name="title" value="Comments"/>
         <put-attribute name="body" value="/WEB-INF/views/admin/comment/articleComments.jsp"/>

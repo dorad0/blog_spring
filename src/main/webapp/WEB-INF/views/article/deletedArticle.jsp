@@ -4,6 +4,6 @@
     </p>
 
     <p>
-        <a href="/article/">Go back</a>
+        <a href="/admin/article/">Go back</a>
     </p>
 </div>
