@@ -13,6 +13,7 @@
 <![endif]-->
 <script src="/resources/js/Chart.Core.js"></script>
 <script src="/resources/js/Chart.Line.js"></script>
+<script src="/resources/js/Chart.Bar.js"></script>
 <script src="/resources/js/jquery-2.1.4.js"></script>
 </head>
 <body>

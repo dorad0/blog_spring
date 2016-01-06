@@ -110,6 +110,10 @@
         <put-attribute name="title" value="User's comments"/>
         <put-attribute name="body" value="/WEB-INF/views/admin/user/userComments.jsp"/>
     </definition>
+    <definition name="noUserComments" extends="adminBase">
+        <put-attribute name="title" value="User's comments"/>
+        <put-attribute name="body" value="/WEB-INF/views/admin/user/noUserComments.jsp"/>
+    </definition>
     <definition name="adminUserArticles" extends="adminBase">
         <put-attribute name="title" value="User's articles"/>
         <put-attribute name="body" value="/WEB-INF/views/admin/article/userArticles.jsp"/>
@@ -138,5 +142,13 @@
     <definition name="analyticsMain" extends="chartBase">
         <put-attribute name="title" value="Main analytics page"/>
         <put-attribute name="body" value="/WEB-INF/views/admin/analyticsMain.jsp"/>
+    </definition>
+    <definition name="commentsByUsers" extends="chartBase">
+        <put-attribute name="title" value="User's comments activity"/>
+        <put-attribute name="body" value="/WEB-INF/views/admin/analytics/commentsByUsers.jsp"/>
+    </definition>
+    <definition name="userCommentActivityByDay" extends="chartBase">
+        <put-attribute name="title" value="User's comments activity"/>
+        <put-attribute name="body" value="/WEB-INF/views/admin/analytics/userCommentActivityByDay.jsp"/>
     </definition>
 </tiles-definitions>

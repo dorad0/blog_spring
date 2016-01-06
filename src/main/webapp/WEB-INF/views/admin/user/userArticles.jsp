@@ -4,9 +4,9 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <div class="col-sm-8 blog-main">
     <p>User's articles:</p>
-    <c:forEach items="articles" var="article">
-        <p>
-            <a href="/admin/article/${article.title}">${article.title}</a>
-        </p>
-    </c:forEach>
+    <%--<c:forEach var="article" items="${articles}" >--%>
+        <%--<p>--%>
+            <%--<a href="/admin/article/${article.title}">${article.title}</a>--%>
+        <%--</p>--%>
+    <%--</c:forEach>--%>
 </div>

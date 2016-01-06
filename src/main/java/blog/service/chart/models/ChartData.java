@@ -1,16 +1,20 @@
 package blog.service.chart.models;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 /**
  * Created by user_1 on 12/31/2015.
  */
-public class NewData {
+public class ChartData {
+
     List<String> labels;
     List<String> data;
 
-    public NewData() {
+    public ChartData() {
+        labels = new ArrayList<>();
+        data = new ArrayList<>();
     }
 
     public List<String> getLabels() {
@@ -28,4 +32,5 @@ public class NewData {
     public void setData(List<String> data) {
         this.data = data;
     }
+
 }

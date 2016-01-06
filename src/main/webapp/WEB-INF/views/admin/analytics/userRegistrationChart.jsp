@@ -3,7 +3,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <p>
-    <canvas id="myChart" width="800" height="400"></canvas>
+    <canvas id="userRegistrationChart" width="800" height="400"></canvas>
     <script>
         //        var data = {
         //            labels: ["January", "February", "March", "April", "May", "June", "July"],
@@ -60,7 +60,7 @@
                 // данные в строке, сама  строка – json –строка, ее нужно распарсить
                 //   data = JSON.parse (result);
 //                alert(data.labels);  // Goper
-                var ctx = document.getElementById("myChart").getContext("2d");
+                var ctx = document.getElementById("userRegistrationChart").getContext("2d");
                 var myLineChart = new Chart(ctx).Line(chartData);
             }
         });

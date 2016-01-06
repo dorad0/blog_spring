@@ -2,9 +2,9 @@ package blog.service;
 
 import blog.entity.Article;
 import blog.entity.User;
+import blog.service.chart.models.ChartData;
 import blog.service.exception.ServiceException;
 import blog.service.forms.UserForm;
-import blog.service.chart.models.NewData;
 
 import java.util.List;
 
@@ -18,6 +18,10 @@ public interface UserService extends GenericService<User, Long> {
 
     List<Article> findUserArticles(String userName) throws ServiceException;
 
-    NewData getUsersRegisterData() throws  ServiceException;
+    ChartData getUsersRegisterData() throws  ServiceException;
+
+    ChartData getCommentsActivity() throws ServiceException;
+
+    ChartData getUsersComment() throws ServiceException;
 
 }

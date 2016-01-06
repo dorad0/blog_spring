@@ -1,6 +1,7 @@
 package blog.web.controller.admin;
 
 import blog.entity.Article;
+import blog.entity.Comment;
 import blog.service.ArticleService;
 import blog.service.CommentService;
 import blog.service.forms.CommentForm;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * Created by user_1 on 11/30/2015.
@@ -33,10 +35,16 @@ public class AdminCommentsController {
     @RequestMapping(value = "/user/{username}", method = RequestMethod.GET)
     public String getUserComments(@PathVariable String username, Model model) {
 
+        List<Comment> comments = commentService.getUserComments(username);
 
-        model.addAttribute("comments", commentService.getUserComments(username));
+        if(!comments.isEmpty()){
+            model.addAttribute("comments", comments);
+            model.addAttribute("userName", username);
+            return "userComments";
+        }
 
-        return "userComments";
+        model.addAttribute("userName", username);
+        return "noUserComments";
     }
 
     @Secured("ROLE_ADMIN")

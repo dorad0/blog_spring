@@ -54,10 +54,14 @@ public class AdminUserController {
     public String getUserArticle(@PathVariable String userName, Model model) {
         List<Article> userArticles = userService.findUserArticles(userName);
 
-        if (userArticles != null) {
+        if (!userArticles.isEmpty()) {
             model.addAttribute("articles", userArticles);
+            model.addAttribute("userName", userName);
             return "adminUserArticles";
-        } else
-            return "adminNoUserArticles";
+        }
+
+        model.addAttribute("userName", userName);
+
+        return "adminNoUserArticles";
     }
 }
